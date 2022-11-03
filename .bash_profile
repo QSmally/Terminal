@@ -5,7 +5,7 @@ alias packages="brew leaves"
 alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 
 # Git
-alias save="git stash save --include-untracked -m"
+alias save="git stash save --include-untracked"
 alias checkpoint="git stash save --include-untracked -m \"checkpoint $(openssl rand -base64 12)\""
 alias restore="git stash pop"
 alias drop="git checkout ."
