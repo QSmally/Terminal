@@ -22,11 +22,11 @@ alias fetch="neofetch && cpufetch"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:$PATH"
 
-if [ -d "/opt/homebrew" ]; then
+if [ -d /opt/homebrew ]; then
 	eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
-if [ -e "~/.bash_local" ]; then
-    eval $(cat ~/.bash_local)
+if [ -e ~/.bash_local ]; then
+    . ~/.bash_local
 fi
 
