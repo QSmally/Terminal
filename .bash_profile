@@ -2,6 +2,7 @@
 # Homebrew
 alias gimme="brew install"
 alias packages="brew leaves"
+alias casks="brew list --casks"
 alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 
 # Git
@@ -14,6 +15,9 @@ alias drop="git checkout ."
 alias archive="tar -cvf Archive.tar"
 alias compress="tar -czvf Archive.tar.gz"
 alias extract="tar -xvf"
+
+# LaTeX
+alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document"
 
 # Miscellaneous
 alias fetch="neofetch && cpufetch"
