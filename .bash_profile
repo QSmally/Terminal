@@ -20,6 +20,7 @@ alias extract="tar -xvf"
 alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document"
 
 # Miscellaneous
+alias usage="du -hd 1"
 alias fetch="neofetch && cpufetch"
 
 # Shell
