@@ -9,7 +9,7 @@ alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 alias save="git stash save --include-untracked"
 alias restore="git stash pop"
 alias drop="git checkout ."
-alias sync="git submodule update --init --recursive"
+alias submodules="git submodule update --init --recursive"
 
 # Compression
 alias archive="tar -cvf Archive.tar"
