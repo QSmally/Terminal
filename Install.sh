@@ -7,12 +7,13 @@ declare -i linked_file_count=0
 for file in "${files[@]}"; do
     if [ -e ~/$file ]; then
         echo "File $file ignored because it already exists in ~"
-    else
-	    ln -s $(pwd)/$file ~/$file
-        if [ $? -eq 0 ]; then
-            linked_file_count+=1
-            echo "Symlinked $file to ~"
-        fi
+        continue
+    fi
+
+    ln -s $(pwd)/$file ~/$file
+    if [ $? -eq 0 ]; then
+        linked_file_count+=1
+        echo "Symlinked $file to ~"
     fi
 done
 
