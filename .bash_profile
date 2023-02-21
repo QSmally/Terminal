@@ -1,8 +1,8 @@
 
 # Homebrew
 alias gimme="brew install"
-alias packages="brew leaves"
-alias casks="brew list --casks"
+alias packages="brew leaves | tee"
+alias casks="brew list --casks | tee"
 alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 
 # Git
