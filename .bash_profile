@@ -28,7 +28,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:$PATH"
 
 if [ -d /opt/homebrew ]; then
-	eval $(/opt/homebrew/bin/brew shellenv)
+    eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
 if [ -e ~/.bash_local ]; then
