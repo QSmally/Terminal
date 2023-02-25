@@ -18,7 +18,11 @@ command CR :set colorcolumn=
 " Syntax highlighting
 syntax on
 highlight LineNr ctermfg=darkgrey
-highlight CursorLineNr ctermfg=white " TODO: Fix highlight + window enter/leave
+highlight CursorLineNr ctermfg=white
+
+" TODO: Fix highlight + window enter/leave
+" TODO: Highlight current line number
+" TODO: Gitgutter or some other way to track additions/deletions
 
 set number
 
