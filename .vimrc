@@ -22,7 +22,17 @@ highlight CursorLineNr ctermfg=white
 
 " TODO: Fix highlight + window enter/leave
 " TODO: Highlight current line number
-" TODO: Gitgutter or some other way to track additions/deletions
 
 set number
 
+" Plugins
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+    call plug#begin()
+        Plug 'ziglang/zig.vim'
+        let g:zig_fmt_autosave = 0
+
+        Plug 'airblade/vim-gitgutter'
+        let g:gitgutter_terminal_reports_focus=0
+        highlight! link SignColumn LineNr
+    call plug#end()
+endif
