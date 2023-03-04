@@ -1,6 +1,7 @@
 
-" Mouse
+" Scrolling
 set mouse=a
+set scrolloff=4
 
 " Tabs
 set tabstop=4
