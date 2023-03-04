@@ -35,5 +35,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'airblade/vim-gitgutter'
         let g:gitgutter_terminal_reports_focus=0
         highlight! link SignColumn LineNr
+
+        Plug 'tpope/vim-commentary'
     call plug#end()
 endif
