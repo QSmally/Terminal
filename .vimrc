@@ -18,13 +18,15 @@ command CR :set colorcolumn=
 
 " Syntax highlighting
 syntax on
-highlight LineNr ctermfg=darkgrey
-highlight CursorLineNr ctermfg=white
-
-" TODO: Fix highlight + window enter/leave
-" TODO: Highlight current line number
-
 set number
+set cursorline
+set cursorlineopt=number
+
+highlight LineNr ctermfg=darkgrey
+highlight CursorLineNr ctermfg=white cterm=bold
+
+autocmd WinEnter * set cursorline
+autocmd WinLeave * set nocursorline
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -37,5 +39,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         highlight! link SignColumn LineNr
 
         Plug 'tpope/vim-commentary'
+        Plug 'tpope/vim-obsession'
     call plug#end()
 endif
