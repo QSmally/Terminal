@@ -53,7 +53,11 @@ command C100 :set colorcolumn=100
 command CC100 :set colorcolumn=100,104,108,112
 command CR :set colorcolumn=
 
+" Exit bindings
+cabbrev wq wqa
+
 " Window navigation bindings
 nnoremap <tab> <c-w>
 nnoremap <tab><tab> <c-w><c-w>
+nnoremap <c-m> <c-w>r
 
