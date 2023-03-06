@@ -25,7 +25,7 @@ alias fetch="neofetch && cpufetch"
 
 # Shell
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
 
 if [ -d /opt/homebrew ]; then
     eval $(/opt/homebrew/bin/brew shellenv)
