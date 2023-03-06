@@ -17,7 +17,7 @@ alias compress="tar -czvf Archive.tar.gz"
 alias extract="tar -xvf"
 
 # LaTeX
-alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document"
+alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode"
 
 # Miscellaneous
 alias usage="du -hd 1"
