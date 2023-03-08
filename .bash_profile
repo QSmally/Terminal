@@ -10,6 +10,7 @@ alias save="git stash save --include-untracked"
 alias restore="git stash pop"
 alias drop="git checkout ."
 alias submodules="git submodule update --init --recursive"
+alias forward="git merge --ff-only"
 
 # Compression
 alias archive="tar -cvf Archive.tar"
