@@ -43,6 +43,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-obsession'
+        Plug 'tpope/vim-fugitive'
     call plug#end()
 endif
 
