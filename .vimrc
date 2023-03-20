@@ -49,6 +49,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-obsession'
         Plug 'tpope/vim-fugitive'
+        Plug 'wellle/targets.vim'
+        Plug 'vim-scripts/a.vim'
+        Plug 'junegunn/gv.vim'
+        Plug 'lervag/vimtex'
     call plug#end()
 endif
 
