@@ -26,8 +26,10 @@ set hlsearch
 command CL :noh
 highlight CurSearch ctermfg=black ctermbg=white
 
-" Autocompletion menu
+" Miscellaneous settings
 set wildmenu
+set autoread
+set incsearch
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
