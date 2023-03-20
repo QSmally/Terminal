@@ -51,8 +51,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'tpope/vim-fugitive'
         Plug 'wellle/targets.vim'
         Plug 'vim-scripts/a.vim'
+        Plug 'jceb/vim-orgmode'
         Plug 'junegunn/gv.vim'
         Plug 'lervag/vimtex'
+        Plug 'yegappan/mru'
     call plug#end()
 endif
 
