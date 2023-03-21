@@ -37,3 +37,6 @@ if [ -e ~/.bash_local ]; then
     . ~/.bash_local
 fi
 
+# Cursor
+printf '\033[3 q'
+

@@ -65,8 +65,12 @@ command C100 :set colorcolumn=100
 command CC100 :set colorcolumn=100,104,108,112
 command CR :set colorcolumn=
 
-" Exit bindings
+" Terminal command
+command T :vert term ++close /bin/bash -l
+
+" Command mappings
 cabbrev wq wqa
+cabbrev h vert h
 
 " Window navigation bindings
 nnoremap <tab> <c-w>
