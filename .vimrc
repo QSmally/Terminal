@@ -30,6 +30,7 @@ highlight CurSearch ctermfg=black ctermbg=white
 set wildmenu
 set autoread
 set incsearch
+set clipboard^=unnamedplus
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -49,8 +50,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-obsession'
         Plug 'tpope/vim-fugitive'
+        Plug 'tpope/vim-surround'
         Plug 'wellle/targets.vim'
         Plug 'vim-scripts/a.vim'
+        Plug 'godlygeek/tabular'
         Plug 'jceb/vim-orgmode'
         Plug 'junegunn/gv.vim'
         Plug 'lervag/vimtex'
