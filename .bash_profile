@@ -11,6 +11,7 @@ alias restore="git stash pop"
 alias drop="git checkout ."
 alias submodules="git submodule update --init --recursive"
 alias forward="git merge --ff-only"
+alias refs="git rev-list --left-right --oneline"
 
 # Compression
 alias archive="tar -cvf Archive.tar"
