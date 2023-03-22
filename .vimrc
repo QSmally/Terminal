@@ -30,7 +30,6 @@ highlight CurSearch ctermfg=black ctermbg=white
 set wildmenu
 set autoread
 set incsearch
-set clipboard^=unnamedplus
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
