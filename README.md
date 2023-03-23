@@ -8,3 +8,4 @@ and configured when [Plug](https://github.com/junegunn/vim-plug) is installed to
 when using it minimally. It decides whether or not to enable it based on the presence of a file at
 `~/.vim/autoload/plug.vim`.
 
+Vim's configuration isn't that minimalistic anymore (though the UI is).

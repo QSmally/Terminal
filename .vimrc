@@ -30,6 +30,7 @@ highlight CurSearch ctermfg=black ctermbg=white
 set wildmenu
 set autoread
 set incsearch
+set shortmess=filnxtToO
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -77,5 +78,8 @@ cabbrev h vert h
 " Window navigation bindings
 nnoremap <tab> <c-w>
 nnoremap <tab><tab> <c-w><c-w>
-nnoremap <c-m> <c-w>r
+
+" Clipboard bindings
+noremap Y "*y
+nnoremap YY "*yy
 
