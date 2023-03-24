@@ -1,13 +1,32 @@
 
+" Miscellaneous settings
+set nocompatible
+set nomodeline
+set ttimeout
+set wildmenu
+set autoread
+set incsearch
+
+set belloff+=esc
+set laststatus=1
+set ttimeoutlen=50
+set shortmess=filnxtToO
+set backspace=indent,eol,start
+
+let mapleader = ','
+filetype plugin indent on
+
 " Scrolling
 set mouse=a
 set scrolloff=4
 
 " Tabs
-set tabstop=4
-set shiftwidth=4
+set smarttab
 set expandtab
 set autoindent
+
+set tabstop=4
+set shiftwidth=4
 
 " Syntax highlighting
 syntax on
@@ -17,20 +36,18 @@ set cursorlineopt=number
 
 highlight LineNr ctermfg=darkgrey
 highlight CursorLineNr ctermfg=white cterm=bold
+highlight! link SignColumn LineNr
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
 
 " Search
 set hlsearch
+set ignorecase
+set smartcase
+
 command CL :noh
 highlight CurSearch ctermfg=black ctermbg=white
-
-" Miscellaneous settings
-set wildmenu
-set autoread
-set incsearch
-set shortmess=filnxtToO
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -56,12 +73,14 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'airblade/vim-gitgutter'
         let g:gitgutter_terminal_reports_focus = 0
-        highlight! link SignColumn LineNr
+        set signcolumn=yes
 
         Plug 'mg979/vim-visual-multi'
         " FIXME: leaving VM re-enables search highlighting
         let g:VM_default_mappings = 0
         let g:VM_mouse_mappings = 1
+        map Q gq
+        sunmap Q
 
         Plug 'vim-scripts/loremipsum'
         cabbrev L Loremipsum
@@ -77,6 +96,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'andrewradev/undoquit.vim'
         cabbrev Q Undoquit
 
+        Plug 'tpope/vim-speeddating'
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-obsession'
         Plug 'tpope/vim-fugitive'
@@ -98,8 +118,9 @@ command C100 :set colorcolumn=100
 command CC100 :set colorcolumn=100,104,108,112
 command CR :set colorcolumn=
 
-" Terminal command
+" Terminal command and binding
 command T :vert term ++close /bin/bash -l
+tnoremap <Esc> <C-\><C-n>
 
 " Command mappings
 cabbrev wq wqa
@@ -112,4 +133,11 @@ nnoremap <tab><tab> <c-w><c-w>
 " Clipboard bindings
 noremap Y "*y
 nnoremap YY "*yy
+noremap <leader>o y'>p']
+nnoremap <leader>o yyp
+nnoremap <leader>p p']
+
+" Indentation bindings
+xnoremap > >gv
+xnoremap < <gv
 
