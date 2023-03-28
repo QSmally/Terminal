@@ -37,6 +37,7 @@ set cursorlineopt=number
 highlight LineNr ctermfg=darkgrey
 highlight CursorLineNr ctermfg=white cterm=bold
 highlight! link SignColumn LineNr
+highlight ColorColumn ctermbg=darkgrey ctermfg=white
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -129,6 +130,8 @@ cabbrev h vert h
 " Window navigation bindings
 nnoremap <tab> <c-w>
 nnoremap <tab><tab> <c-w><c-w>
+nnoremap <leader>k :prev<CR>
+nnoremap <leader>l :next<CR>
 
 " Clipboard bindings
 noremap Y "*y
