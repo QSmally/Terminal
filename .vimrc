@@ -106,7 +106,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'vim-scripts/a.vim'
         Plug 'godlygeek/tabular'
         Plug 'jceb/vim-orgmode'
-        Plug 'danro/rename.vim'
+        Plug 'tpope/vim-eunuch'
         Plug 'lervag/vimtex'
         Plug 'yegappan/mru'
     call plug#end()
