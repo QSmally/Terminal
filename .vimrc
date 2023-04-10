@@ -38,7 +38,7 @@ set cursorlineopt=number
 highlight LineNr ctermfg=darkgrey
 highlight CursorLineNr ctermfg=white cterm=bold
 highlight! link SignColumn LineNr
-highlight ColorColumn ctermbg=darkgrey ctermfg=white
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
