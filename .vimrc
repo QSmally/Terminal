@@ -14,6 +14,7 @@ set shortmess=filnxtToO
 set backspace=indent,eol,start
 
 let mapleader = ','
+let maplocalleader = ','
 filetype plugin indent on
 
 " Scrolling
@@ -53,6 +54,10 @@ highlight CurSearch ctermfg=black ctermbg=white
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
+        Plug 'lervag/vimtex', { 'for': 'tex' }
+        let g:vimtex_compiler_latexmk = { 'build_dir': 'Compilation' }
+        let g:vimtex_view_method = 'skim'
+
         Plug 'ziglang/zig.vim'
         let g:zig_fmt_autosave = 0
 
@@ -107,7 +112,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'godlygeek/tabular'
         Plug 'jceb/vim-orgmode'
         Plug 'tpope/vim-eunuch'
-        Plug 'lervag/vimtex'
         Plug 'yegappan/mru'
     call plug#end()
 endif
@@ -130,8 +134,8 @@ cabbrev h vert h
 " Window navigation bindings
 nnoremap <tab> <c-w>
 nnoremap <tab><tab> <c-w><c-w>
-nnoremap <leader>k :prev<CR>
-nnoremap <leader>l :next<CR>
+nnoremap <leader>[ :prev<CR>
+nnoremap <leader>] :next<CR>
 
 " Clipboard bindings
 noremap Y "*y
