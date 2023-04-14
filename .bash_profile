@@ -9,9 +9,11 @@ alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 alias save="git stash save --include-untracked"
 alias restore="git stash pop"
 alias drop="git checkout ."
-alias submodules="git submodule update --init --recursive"
 alias forward="git merge --ff-only"
+alias merge="git merge --no-ff --no-commit"
 alias refs="git rev-list --left-right --oneline"
+alias submodules="git submodule update --init --recursive"
+alias prune="git remote prune origin && git branch -v | grep \"\\[gone\\]\" | awk '{print $1}' | xargs git branch -D"
 
 # Compression
 alias archive="tar -cvf Archive.tar"
