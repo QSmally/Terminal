@@ -65,6 +65,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         cabbrev R Agit
         cabbrev C AgitFile
 
+        Plug 'shougo/vimfiler.vim'
+        let g:vimfiler_as_default_explorer = 1
+        let g:vimfiler_readonly_file_icon = 'R'
+        let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
+        cabbrev F VimFiler
+        cabbrev E VimFilerExplorer
+
         Plug 'sotte/presenting.vim'
         cabbrev P PresentingStart
 
@@ -74,8 +81,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'keith/investigate.vim'
         " FIXME: change default search engine for some filetypes
-        nnoremap K :call investigate#Investigate('n')<CR>
-        vnoremap K :call investigate#Investigate('v')<CR>
+        nnoremap <leader>k :call investigate#Investigate('n')<CR>
+        vnoremap <leader>k :call investigate#Investigate('v')<CR>
 
         Plug 'airblade/vim-gitgutter'
         let g:gitgutter_terminal_reports_focus = 0
@@ -108,10 +115,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'tpope/vim-fugitive'
         Plug 'tpope/vim-surround'
         Plug 'wellle/targets.vim'
-        Plug 'vim-scripts/a.vim'
+        Plug 'justinmk/vim-gtfo'
         Plug 'godlygeek/tabular'
+        Plug 'vim-scripts/a.vim'
         Plug 'jceb/vim-orgmode'
         Plug 'tpope/vim-eunuch'
+        Plug 'Shougo/unite.vim'
         Plug 'yegappan/mru'
     call plug#end()
 endif
