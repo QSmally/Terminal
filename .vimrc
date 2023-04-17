@@ -52,6 +52,7 @@ command CL :noh
 highlight CurSearch ctermfg=black ctermbg=white
 
 " Plugins
+" TODO: Filter plugins by purpose and add description
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
         Plug 'lervag/vimtex', { 'for': 'tex' }
@@ -81,8 +82,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'keith/investigate.vim'
         " FIXME: change default search engine for some filetypes
-        nnoremap <leader>k :call investigate#Investigate('n')<CR>
-        vnoremap <leader>k :call investigate#Investigate('v')<CR>
+        nnoremap <leader>j :call investigate#Investigate('n')<CR>
+        vnoremap <leader>j :call investigate#Investigate('v')<CR>
 
         Plug 'airblade/vim-gitgutter'
         let g:gitgutter_terminal_reports_focus = 0
@@ -108,6 +109,14 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'andrewradev/undoquit.vim'
         cabbrev Q Undoquit
+
+        Plug 'iamcco/markdown-preview.nvim', {
+            \ 'do': { -> mkdp#util#install() },
+            \ 'for': ['markdown', 'vim-plug'] }
+        let g:mkdp_page_title = '${name}'
+        autocmd FileType markdown
+            \ nnoremap <silent> <buffer> <leader>ll :MarkdownPreview<CR> |
+            \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
 
         Plug 'tpope/vim-speeddating'
         Plug 'tpope/vim-commentary'
