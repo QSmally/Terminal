@@ -66,6 +66,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         cabbrev R Agit
         cabbrev C AgitFile
 
+        Plug 'godlygeek/tabular'
+        cabbrev Tab Tabularize
+
+        Plug 'gcmt/wildfire.vim'
+        map <leader>k <Plug>(wildfire-fuel)
+        vmap <leader>j <Plug>(wildfire-water)
+
         Plug 'shougo/vimfiler.vim'
         let g:vimfiler_as_default_explorer = 1
         let g:vimfiler_readonly_file_icon = 'R'
@@ -82,8 +89,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'keith/investigate.vim'
         " FIXME: change default search engine for some filetypes
-        nnoremap <leader>j :call investigate#Investigate('n')<CR>
-        vnoremap <leader>j :call investigate#Investigate('v')<CR>
+        nnoremap <leader>; :call investigate#Investigate('n')<CR>
+        vnoremap <leader>; :call investigate#Investigate('v')<CR>
 
         Plug 'airblade/vim-gitgutter'
         let g:gitgutter_terminal_reports_focus = 0
@@ -104,11 +111,20 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'vim-scripts/copypath.vim'
         let g:copypath_copy_to_unnamed_register = 1
-        cabbrev YF CopyFileName
-        cabbrev YP CopyPath
+        nnoremap <silent> gyf :CopyFileName<CR>
+        nnoremap <silent> gyF :CopyPath<CR>
 
         Plug 'andrewradev/undoquit.vim'
         cabbrev Q Undoquit
+
+        Plug 'rhysd/conflict-marker.vim'
+        let g:conflict_marker_enable_mappings = 0
+        nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
+        nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
+        nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
+
+        Plug 'dhruvasagar/vim-table-mode'
+        let g:table_mode_c = '|'
 
         Plug 'iamcco/markdown-preview.nvim', {
             \ 'do': { -> mkdp#util#install() },
@@ -118,6 +134,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
             \ nnoremap <silent> <buffer> <leader>ll :MarkdownPreview<CR> |
             \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
 
+        Plug 'vim-scripts/ReplaceWithRegister'
         Plug 'tpope/vim-speeddating'
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-obsession'
@@ -125,9 +142,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'tpope/vim-surround'
         Plug 'wellle/targets.vim'
         Plug 'justinmk/vim-gtfo'
-        Plug 'godlygeek/tabular'
         Plug 'vim-scripts/a.vim'
         Plug 'jceb/vim-orgmode'
+        Plug 'mtth/scratch.vim'
         Plug 'tpope/vim-eunuch'
         Plug 'Shougo/unite.vim'
         Plug 'yegappan/mru'
