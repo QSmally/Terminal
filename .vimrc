@@ -48,106 +48,122 @@ set hlsearch
 set ignorecase
 set smartcase
 
-command CL :noh
+nnoremap <silent> m :noh<CR>
 highlight CurSearch ctermfg=black ctermbg=white
 
 " Plugins
-" TODO: Filter plugins by purpose and add description
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
-        Plug 'lervag/vimtex', { 'for': 'tex' }
-        let g:vimtex_compiler_latexmk = { 'build_dir': 'Compilation' }
-        let g:vimtex_view_method = 'skim'
 
-        Plug 'ziglang/zig.vim'
-        let g:zig_fmt_autosave = 0
+    " Mark: language integration
+    Plug 'lervag/vimtex', { 'for': 'tex' }
+    let g:vimtex_compiler_latexmk = { 'build_dir': 'Compilation' }
+    let g:vimtex_view_method = 'skim'
 
-        Plug 'cohama/agit.vim'
-        cabbrev R Agit
-        cabbrev C AgitFile
+    Plug 'ziglang/zig.vim'
+    let g:zig_fmt_autosave = 0
 
-        Plug 'godlygeek/tabular'
-        cabbrev Tab Tabularize
+    Plug 'sotte/presenting.vim'
+    cabbrev P PresentingStart
 
-        Plug 'gcmt/wildfire.vim'
-        map <leader>k <Plug>(wildfire-fuel)
-        vmap <leader>j <Plug>(wildfire-water)
+    Plug 'keith/investigate.vim'
+    " FIXME: change default search engine for some filetypes
+    nnoremap <leader>; :call investigate#Investigate('n')<CR>
+    vnoremap <leader>; :call investigate#Investigate('v')<CR>
 
-        Plug 'shougo/vimfiler.vim'
-        let g:vimfiler_as_default_explorer = 1
-        let g:vimfiler_readonly_file_icon = 'R'
-        let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
-        cabbrev F VimFiler
-        cabbrev E VimFilerExplorer
+    Plug 'iamcco/markdown-preview.nvim', {
+        \ 'do': { -> mkdp#util#install() },
+        \ 'for': ['markdown', 'vim-plug'] }
+    let g:mkdp_page_title = '${name}'
+    autocmd FileType markdown
+        \ nnoremap <silent> <buffer> <leader>ll :MarkdownPreview<CR> |
+        \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
 
-        Plug 'sotte/presenting.vim'
-        cabbrev P PresentingStart
+    Plug 'tpope/vim-speeddating'
+    Plug 'vim-scripts/a.vim'
+    Plug 'jceb/vim-orgmode'
 
-        Plug 'wesq3/vim-windowswap'
-        let g:windowswap_map_keys = 0
-        nnoremap <silent> qq :call WindowSwap#EasyWindowSwap()<CR>
+    " Mark: Git integration
+    Plug 'cohama/agit.vim'
+    cabbrev R Agit
+    cabbrev C AgitFile
 
-        Plug 'keith/investigate.vim'
-        " FIXME: change default search engine for some filetypes
-        nnoremap <leader>; :call investigate#Investigate('n')<CR>
-        vnoremap <leader>; :call investigate#Investigate('v')<CR>
+    Plug 'airblade/vim-gitgutter'
+    let g:gitgutter_terminal_reports_focus = 0
+    set signcolumn=yes
 
-        Plug 'airblade/vim-gitgutter'
-        let g:gitgutter_terminal_reports_focus = 0
-        set signcolumn=yes
+    Plug 'rhysd/conflict-marker.vim'
+    let g:conflict_marker_enable_mappings = 0
+    nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
+    nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
+    nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
 
-        Plug 'mg979/vim-visual-multi'
-        " FIXME: leaving VM re-enables search highlighting
-        let g:VM_default_mappings = 0
-        let g:VM_mouse_mappings = 1
-        map Q gq
-        sunmap Q
+    Plug 'tpope/vim-fugitive'
 
-        Plug 'vim-scripts/loremipsum'
-        cabbrev L Loremipsum
+    " Mark: window management
+    Plug 'shougo/vimfiler.vim'
+    let g:vimfiler_as_default_explorer = 1
+    let g:vimfiler_readonly_file_icon = 'R'
+    let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
+    cabbrev F VimFiler
+    cabbrev E VimFilerExplorer
 
-        Plug 'wellle/visual-split.vim'
-        cabbrev S VSSplit
+    Plug 'wesq3/vim-windowswap'
+    let g:windowswap_map_keys = 0
+    nnoremap <silent> qq :call WindowSwap#EasyWindowSwap()<CR>
 
-        Plug 'vim-scripts/copypath.vim'
-        let g:copypath_copy_to_unnamed_register = 1
-        nnoremap <silent> gyf :CopyFileName<CR>
-        nnoremap <silent> gyF :CopyPath<CR>
+    Plug 'wellle/visual-split.vim'
+    cabbrev S VSSplit
 
-        Plug 'andrewradev/undoquit.vim'
-        cabbrev Q Undoquit
+    Plug 'andrewradev/undoquit.vim'
+    cabbrev Q Undoquit
 
-        Plug 'rhysd/conflict-marker.vim'
-        let g:conflict_marker_enable_mappings = 0
-        nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
-        nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
-        nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
+    Plug 'vim-scripts/copypath.vim'
+    let g:copypath_copy_to_unnamed_register = 1
+    nnoremap <silent> gyf :CopyFileName<CR>
+    nnoremap <silent> gyF :CopyPath<CR>
 
-        Plug 'dhruvasagar/vim-table-mode'
-        let g:table_mode_c = '|'
+    Plug 'tpope/vim-obsession'
+    Plug 'justinmk/vim-gtfo'
+    Plug 'spolu/dwm.vim'
 
-        Plug 'iamcco/markdown-preview.nvim', {
-            \ 'do': { -> mkdp#util#install() },
-            \ 'for': ['markdown', 'vim-plug'] }
-        let g:mkdp_page_title = '${name}'
-        autocmd FileType markdown
-            \ nnoremap <silent> <buffer> <leader>ll :MarkdownPreview<CR> |
-            \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
+    " Mark: text objects
+    Plug 'godlygeek/tabular'
+    cabbrev Tab Tabularize
 
-        Plug 'vim-scripts/ReplaceWithRegister'
-        Plug 'tpope/vim-speeddating'
-        Plug 'tpope/vim-commentary'
-        Plug 'tpope/vim-obsession'
-        Plug 'tpope/vim-fugitive'
-        Plug 'tpope/vim-surround'
-        Plug 'wellle/targets.vim'
-        Plug 'justinmk/vim-gtfo'
-        Plug 'vim-scripts/a.vim'
-        Plug 'jceb/vim-orgmode'
-        Plug 'mtth/scratch.vim'
-        Plug 'tpope/vim-eunuch'
-        Plug 'Shougo/unite.vim'
-        Plug 'yegappan/mru'
+    Plug 'gcmt/wildfire.vim'
+    map <leader>k <Plug>(wildfire-fuel)
+    vmap <leader>j <Plug>(wildfire-water)
+
+    Plug 'mg979/vim-visual-multi'
+    " FIXME: leaving VM through 'Q' re-enables search highlighting
+    let g:VM_default_mappings = 0
+    let g:VM_mouse_mappings = 1
+    let g:VM_maps = {}
+    let g:VM_maps['Find Under']         = '<C-m>'
+    let g:VM_maps['Find Subword Under'] = '<C-m>'
+    map Q gq
+    sunmap Q
+
+    Plug 'dhruvasagar/vim-table-mode'
+    let g:table_mode_c = '|'
+
+    Plug 'coderifous/textobj-word-column.vim'
+    Plug 'vim-scripts/ReplaceWithRegister'
+    Plug 'triglav/vim-visual-increment'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'wellle/targets.vim'
+
+    " Mark: miscellaneous tools
+    Plug 'vim-scripts/loremipsum'
+    cabbrev L Loremipsum
+
+    Plug 'mtth/scratch.vim'
+    Plug 'tpope/vim-eunuch'
+    Plug 'Shougo/unite.vim'
+    Plug 'yegappan/mru'
+
     call plug#end()
 endif
 
