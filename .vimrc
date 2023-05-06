@@ -92,6 +92,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:gitgutter_terminal_reports_focus = 0
     set signcolumn=yes
 
+    Plug 'zivyangll/git-blame.vim'
+    nnoremap <silent> <leader>b :call gitblame#echo()<CR>
+
     Plug 'rhysd/conflict-marker.vim'
     let g:conflict_marker_enable_mappings = 0
     nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
@@ -101,6 +104,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-fugitive'
 
     " Mark: window management
+    Plug 'romainl/vim-qf'
+    let g:qf_auto_resize = 0
+    nnoremap <leader>q <Plug>(qf_qf_toggle)
+    nnoremap <leader>w <Plug>(qf_qf_switch)
+
     Plug 'shougo/vimfiler.vim'
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_readonly_file_icon = 'R'
@@ -124,7 +132,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap <silent> gyF :CopyPath<CR>
 
     Plug 'tpope/vim-obsession'
+    Plug 'artnez/vim-wipeout'
     Plug 'justinmk/vim-gtfo'
+    Plug 'mileszs/ack.vim'
     Plug 'spolu/dwm.vim'
 
     " Mark: text objects
@@ -140,7 +150,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:VM_default_mappings = 0
     let g:VM_mouse_mappings = 1
     let g:VM_maps = {}
-    let g:VM_maps['Find Under']         = '<C-m>'
+    let g:VM_maps['Find Under'] = '<C-m>'
     let g:VM_maps['Find Subword Under'] = '<C-m>'
     map Q gq
     sunmap Q
@@ -159,6 +169,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-scripts/loremipsum'
     cabbrev L Loremipsum
 
+    Plug 'antoyo/vim-licenses'
     Plug 'mtth/scratch.vim'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
