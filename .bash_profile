@@ -24,7 +24,7 @@ alias extract="tar -xvf"
 alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode"
 
 # Miscellaneous
-alias ll="ls -lAh"
+alias ll="ls -lAh --color=always"
 alias usage="du -hd 1"
 alias fetch="neofetch && cpufetch"
 

@@ -59,6 +59,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'lervag/vimtex', { 'for': 'tex' }
     let g:vimtex_compiler_latexmk = { 'build_dir': 'Compilation' }
     let g:vimtex_view_method = 'skim'
+    autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
 
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
@@ -97,9 +98,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'rhysd/conflict-marker.vim'
     let g:conflict_marker_enable_mappings = 0
-    nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
-    nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
-    nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
+    nnoremap <silent> <buffer> <leader>ct :ConflictMarkerThemselves<CR>
+    nnoremap <silent> <buffer> <leader>co :ConflictMarkerOurselves<CR>
+    nnoremap <silent> <buffer> <leader>cb :ConflictMarkerBoth<CR>
 
     Plug 'tpope/vim-fugitive'
 
