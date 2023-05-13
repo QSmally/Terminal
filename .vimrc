@@ -98,9 +98,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'rhysd/conflict-marker.vim'
     let g:conflict_marker_enable_mappings = 0
-    nnoremap <silent> <buffer> <leader>ct :ConflictMarkerThemselves<CR>
-    nnoremap <silent> <buffer> <leader>co :ConflictMarkerOurselves<CR>
-    nnoremap <silent> <buffer> <leader>cb :ConflictMarkerBoth<CR>
+    nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
+    nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
+    nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
 
     Plug 'tpope/vim-fugitive'
 
@@ -136,7 +136,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'artnez/vim-wipeout'
     Plug 'justinmk/vim-gtfo'
     Plug 'mileszs/ack.vim'
-    Plug 'spolu/dwm.vim'
+    Plug 'QSmally/DWM'
 
     " Mark: text objects
     Plug 'godlygeek/tabular'
@@ -169,6 +169,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " Mark: miscellaneous tools
     Plug 'vim-scripts/loremipsum'
     cabbrev L Loremipsum
+
+    Plug 'mopp/autodirmake.vim'
+    let g:autodirmake#is_confirm = 0
 
     Plug 'antoyo/vim-licenses'
     Plug 'mtth/scratch.vim'
