@@ -51,6 +51,38 @@ set smartcase
 nnoremap <silent> m :noh<CR>
 highlight CurSearch ctermfg=black ctermbg=white
 
+" Newline-column commands
+command C80 :set colorcolumn=80
+command CC80 :set colorcolumn=80,84,88,92
+command C100 :set colorcolumn=100
+command CC100 :set colorcolumn=100,104,108,112
+command CR :set colorcolumn=
+
+" Terminal command and binding
+command T :vert term ++close /bin/bash -l
+tnoremap <Esc> <C-\><C-n>
+
+" Command mappings
+cabbrev wq wqa
+cabbrev h vert h
+
+" Window navigation bindings
+nnoremap <tab> <c-w>
+nnoremap <tab><tab> <c-w><c-w>
+nnoremap <leader>[ :prev<CR>
+nnoremap <leader>] :next<CR>
+
+" Clipboard bindings
+noremap Y "*y
+nnoremap YY "*yy
+noremap <leader>o y'>p']
+nnoremap <leader>o yyp
+nnoremap <leader>p p']
+
+" Indentation bindings
+xnoremap > >gv
+xnoremap < <gv
+
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
@@ -63,9 +95,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
-
-    Plug 'sotte/presenting.vim'
-    cabbrev P PresentingStart
 
     Plug 'keith/investigate.vim'
     " FIXME: change default search engine for some filetypes
@@ -124,6 +153,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'wellle/visual-split.vim'
     cabbrev S VSSplit
 
+    Plug 'skywind3000/vim-preview'
+    cabbrev D PreviewFile
+    noremap <silent> _ :PreviewScroll -1<CR>
+    noremap <silent> + :PreviewScroll +1<CR>
+
     Plug 'andrewradev/undoquit.vim'
     cabbrev Q Undoquit
 
@@ -181,36 +215,3 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     call plug#end()
 endif
-
-" Newline-column commands
-command C80 :set colorcolumn=80
-command CC80 :set colorcolumn=80,84,88,92
-command C100 :set colorcolumn=100
-command CC100 :set colorcolumn=100,104,108,112
-command CR :set colorcolumn=
-
-" Terminal command and binding
-command T :vert term ++close /bin/bash -l
-tnoremap <Esc> <C-\><C-n>
-
-" Command mappings
-cabbrev wq wqa
-cabbrev h vert h
-
-" Window navigation bindings
-nnoremap <tab> <c-w>
-nnoremap <tab><tab> <c-w><c-w>
-nnoremap <leader>[ :prev<CR>
-nnoremap <leader>] :next<CR>
-
-" Clipboard bindings
-noremap Y "*y
-nnoremap YY "*yy
-noremap <leader>o y'>p']
-nnoremap <leader>o yyp
-nnoremap <leader>p p']
-
-" Indentation bindings
-xnoremap > >gv
-xnoremap < <gv
-
