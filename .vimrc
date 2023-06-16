@@ -77,7 +77,6 @@ noremap Y "*y
 nnoremap YY "*yy
 noremap <leader>o y'>p']
 nnoremap <leader>o yyp
-nnoremap <leader>p p']
 
 " Indentation bindings
 xnoremap > >gv
@@ -100,6 +99,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " FIXME: change default search engine for some filetypes
     nnoremap <leader>; :call investigate#Investigate('n')<CR>
     vnoremap <leader>; :call investigate#Investigate('v')<CR>
+
+    Plug 'krisajenkins/vim-pipe'
+    let g:vimpipe_silent = 1
+    autocmd FileType zig,c,cpp let b:vimpipe_command="zig build"
 
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
@@ -207,10 +210,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
 
+    Plug 'thirtythreeforty/lessspace.vim'
+    Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
     Plug 'mtth/scratch.vim'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
+    Plug 'reedes/vim-wordy'
     Plug 'yegappan/mru'
 
     call plug#end()
