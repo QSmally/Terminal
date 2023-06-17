@@ -100,10 +100,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap <leader>; :call investigate#Investigate('n')<CR>
     vnoremap <leader>; :call investigate#Investigate('v')<CR>
 
-    Plug 'krisajenkins/vim-pipe'
-    let g:vimpipe_silent = 1
-    autocmd FileType zig,c,cpp let b:vimpipe_command="zig build"
-
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
         \ 'for': ['markdown', 'vim-plug'] }
@@ -158,6 +154,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'skywind3000/vim-preview'
     cabbrev D PreviewFile
+    cabbrev DD PreviewClose
     noremap <silent> _ :PreviewScroll -1<CR>
     noremap <silent> + :PreviewScroll +1<CR>
 
@@ -186,6 +183,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     map <leader>k <Plug>(wildfire-fuel)
     vmap <leader>j <Plug>(wildfire-water)
 
+    Plug 'joereynolds/place.vim'
+    nnoremap gp <Plug>(place-insert)
+    nnoremap gP <Plug>(place-insert-multiple)
+
     Plug 'mg979/vim-visual-multi'
     " FIXME: leaving VM through 'Q' re-enables search highlighting
     let g:VM_default_mappings = 0
@@ -196,6 +197,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     map Q gq
     sunmap Q
 
+    Plug 'AaronLasseigne/yank-code'
+    noremap gy <plug>YankCode
+
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
 
@@ -205,16 +209,21 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'arthurxavierx/vim-caser'
     Plug 'andrewradev/deleft.vim'
     Plug 'tpope/vim-commentary'
+    Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
     Plug 'machakann/vim-swap'
 
     " Mark: miscellaneous tools
-    Plug 'vim-scripts/loremipsum'
-    cabbrev L Loremipsum
-
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
+
+    Plug 'ferranpm/vim-isolate'
+    nnoremap gi vap \| :Isolation<CR>
+    vnoremap gi :Isolation<CR>
+
+    Plug 'vim-scripts/loremipsum'
+    cabbrev L Loremipsum
 
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
@@ -226,6 +235,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'k0kubun/vim-open-github'
     Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
+    Plug 'fcpg/vim-altscreen'
     Plug 'junegunn/vim-slash'
     Plug 'mtth/scratch.vim'
     Plug 'tpope/vim-eunuch'
