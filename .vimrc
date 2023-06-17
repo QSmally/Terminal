@@ -176,6 +176,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'QSmally/DWM'
 
     " Mark: text objects
+    Plug 'jayflo/vim-skip'
+    let g:vimskip_mapforwardskip = 'S'
+
     Plug 'godlygeek/tabular'
     cabbrev Tab Tabularize
 
@@ -199,9 +202,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'coderifous/textobj-word-column.vim'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'triglav/vim-visual-increment'
+    Plug 'arthurxavierx/vim-caser'
+    Plug 'andrewradev/deleft.vim'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
+    Plug 'machakann/vim-swap'
 
     " Mark: miscellaneous tools
     Plug 'vim-scripts/loremipsum'
@@ -210,9 +216,17 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
 
+    Plug 'kevinhui/vim-docker-tools'
+    cabbrev Docker DockerToolsToggle
+
     Plug 'thirtythreeforty/lessspace.vim'
+    let g:lessspace_normal = 0
+
+    Plug 'inkarkat/vim-unconditionalpaste'
+    Plug 'k0kubun/vim-open-github'
     Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
+    Plug 'junegunn/vim-slash'
     Plug 'mtth/scratch.vim'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
