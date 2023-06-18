@@ -130,6 +130,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
     nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
 
+    Plug 'k0kubun/vim-open-github'
     Plug 'tpope/vim-fugitive'
 
     " Mark: window management
@@ -222,11 +223,18 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap gi vap \| :Isolation<CR>
     vnoremap gi :Isolation<CR>
 
+    Plug 'unblevable/quick-scope'
+    let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
     Plug 'vim-scripts/loremipsum'
     cabbrev L Loremipsum
 
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
+
+    Plug 'genezharov/vim-scrollmode'
+    let g:scrollmode_distance = 10
+    nnoremap <silent> <leader>sm <Plug>ScrollMode
 
     Plug 'thirtythreeforty/lessspace.vim'
     let g:lessspace_normal = 0
