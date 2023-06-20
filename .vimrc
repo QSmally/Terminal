@@ -10,7 +10,7 @@ set incsearch
 set belloff+=esc
 set laststatus=1
 set ttimeoutlen=50
-set shortmess=filnxtToO
+set shortmess=filnxtToOsS
 set backspace=indent,eol,start
 
 let mapleader = ','
@@ -48,6 +48,8 @@ set hlsearch
 set ignorecase
 set smartcase
 
+cabbrev ml g//p
+cabbrev mc %s///ng
 nnoremap <silent> m :noh<CR>
 highlight CurSearch ctermfg=black ctermbg=white
 
@@ -81,6 +83,12 @@ nnoremap <leader>o yyp
 " Indentation bindings
 xnoremap > >gv
 xnoremap < <gv
+
+" Movement bindings
+nnoremap <silent> <leader>j :m .+1<CR>==
+nnoremap <silent> <leader>k :m .-2<CR>==
+vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
+vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -156,8 +164,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'skywind3000/vim-preview'
     cabbrev D PreviewFile
     cabbrev DD PreviewClose
-    noremap <silent> _ :PreviewScroll -1<CR>
-    noremap <silent> + :PreviewScroll +1<CR>
+    " NOTE: for me, these characters is the key besides the numerical row
+    noremap <silent> ± :PreviewScroll -1<CR>
+    noremap <silent> § :PreviewScroll +1<CR>
 
     Plug 'andrewradev/undoquit.vim'
     cabbrev Q Undoquit
@@ -169,6 +178,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'tpope/vim-obsession'
     Plug 'artnez/vim-wipeout'
+    Plug 'taylor/vim-zoomwin'
     Plug 'justinmk/vim-gtfo'
     Plug 'mileszs/ack.vim'
     Plug 'QSmally/DWM'
@@ -181,8 +191,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     cabbrev Tab Tabularize
 
     Plug 'gcmt/wildfire.vim'
-    map <leader>k <Plug>(wildfire-fuel)
-    vmap <leader>j <Plug>(wildfire-water)
+    let g:wildfire_objects = [
+        \ 'i''', 'a''', 'i"', 'a"', 'i)', 'a)',
+        \ 'i]', 'a]', 'i}', 'a}', 'ip', 'it',
+        \ 'at']
+    noremap + <Plug>(wildfire-fuel)
+    vnoremap _ <Plug>(wildfire-water)
+    nnoremap _ V \| <Plug>(wildfire-water)
 
     Plug 'joereynolds/place.vim'
     nnoremap gp <Plug>(place-insert)
@@ -199,10 +214,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     sunmap Q
 
     Plug 'AaronLasseigne/yank-code'
-    noremap gy <plug>YankCode
+    noremap gy <Plug>YankCode
 
-    Plug 'dhruvasagar/vim-table-mode'
-    let g:table_mode_c = '|'
+    Plug 'vim-scripts/transpose-words'
+    nnoremap g/ <Plug>Transposewords
 
     Plug 'coderifous/textobj-word-column.vim'
     Plug 'vim-scripts/ReplaceWithRegister'
@@ -215,7 +230,31 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'wellle/targets.vim'
     Plug 'machakann/vim-swap'
 
+    " Mark: modes
+    Plug 'genezharov/vim-scrollmode'
+    let g:scrollmode_distance = 10
+    let g:scrollmode_mappings = {
+        \ ':-4<CR>': ['K', '<S-Up>'],
+        \ ':+4<CR>': ['J', '<S-Down>'] }
+    let g:scrollmode_actions = {
+        \ 'pageup': ['l'],
+        \ 'pagedown': ['h'],
+        \ 'exit': ['<Esc>'],
+        \ 'bdelete': [] }
+    nnoremap <silent> <leader>sm <Plug>ScrollMode
+    nnoremap <silent> ; <Plug>ScrollMode
+
+    Plug 'dhruvasagar/vim-table-mode'
+    let g:table_mode_c = '|'
+
+    Plug 'andrewradev/multichange.vim'
+    let g:multichange_mapping = '<leader>mm'
+    let g:multichange_motion_mapping = 'm'
+
     " Mark: miscellaneous tools
+    Plug 'junegunn/vim-slash'
+    noremap <Plug>(slash-after) zz
+
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
 
@@ -232,10 +271,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
 
-    Plug 'genezharov/vim-scrollmode'
-    let g:scrollmode_distance = 10
-    nnoremap <silent> <leader>sm <Plug>ScrollMode
-
     Plug 'thirtythreeforty/lessspace.vim'
     let g:lessspace_normal = 0
 
@@ -244,7 +279,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
     Plug 'fcpg/vim-altscreen'
-    Plug 'junegunn/vim-slash'
     Plug 'mtth/scratch.vim'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
