@@ -271,6 +271,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
 
+    Plug 'haya14busa/vim-edgemotion'
+    noremap ) <Plug>(edgemotion-j)
+    noremap ( <Plug>(edgemotion-k)
+
     Plug 'thirtythreeforty/lessspace.vim'
     let g:lessspace_normal = 0
 
