@@ -90,6 +90,9 @@ nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
+" Custom motions
+nnoremap <leader>df daBddk
+
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
@@ -198,6 +201,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     noremap + <Plug>(wildfire-fuel)
     vnoremap _ <Plug>(wildfire-water)
     nnoremap _ V \| <Plug>(wildfire-water)
+
+    Plug 'justinmk/vim-sneak'
+    let g:sneak#prompt = ''
+    highlight link Sneak None
 
     Plug 'joereynolds/place.vim'
     nnoremap gp <Plug>(place-insert)
