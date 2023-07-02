@@ -111,6 +111,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap <leader>; :call investigate#Investigate('n')<CR>
     vnoremap <leader>; :call investigate#Investigate('v')<CR>
 
+    Plug 'gi1242/vim-tex-autoclose'
+    nnoremap <buffer> <silent> <Leader>e :call TexACClosePrev('n')<cr>
+
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
         \ 'for': ['markdown', 'vim-plug'] }
