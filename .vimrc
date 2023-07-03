@@ -106,13 +106,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
 
-    Plug 'keith/investigate.vim'
-    " FIXME: change default search engine for some filetypes
-    nnoremap <leader>; :call investigate#Investigate('n')<CR>
-    vnoremap <leader>; :call investigate#Investigate('v')<CR>
-
-    Plug 'gi1242/vim-tex-autoclose'
-    nnoremap <buffer> <silent> <Leader>e :call TexACClosePrev('n')<cr>
+    Plug 'gi1242/vim-tex-autoclose', { 'for': 'tex' }
+    autocmd FileType tex nnoremap <silent> <buffer> <leader>e :call TexACClosePrev('n')<CR>
 
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
@@ -138,11 +133,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'zivyangll/git-blame.vim'
     nnoremap <silent> <leader>b :call gitblame#echo()<CR>
 
-    Plug 'rhysd/conflict-marker.vim'
-    let g:conflict_marker_enable_mappings = 0
-    nnoremap <silent> <leader>ct :ConflictMarkerThemselves<CR>
-    nnoremap <silent> <leader>co :ConflictMarkerOurselves<CR>
-    nnoremap <silent> <leader>cb :ConflictMarkerBoth<CR>
+    Plug 'vim-scripts/ConflictMotions'
+    nnoremap <silent> <leader>x/ :ConflictTake all<CR>
 
     Plug 'k0kubun/vim-open-github'
     Plug 'tpope/vim-fugitive'
@@ -208,10 +200,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'justinmk/vim-sneak'
     let g:sneak#prompt = ''
     highlight link Sneak None
-
-    Plug 'joereynolds/place.vim'
-    nnoremap gp <Plug>(place-insert)
-    nnoremap gP <Plug>(place-insert-multiple)
 
     Plug 'mg979/vim-visual-multi'
     " FIXME: leaving VM through 'Q' re-enables search highlighting
@@ -293,7 +281,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
     Plug 'fcpg/vim-altscreen'
-    Plug 'mtth/scratch.vim'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
