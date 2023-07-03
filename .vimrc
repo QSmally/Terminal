@@ -117,7 +117,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         \ nnoremap <silent> <buffer> <leader>ll :MarkdownPreview<CR> |
         \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
 
-    Plug 'tpope/vim-speeddating'
+    Plug 'ludovicchabant/vim-gutentags'
+    let g:gutentags_ctags_tagfile = '.git/tags'
+
     Plug 'vim-scripts/a.vim'
     Plug 'jceb/vim-orgmode'
 
@@ -198,6 +200,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap _ V \| <Plug>(wildfire-water)
 
     Plug 'justinmk/vim-sneak'
+    let g:sneak#use_ic_scs = 1
     let g:sneak#prompt = ''
     highlight link Sneak None
 
@@ -211,6 +214,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     map Q gq
     sunmap Q
 
+    Plug 'andrewradev/deleft.vim'
+    let g:deleft_remove_strategy = 'spaces'
+
     Plug 'AaronLasseigne/yank-code'
     noremap gy <Plug>YankCode
 
@@ -219,9 +225,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'coderifous/textobj-word-column.vim'
     Plug 'vim-scripts/ReplaceWithRegister'
+    Plug 'michaeljsmith/vim-indent-object'
     Plug 'triglav/vim-visual-increment'
     Plug 'arthurxavierx/vim-caser'
-    Plug 'andrewradev/deleft.vim'
     Plug 'tpope/vim-commentary'
     Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
@@ -257,7 +263,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:autodirmake#is_confirm = 0
 
     Plug 'ferranpm/vim-isolate'
-    nnoremap gi vap \| :Isolation<CR>
+    nnoremap gi vip \| :Isolation<CR>
     vnoremap gi :Isolation<CR>
 
     Plug 'unblevable/quick-scope'
@@ -277,6 +283,15 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:lessspace_normal = 0
 
     Plug 'inkarkat/vim-unconditionalpaste'
+    let g:UnconditionalPaste_no_mappings = 1
+    nnoremap gcp <Plug>UnconditionalPasteInlinedAfter
+    nnoremap gcP <Plug>UnconditionalPasteInlinedBefore
+    nnoremap gjp <Plug>UnconditionalPasteCharAfter
+    nnoremap gjP <Plug>UnconditionalPasteCharBefore
+    nnoremap glp <Plug>UnconditionalPasteLineAfter
+    nnoremap glP <Plug>UnconditionalPasteLineBefore
+
+    Plug 'kristijanhusak/vim-create-pr'
     Plug 'k0kubun/vim-open-github'
     Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
@@ -285,6 +300,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
     Plug 'yegappan/mru'
+
+    " Mark: dependencies
+    Plug 'inkarkat/vim-ingo-library'
+    Plug 'inkarkat/vim-countjump'
+    Plug 'tpope/vim-speeddating'
 
     call plug#end()
 endif
