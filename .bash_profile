@@ -13,7 +13,8 @@ alias forward="git merge --ff-only"
 alias merge="git merge --no-ff --no-commit"
 alias refs="git rev-list --left-right --oneline"
 alias submodules="git submodule update --init --recursive"
-alias prune="git remote prune origin && git branch -v | grep \"\\[gone\\]\" | awk '{print $1}' | xargs git branch -D"
+alias prune="git remote prune origin && git branch -v | grep \"\\[gone\\]\" | awk '{print \$1}' | xargs git branch -D"
+alias mods="vim \$(git status --porcelain | awk '{print \$2}')"
 
 # Compression
 alias archive="tar -cvf Archive.tar"
@@ -43,4 +44,3 @@ fi
 # Cursor and prefix colours
 printf '\033[3 q'
 PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
