@@ -50,7 +50,7 @@ set smartcase
 
 cabbrev ml g//p
 cabbrev mc %s///ng
-nnoremap <silent> m :noh<CR>
+nnoremap <silent> <leader>m :noh<CR>
 highlight CurSearch ctermfg=black ctermbg=white
 
 " Newline-column commands
@@ -66,7 +66,6 @@ tnoremap <Esc> <C-\><C-n>
 
 " Command mappings
 cabbrev wq wqa
-cabbrev h vert h
 
 " Window navigation bindings
 nnoremap <tab> <c-w>
@@ -152,7 +151,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:vimfiler_readonly_file_icon = 'R'
     let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
     cabbrev F VimFiler
-    cabbrev E VimFilerExplorer
 
     Plug 'wesq3/vim-windowswap'
     let g:windowswap_map_keys = 0
@@ -187,9 +185,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'jayflo/vim-skip'
     let g:vimskip_mapforwardskip = 'S'
 
-    Plug 'godlygeek/tabular'
-    cabbrev Tab Tabularize
-
     Plug 'gcmt/wildfire.vim'
     let g:wildfire_objects = [
         \ 'i''', 'a''', 'i"', 'a"', 'i)', 'a)',
@@ -209,13 +204,18 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:VM_default_mappings = 0
     let g:VM_mouse_mappings = 1
     let g:VM_maps = {}
-    let g:VM_maps['Find Under'] = '<C-m>'
-    let g:VM_maps['Find Subword Under'] = '<C-m>'
+    let g:VM_maps['Find Under'] = '<C-s>'
+    let g:VM_maps['Find Subword Under'] = '<C-s>'
     map Q gq
     sunmap Q
 
     Plug 'andrewradev/deleft.vim'
     let g:deleft_remove_strategy = 'spaces'
+
+    Plug 'junegunn/vim-easy-align'
+    xnoremap m <Plug>(EasyAlign)
+    nnoremap m <Plug>(EasyAlign)
+    cabbrev Tab EasyAlign
 
     Plug 'AaronLasseigne/yank-code'
     noremap gy <Plug>YankCode
