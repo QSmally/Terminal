@@ -39,6 +39,7 @@ highlight LineNr ctermfg=darkgrey
 highlight CursorLineNr ctermfg=white cterm=bold
 highlight! link SignColumn LineNr
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
+highlight Folded ctermfg=white ctermbg=235 guibg=#2c2d27
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -96,6 +97,12 @@ nnoremap <leader>df daBddk
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
 
+    " Mark: dependencies
+    Plug 'inkarkat/vim-ingo-library'
+    Plug 'inkarkat/vim-countjump'
+    Plug 'kana/vim-textobj-user'
+    Plug 'tpope/vim-speeddating'
+
     " Mark: language integration
     Plug 'lervag/vimtex', { 'for': 'tex' }
     let g:vimtex_compiler_latexmk = { 'build_dir': 'Compilation' }
@@ -146,18 +153,17 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap <leader>q <Plug>(qf_qf_toggle)
     nnoremap <leader>w <Plug>(qf_qf_switch)
 
+    Plug 'taylor/vim-zoomwin'
+    nnoremap <silent> <C-q> :ZoomWin<CR>
+
     Plug 'shougo/vimfiler.vim'
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_readonly_file_icon = 'R'
     let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
     cabbrev F VimFiler
 
-    Plug 'wesq3/vim-windowswap'
-    let g:windowswap_map_keys = 0
-    nnoremap <silent> qq :call WindowSwap#EasyWindowSwap()<CR>
-
     Plug 'wellle/visual-split.vim'
-    cabbrev S VSSplit
+    cabbrev S VSSplitBelow
 
     Plug 'skywind3000/vim-preview'
     cabbrev D PreviewFile
@@ -176,7 +182,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'tpope/vim-obsession'
     Plug 'artnez/vim-wipeout'
-    Plug 'taylor/vim-zoomwin'
     Plug 'justinmk/vim-gtfo'
     Plug 'mileszs/ack.vim'
     Plug 'QSmally/DWM'
@@ -203,10 +208,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " FIXME: leaving VM through 'Q' re-enables search highlighting
     let g:VM_default_mappings = 0
     let g:VM_mouse_mappings = 1
-    let g:VM_maps = {}
-    let g:VM_maps['Find Under'] = '<C-s>'
-    let g:VM_maps['Find Subword Under'] = '<C-s>'
-    map Q gq
+    let g:VM_maps = {
+        \ 'Find Under': '<C-s>',
+        \ 'Find Subword Under': '<C-s>' }
+    noremap Q gq
     sunmap Q
 
     Plug 'andrewradev/deleft.vim'
@@ -220,15 +225,37 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'AaronLasseigne/yank-code'
     noremap gy <Plug>YankCode
 
+    Plug 'junegunn/vim-after-object'
+    autocmd VimEnter * call after_object#enable(['a'], '=', ':')
+
+    Plug 'haya14busa/vim-edgemotion'
+    noremap ) <Plug>(edgemotion-j)
+    noremap ( <Plug>(edgemotion-k)
+
     Plug 'vim-scripts/transpose-words'
     nnoremap g/ <Plug>Transposewords
 
+    Plug 'saaguero/vim-textobj-pastedtext'
+    let g:pastedtext_select_key = 'gp'
+
+    Plug 'inkarkat/vim-unconditionalpaste'
+    let g:UnconditionalPaste_no_mappings = 1
+    nnoremap gcp <Plug>UnconditionalPasteInlinedAfter
+    nnoremap gcP <Plug>UnconditionalPasteInlinedBefore
+    nnoremap gjp <Plug>UnconditionalPasteCharAfter
+    nnoremap gjP <Plug>UnconditionalPasteCharBefore
+    nnoremap glp <Plug>UnconditionalPasteLineAfter
+    nnoremap glP <Plug>UnconditionalPasteLineBefore
+
+    Plug 'julian/vim-textobj-variable-segment'
     Plug 'coderifous/textobj-word-column.vim'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'triglav/vim-visual-increment'
+    Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown'] }
     Plug 'arthurxavierx/vim-caser'
     Plug 'tpope/vim-commentary'
+    Plug 'jceb/vim-textobj-uri'
     Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
@@ -275,24 +302,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
 
-    Plug 'haya14busa/vim-edgemotion'
-    noremap ) <Plug>(edgemotion-j)
-    noremap ( <Plug>(edgemotion-k)
-
     Plug 'thirtythreeforty/lessspace.vim'
     let g:lessspace_normal = 0
 
-    Plug 'inkarkat/vim-unconditionalpaste'
-    let g:UnconditionalPaste_no_mappings = 1
-    nnoremap gcp <Plug>UnconditionalPasteInlinedAfter
-    nnoremap gcP <Plug>UnconditionalPasteInlinedBefore
-    nnoremap gjp <Plug>UnconditionalPasteCharAfter
-    nnoremap gjP <Plug>UnconditionalPasteCharBefore
-    nnoremap glp <Plug>UnconditionalPasteLineAfter
-    nnoremap glP <Plug>UnconditionalPasteLineBefore
-
     Plug 'kristijanhusak/vim-create-pr'
-    Plug 'k0kubun/vim-open-github'
     Plug 'vim-scripts/visSum.vim'
     Plug 'antoyo/vim-licenses'
     Plug 'fcpg/vim-altscreen'
@@ -300,11 +313,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
     Plug 'yegappan/mru'
-
-    " Mark: dependencies
-    Plug 'inkarkat/vim-ingo-library'
-    Plug 'inkarkat/vim-countjump'
-    Plug 'tpope/vim-speeddating'
 
     call plug#end()
 endif
