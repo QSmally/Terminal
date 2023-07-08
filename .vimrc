@@ -124,6 +124,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
 
     Plug 'ludovicchabant/vim-gutentags'
+    let g:gutentags_enable = filereadable('/usr/bin/ctags')
     let g:gutentags_ctags_tagfile = '.git/tags'
 
     Plug 'vim-scripts/a.vim'
