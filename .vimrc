@@ -161,7 +161,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_readonly_file_icon = 'R'
     let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
+    " FIXME: file manager remaps C-J even though in use by DWM
     cabbrev F VimFiler
+    cabbrev E VimFilerSplit
 
     Plug 'wellle/visual-split.vim'
     cabbrev S VSSplitBelow
@@ -250,10 +252,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'julian/vim-textobj-variable-segment'
     Plug 'coderifous/textobj-word-column.vim'
+    Plug 'thalesmello/vim-textobj-methodcall'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'triglav/vim-visual-increment'
     Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown'] }
+    Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
     Plug 'tpope/vim-commentary'
     Plug 'jceb/vim-textobj-uri'
@@ -308,7 +312,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'kristijanhusak/vim-create-pr'
     Plug 'vim-scripts/visSum.vim'
+    Plug 'townk/vim-autoclose'
     Plug 'antoyo/vim-licenses'
+    Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
