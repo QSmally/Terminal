@@ -257,6 +257,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'triglav/vim-visual-increment'
     Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown'] }
+    Plug 'vesion/vim-textobj-restline'
     Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
     Plug 'tpope/vim-commentary'
