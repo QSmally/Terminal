@@ -51,7 +51,7 @@ set smartcase
 
 cabbrev ml g//p
 cabbrev mc %s///ng
-nnoremap <silent> <leader>m :noh<CR>
+nnoremap <silent> <Esc> :nohl<CR><Esc>
 highlight CurSearch ctermfg=black ctermbg=white
 
 " Newline-column commands
@@ -69,8 +69,8 @@ tnoremap <Esc> <C-\><C-n>
 cabbrev wq wqa
 
 " Window navigation bindings
-nnoremap <tab> <c-w>
-nnoremap <tab><tab> <c-w><c-w>
+nnoremap <tab> <C-w>
+nnoremap <tab><tab> <C-w><C-w>
 nnoremap <leader>[ :prev<CR>
 nnoremap <leader>] :next<CR>
 
