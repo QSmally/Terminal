@@ -292,6 +292,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
+    Plug 'townk/vim-autoclose'
+    let g:AutoClosePairs_del = '`'
+
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
 
@@ -313,7 +316,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'kristijanhusak/vim-create-pr'
     Plug 'vim-scripts/visSum.vim'
-    Plug 'townk/vim-autoclose'
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
