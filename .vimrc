@@ -221,8 +221,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:deleft_remove_strategy = 'spaces'
 
     Plug 'junegunn/vim-easy-align'
-    xnoremap m <Plug>(EasyAlign)
-    nnoremap m <Plug>(EasyAlign)
+    xnoremap \ <Plug>(EasyAlign)
+    nnoremap \ <Plug>(EasyAlign)
     cabbrev Tab EasyAlign
 
     Plug 'AaronLasseigne/yank-code'
@@ -252,6 +252,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'julian/vim-textobj-variable-segment'
     Plug 'coderifous/textobj-word-column.vim'
+    Plug 'beloglazov/vim-textobj-punctuation'
     Plug 'thalesmello/vim-textobj-methodcall'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
@@ -261,7 +262,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
     Plug 'tpope/vim-commentary'
-    Plug 'jceb/vim-textobj-uri'
     Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
@@ -316,6 +316,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'kristijanhusak/vim-create-pr'
     Plug 'vim-scripts/visSum.vim'
+    Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
