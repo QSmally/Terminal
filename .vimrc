@@ -71,8 +71,6 @@ cabbrev wq wqa
 " Window navigation bindings
 nnoremap <tab> <C-w>
 nnoremap <tab><tab> <C-w><C-w>
-nnoremap <leader>[ :prev<CR>
-nnoremap <leader>] :next<CR>
 
 " Clipboard bindings
 noremap Y "*y
@@ -89,9 +87,6 @@ nnoremap <silent> <leader>j :m .+1<CR>==
 nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
-
-" Custom motions
-nnoremap <leader>df daBddk
 
 " Plugins
 if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -164,6 +159,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " FIXME: file manager remaps C-J even though in use by DWM
     cabbrev F VimFiler
     cabbrev E VimFilerSplit
+
+    Plug 'romgrk/vimfiler-prompt'
+    autocmd FileType vimfiler nnoremap <buffer> i :VimFilerPrompt<CR>
 
     Plug 'wellle/visual-split.vim'
     cabbrev S VSSplitBelow
@@ -271,8 +269,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'genezharov/vim-scrollmode'
     let g:scrollmode_distance = 10
     let g:scrollmode_mappings = {
-        \ ':-4<CR>': ['K', '<S-Up>'],
-        \ ':+4<CR>': ['J', '<S-Down>'] }
+        \ ':-5<CR>': ['K', '<S-Up>'],
+        \ ':+5<CR>': ['J', '<S-Down>'] }
     let g:scrollmode_actions = {
         \ 'pageup': ['l'],
         \ 'pagedown': ['h'],
@@ -284,11 +282,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
 
-    Plug 'andrewradev/multichange.vim'
-    let g:multichange_mapping = '<leader>mm'
-    let g:multichange_motion_mapping = 'm'
-
     " Mark: miscellaneous tools
+    Plug 'tyru/nextfile.vim'
+    let g:nf_include_dotfiles = 1
+    let g:nf_map_previous = '<leader>['
+    let g:nf_ignore_ext = ['swp']
+    let g:nf_map_next = '<leader>]'
+
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
