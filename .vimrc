@@ -67,10 +67,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Command mappings
 cabbrev wq wqa
-
-" Window navigation bindings
-nnoremap <tab> <C-w>
-nnoremap <tab><tab> <C-w><C-w>
+cabbrev wr wq
 
 " Clipboard bindings
 noremap Y "*y
@@ -320,6 +317,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
+    Plug 'ledesmablt/vim-run' " ???
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
