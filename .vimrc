@@ -18,8 +18,11 @@ let maplocalleader = ','
 filetype plugin indent on
 
 " Scrolling
+set nowrap
+
 set mouse=a
 set scrolloff=4
+set sidescrolloff=12
 
 " Tabs
 set smarttab
@@ -33,6 +36,7 @@ set shiftwidth=4
 syntax on
 set number
 set cursorline
+
 set cursorlineopt=number
 
 highlight LineNr ctermfg=darkgrey
@@ -317,7 +321,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
-    Plug 'ledesmablt/vim-run' " ???
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
