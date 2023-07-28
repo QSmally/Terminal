@@ -303,6 +303,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nnoremap gi vip \| :Isolation<CR>
     vnoremap gi :Isolation<CR>
 
+    Plug 'davidgamba/vim-vmath'
+    vnoremap <expr> <leader>su VMATH_YankAndAnalyse()
+
     Plug 'unblevable/quick-scope'
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
@@ -316,7 +319,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:lessspace_normal = 0
 
     Plug 'kristijanhusak/vim-create-pr'
-    Plug 'vim-scripts/visSum.vim'
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
