@@ -108,6 +108,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
 
+    Plug 'rhysd/open-pdf.vim'
+    let g:pdf_cache_dir = expand('~/.cache/pdf')
+    let g:pdf_convert_on_edit = 1
+
     Plug 'gi1242/vim-tex-autoclose', { 'for': 'tex' }
     autocmd FileType tex nnoremap <silent> <buffer> <leader>e :call TexACClosePrev('n')<CR>
 
@@ -156,7 +160,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'shougo/vimfiler.vim'
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_readonly_file_icon = 'R'
-    let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$']
+    let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '\.swp$']
     " FIXME: file manager remaps C-J even though in use by DWM
     cabbrev F VimFiler
     cabbrev E VimFilerSplit
@@ -323,6 +327,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
+    Plug 'tpope/vim-dadbod'
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
