@@ -90,7 +90,7 @@ vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
 " Plugins
-if filereadable(expand("~/.vim/autoload/plug.vim"))
+if filereadable(expand('~/.vim/autoload/plug.vim'))
     call plug#begin()
 
     " Mark: dependencies
@@ -98,6 +98,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'inkarkat/vim-countjump'
     Plug 'kana/vim-textobj-user'
     Plug 'tpope/vim-speeddating'
+    Plug 'glts/vim-magnum'
 
     " Mark: language integration
     Plug 'lervag/vimtex', { 'for': 'tex' }
@@ -153,6 +154,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:qf_auto_resize = 0
     nnoremap <leader>q <Plug>(qf_qf_toggle)
     nnoremap <leader>w <Plug>(qf_qf_switch)
+    autocmd FileType qf
+        \ nnoremap <buffer> { <Plug>(qf_previous_file) |
+        \ nnoremap <buffer> } <Plug>(qf_next_file)
 
     Plug 'taylor/vim-zoomwin'
     nnoremap <silent> <C-q> :ZoomWin<CR>
@@ -164,12 +168,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " FIXME: file manager remaps C-J even though in use by DWM
     cabbrev F VimFiler
     cabbrev E VimFilerSplit
+    autocmd FileType vimfiler setl nonumber
 
     Plug 'romgrk/vimfiler-prompt'
     autocmd FileType vimfiler nnoremap <buffer> i :VimFilerPrompt<CR>
-
-    Plug 'wellle/visual-split.vim'
-    cabbrev S VSSplitBelow
 
     Plug 'skywind3000/vim-preview'
     cabbrev D PreviewFile
@@ -232,7 +234,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     noremap gy <Plug>YankCode
 
     Plug 'junegunn/vim-after-object'
-    autocmd VimEnter * call after_object#enable(['a'], '=', ':')
+    if exists('after_object#enable')
+        autocmd VimEnter * call after_object#enable(['a'], '=', ':')
+    endif
 
     Plug 'haya14busa/vim-edgemotion'
     noremap ) <Plug>(edgemotion-j)
@@ -269,6 +273,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
     Plug 'machakann/vim-swap'
+    Plug 'glts/vim-radical'
 
     " Mark: modes
     Plug 'genezharov/vim-scrollmode'
@@ -288,6 +293,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:table_mode_c = '|'
 
     " Mark: miscellaneous tools
+    Plug 'yegappan/mru'
+    let MRU_File = expand('~/.cache/mru')
+
     Plug 'tyru/nextfile.vim'
     let g:nf_include_dotfiles = 1
     let g:nf_map_previous = '<leader>['
@@ -302,10 +310,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
-
-    Plug 'ferranpm/vim-isolate'
-    nnoremap gi vip \| :Isolation<CR>
-    vnoremap gi :Isolation<CR>
 
     Plug 'davidgamba/vim-vmath'
     vnoremap <expr> <leader>su VMATH_YankAndAnalyse()
@@ -331,7 +335,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-eunuch'
     Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
-    Plug 'yegappan/mru'
 
     call plug#end()
 endif
