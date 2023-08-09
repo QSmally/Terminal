@@ -37,13 +37,20 @@ syntax on
 set number
 set cursorline
 
+set signcolumn=yes
 set cursorlineopt=number
 
 highlight LineNr ctermfg=darkgrey
 highlight CursorLineNr ctermfg=white cterm=bold
 highlight! link SignColumn LineNr
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-highlight Folded ctermfg=white ctermbg=235 guibg=#2c2d27
+highlight! link FoldColumn LineNr
+highlight ColorColumn ctermbg=235
+highlight Folded ctermfg=white ctermbg=235
+
+highlight DiffAdd ctermbg=none
+highlight DiffChange ctermbg=none
+highlight DiffDelete ctermfg=none ctermbg=none
+highlight DiffText cterm=none ctermfg=none ctermbg=242
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -59,14 +66,14 @@ nnoremap <silent> <Esc> :nohl<CR><Esc>
 highlight CurSearch ctermfg=black ctermbg=white
 
 " Newline-column commands
-command C80 :set colorcolumn=80
-command CC80 :set colorcolumn=80,84,88,92
-command C100 :set colorcolumn=100
-command CC100 :set colorcolumn=100,104,108,112
-command CR :set colorcolumn=
+command! C80 :set colorcolumn=80
+command! CC80 :set colorcolumn=80,84,88,92
+command! C100 :set colorcolumn=100
+command! CC100 :set colorcolumn=100,104,108,112
+command! CR :set colorcolumn=
 
 " Terminal command and binding
-command T :vert term ++close /bin/bash -l
+command! T :vert term ++close /bin/bash -l
 tnoremap <Esc> <C-\><C-n>
 
 " Command mappings
@@ -98,6 +105,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'inkarkat/vim-countjump'
     Plug 'kana/vim-textobj-user'
     Plug 'tpope/vim-speeddating'
+    Plug 'Shougo/unite.vim'
     Plug 'glts/vim-magnum'
 
     " Mark: language integration
@@ -106,15 +114,14 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:vimtex_view_method = 'skim'
     autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
 
+    Plug 'makerj/vim-pdf'
+    autocmd BufEnter *.pdf setl nonumber
+
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
 
-    Plug 'rhysd/open-pdf.vim'
-    let g:pdf_cache_dir = expand('~/.cache/pdf')
-    let g:pdf_convert_on_edit = 1
-
     Plug 'gi1242/vim-tex-autoclose', { 'for': 'tex' }
-    autocmd FileType tex nnoremap <silent> <buffer> <leader>e :call TexACClosePrev('n')<CR>
+    autocmd FileType tex nnoremap <silent> <buffer> <leader>c :call TexACClosePrev('n')<CR>
 
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
@@ -138,7 +145,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_terminal_reports_focus = 0
-    set signcolumn=yes
 
     Plug 'zivyangll/git-blame.vim'
     nnoremap <silent> <leader>b :call gitblame#echo()<CR>
@@ -302,6 +308,10 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:nf_ignore_ext = ['swp']
     let g:nf_map_next = '<leader>]'
 
+    Plug 'olical/vim-expand'
+    nnoremap <silent> <leader>e :Expand<CR>
+    vnoremap <silent> <leader>e :Expand<CR>
+
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
@@ -320,6 +330,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'vim-scripts/loremipsum'
     cabbrev L Loremipsum
 
+    Plug 'andrewradev/linediff.vim'
+    let g:linediff_sign_highlight_group = 'Directory'
+    nnoremap <silent> <leader>d :Linediff<CR>
+    vnoremap <silent> <leader>d :Linediff<CR>
+
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
 
@@ -333,7 +348,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'fcpg/vim-altscreen'
     Plug 'tpope/vim-dadbod'
     Plug 'tpope/vim-eunuch'
-    Plug 'Shougo/unite.vim'
     Plug 'reedes/vim-wordy'
 
     call plug#end()
