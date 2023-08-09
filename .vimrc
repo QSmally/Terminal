@@ -96,6 +96,16 @@ nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
+" Netrw/file browser
+let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
+let g:netrw_banner = 0
+let g:netrw_hide = 1
+cabbrev F edit .
+
+if exists('dwm#layout')
+    cabbrev E vsplit . \| call dwm#layout()
+endif
+
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
     call plug#begin()
@@ -105,7 +115,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'inkarkat/vim-countjump'
     Plug 'kana/vim-textobj-user'
     Plug 'tpope/vim-speeddating'
-    Plug 'Shougo/unite.vim'
     Plug 'glts/vim-magnum'
 
     " Mark: language integration
@@ -167,21 +176,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'taylor/vim-zoomwin'
     nnoremap <silent> <C-q> :ZoomWin<CR>
 
-    Plug 'shougo/vimfiler.vim'
-    let g:vimfiler_as_default_explorer = 1
-    let g:vimfiler_readonly_file_icon = 'R'
-    let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '\.swp$']
-    " FIXME: file manager remaps C-J even though in use by DWM
-    cabbrev F VimFiler
-    cabbrev E VimFilerSplit
-    autocmd FileType vimfiler setl nonumber
-
-    Plug 'romgrk/vimfiler-prompt'
-    autocmd FileType vimfiler nnoremap <buffer> i :VimFilerPrompt<CR>
-
     Plug 'skywind3000/vim-preview'
     cabbrev D PreviewFile
-    cabbrev DD PreviewClose
+    cabbrev DD PreviewClose \| call dwm#layout()
     " NOTE: for me, these characters is the key besides the numerical row
     noremap <silent> ± :PreviewScroll -1<CR>
     noremap <silent> § :PreviewScroll +1<CR>
