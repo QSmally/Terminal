@@ -32,7 +32,7 @@ set autoindent
 set tabstop=4
 set shiftwidth=4
 
-" Syntax highlighting
+" Highlighting
 syntax on
 set number
 set cursorline
@@ -44,8 +44,15 @@ highlight LineNr ctermfg=darkgrey
 highlight CursorLineNr ctermfg=white cterm=bold
 highlight! link SignColumn LineNr
 highlight! link FoldColumn LineNr
+highlight! link TabLineFill LineNr
+highlight! link TabLine LineNr
 highlight ColorColumn ctermbg=235
-highlight Folded ctermfg=white ctermbg=235
+highlight Folded ctermfg=white ctermbg=233
+highlight QuickFixLine cterm=bold
+
+highlight VertSplit ctermfg=240 ctermbg=234 cterm=none
+highlight StatusLine ctermfg=255 ctermbg=234 cterm=bold
+highlight StatusLineNC ctermfg=252 ctermbg=234 cterm=none
 
 highlight DiffAdd ctermbg=none
 highlight DiffChange ctermbg=none
@@ -78,7 +85,12 @@ tnoremap <Esc> <C-\><C-n>
 
 " Command mappings
 cabbrev wq wqa
-cabbrev wr wq
+
+if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
+    cabbrev wr wq \| call dwm#layout()
+else
+    cabbrev wr wq
+endif
 
 " Clipboard bindings
 noremap Y "*y
@@ -96,15 +108,11 @@ nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
-" Netrw/file browser
-let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
-let g:netrw_banner = 0
-let g:netrw_hide = 1
-cabbrev F edit .
-
-if exists('dwm#layout')
-    cabbrev E vsplit . \| call dwm#layout()
-endif
+" Tab bindings
+nnoremap <silent> <leader>t] :tabnext<CR>
+nnoremap <silent> <leader>t[ :tabprev<CR>
+nnoremap <silent> <leader>tn :tabnew \| :edit .<CR>
+nnoremap <silent> <leader>tc :tabclose<CR>
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -152,6 +160,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     cabbrev R Agit
     cabbrev C AgitFile
 
+    Plug 'tpope/vim-fugitive'
+    autocmd FileType git,fugitive setl nonumber
+
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_terminal_reports_focus = 0
 
@@ -162,7 +173,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <silent> <leader>x/ :ConflictTake all<CR>
 
     Plug 'k0kubun/vim-open-github'
-    Plug 'tpope/vim-fugitive'
 
     " Mark: window management
     Plug 'romainl/vim-qf'
@@ -216,12 +226,13 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     highlight link Sneak None
 
     Plug 'mg979/vim-visual-multi'
-    " FIXME: leaving VM through 'Q' re-enables search highlighting
     let g:VM_default_mappings = 0
     let g:VM_mouse_mappings = 1
     let g:VM_maps = {
         \ 'Find Under': '<C-s>',
-        \ 'Find Subword Under': '<C-s>' }
+        \ 'Find Subword Under': '<C-s>',
+        \ 'Add Cursor Down': '<leader>J',
+        \ 'Add Cursor Up': '<leader>K' }
     noremap Q gq
     sunmap Q
 
@@ -348,4 +359,18 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'reedes/vim-wordy'
 
     call plug#end()
+endif
+
+" Netrw/file browser
+let g:netrw_use_errorwindow = 0
+let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
+let g:netrw_banner = 0
+let g:netrw_hide = 1
+
+if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
+    cabbrev E vsplit . \| call dwm#layout()
+    cabbrev F edit . \| call dwm#focus_window(0, 1)
+else
+    cabbrev E vsplit .
+    cabbrev F edit .
 endif
