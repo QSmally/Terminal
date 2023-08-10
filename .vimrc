@@ -83,15 +83,6 @@ command! CR :set colorcolumn=
 command! T :vert term ++close /bin/bash -l
 tnoremap <Esc> <C-\><C-n>
 
-" Command mappings
-cabbrev wq wqa
-
-if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
-    cabbrev wr wq \| call dwm#layout()
-else
-    cabbrev wr wq
-endif
-
 " Clipboard bindings
 noremap Y "*y
 nnoremap YY "*yy
@@ -367,10 +358,14 @@ let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
 
+cabbrev wq wqa
+
 if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
     cabbrev E vsplit . \| call dwm#layout()
     cabbrev F edit . \| call dwm#focus_window(0, 1)
+    cabbrev wr wq \| call dwm#layout()
 else
     cabbrev E vsplit .
     cabbrev F edit .
+    cabbrev wr wq
 endif
