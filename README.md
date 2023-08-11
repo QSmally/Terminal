@@ -10,4 +10,4 @@ when using it minimally. It decides whether or not to enable it based on the pre
 
 Vim's configuration isn't that minimalistic anymore (though the UI is). `Ack`, `ctags` and `xpdf`
 may be installed for a nice experience, as well as being compiled with Python for Emacs org-mode
-support.
+support. Skim is used as VimTeX compiled document viewer.

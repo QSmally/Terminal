@@ -105,6 +105,21 @@ nnoremap <silent> <leader>t[ :tabprev<CR>
 nnoremap <silent> <leader>tn :tabnew \| :edit .<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
 
+nnoremap <silent> <leader>t1 :1tabnext<CR>
+nnoremap <silent> <leader>t2 :2tabnext<CR>
+nnoremap <silent> <leader>t3 :3tabnext<CR>
+nnoremap <silent> <leader>t4 :4tabnext<CR>
+nnoremap <silent> <leader>t5 :5tabnext<CR>
+nnoremap <silent> <leader>t6 :6tabnext<CR>
+nnoremap <silent> <leader>t7 :7tabnext<CR>
+nnoremap <silent> <leader>t8 :8tabnext<CR>
+nnoremap <silent> <leader>t9 :9tabnext<CR>
+nnoremap <silent> <leader>t0 :tabnext #<CR>
+
+nnoremap <silent> <leader>t< :-tabmove<CR>
+nnoremap <silent> <leader>t> :+tabmove<CR>
+nnoremap <silent> <leader>t/ :0tabmove<CR>
+
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
     call plug#begin()
@@ -123,7 +138,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
 
     Plug 'makerj/vim-pdf'
-    autocmd BufEnter *.pdf setl nonumber
+    autocmd BufEnter *.pdf
+        \ setl nonumber |
+        \ setl nomodifiable
 
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
