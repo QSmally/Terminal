@@ -6,11 +6,12 @@ set ttimeout
 set wildmenu
 set autoread
 set incsearch
+set noruler
 
 set belloff+=esc
 set laststatus=1
 set ttimeoutlen=50
-set shortmess=filnxtToOsS
+set shortmess=filmnxtToOsS
 set backspace=indent,eol,start
 
 let mapleader = ','
@@ -69,6 +70,7 @@ set smartcase
 
 cabbrev ml g//p
 cabbrev mc %s///ng
+" FIXME: Mapping <Esc> results in faulty arrow keys on X-terminal-emulator
 nnoremap <silent> <Esc> :nohl<CR><Esc>
 highlight CurSearch ctermfg=black ctermbg=white
 
@@ -78,6 +80,9 @@ command! CC80 :set colorcolumn=80,84,88,92
 command! C100 :set colorcolumn=100
 command! CC100 :set colorcolumn=100,104,108,112
 command! CR :set colorcolumn=
+command! W80 :set textwidth=80
+command! W100 :set textwidth=100
+command! WR :set textwidth=
 
 " Terminal command and binding
 command! T :vert term ++close /bin/bash -l
@@ -103,6 +108,7 @@ vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 nnoremap <silent> <leader>t] :tabnext<CR>
 nnoremap <silent> <leader>t[ :tabprev<CR>
 nnoremap <silent> <leader>tn :tabnew \| :edit .<CR>
+nnoremap <silent> <leader>tp :wincmd T<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
 
 nnoremap <silent> <leader>t1 :1tabnext<CR>
@@ -381,6 +387,7 @@ if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
     cabbrev E vsplit . \| call dwm#layout()
     cabbrev F edit . \| call dwm#focus_window(0, 1)
     cabbrev wr wq \| call dwm#layout()
+    nnoremap <silent> <leader>fix :call dwm#layout()<CR>
 else
     cabbrev E vsplit .
     cabbrev F edit .
