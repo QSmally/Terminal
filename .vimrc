@@ -35,30 +35,12 @@ set shiftwidth=4
 
 " Highlighting
 syntax on
+colorscheme Colourscheme
 set number
 set cursorline
 
 set signcolumn=yes
 set cursorlineopt=number
-
-highlight LineNr ctermfg=darkgrey
-highlight CursorLineNr ctermfg=white cterm=bold
-highlight! link SignColumn LineNr
-highlight! link FoldColumn LineNr
-highlight! link TabLineFill LineNr
-highlight! link TabLine LineNr
-highlight ColorColumn ctermbg=235
-highlight Folded ctermfg=white ctermbg=233
-highlight QuickFixLine cterm=bold
-
-highlight VertSplit ctermfg=240 ctermbg=234 cterm=none
-highlight StatusLine ctermfg=255 ctermbg=234 cterm=bold
-highlight StatusLineNC ctermfg=252 ctermbg=234 cterm=none
-
-highlight DiffAdd ctermbg=none
-highlight DiffChange ctermbg=none
-highlight DiffDelete ctermfg=none ctermbg=none
-highlight DiffText cterm=none ctermfg=none ctermbg=242
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline

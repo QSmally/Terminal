@@ -1,21 +1,34 @@
 #!/bin/bash
 
-files=( ".bash_profile" ".vimrc" )
+declare -r files=(
+    ~/.bash_profile
+    ~/.vimrc
+    ~/.vim/colors/Colourscheme.vim
+)
 
 declare -i linked_file_count=0
 
-for file in "${files[@]}"; do
-    if [ -e ~/$file ]; then
-        echo "File $file ignored because it already exists in ~"
+for path in "${files[@]}"; do
+    filename=$(basename $path)
+    directory=$(dirname $path)
+
+    if [ -e $path ]; then
+        echo "File $filename ignored because it already exists in $directory"
         continue
     fi
 
-    ln -s $(pwd)/$file ~/$file
+    if [ ! -d $directory ]; then
+        mkdir $directory
+        echo "Intermediate directory $directory created"
+    fi
+
+    ln -s $(pwd)/$filename $directory
+
     if [ $? -eq 0 ]; then
         linked_file_count+=1
-        echo "Symlinked $file to ~"
+        echo "Symlinked $filename to $directory"
     fi
 done
 
-echo "Symlinked a total of $linked_file_count configuration files to ~"
+echo "Installed a total of $linked_file_count configuration files"
 
