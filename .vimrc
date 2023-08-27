@@ -70,9 +70,11 @@ set smartcase
 
 cabbrev ml g//p
 cabbrev mc %s///ng
-" FIXME: Mapping <Esc> results in faulty arrow keys on X-terminal-emulator
-nnoremap <silent> <Esc> :nohl<CR><Esc>
-highlight CurSearch ctermfg=black ctermbg=white
+
+if has('macunix')
+    " FIXME: Mapping <Esc> results in faulty arrow keys on X-terminal-emulator
+    nnoremap <silent> <Esc> :nohl<CR><Esc>
+endif
 
 " Newline-column commands
 command! C80 :set colorcolumn=80
@@ -202,7 +204,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'skywind3000/vim-preview'
     cabbrev D PreviewFile
-    cabbrev DD PreviewClose \| call dwm#layout()
+    cabbrev DD PreviewClose
     " NOTE: for me, these characters is the key besides the numerical row
     noremap <silent> ± :PreviewScroll -1<CR>
     noremap <silent> § :PreviewScroll +1<CR>
@@ -381,6 +383,7 @@ let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
 
+autocmd FileType netrw nmap <Space> mfj
 cabbrev wq wqa
 
 if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
