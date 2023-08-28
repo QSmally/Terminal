@@ -70,6 +70,9 @@ command! WR :set textwidth=
 
 " Terminal command and binding
 command! T :vert term ++close /bin/bash -l
+autocmd TerminalOpen *
+    \ setl nonumber |
+    \ setl signcolumn=no
 tnoremap <Esc> <C-\><C-n>
 
 " Clipboard bindings
