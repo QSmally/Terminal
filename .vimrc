@@ -70,9 +70,7 @@ command! WR :set textwidth=
 
 " Terminal command and binding
 command! T :vert term ++close /bin/bash -l
-autocmd TerminalOpen *
-    \ setl nonumber |
-    \ setl signcolumn=no
+autocmd TerminalOpen * setl nonumber signcolumn=no
 tnoremap <Esc> <C-\><C-n>
 
 " Clipboard bindings
@@ -94,7 +92,7 @@ vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 " Tab bindings
 nnoremap <silent> <leader>t] :tabnext<CR>
 nnoremap <silent> <leader>t[ :tabprev<CR>
-nnoremap <silent> <leader>tn :tabnew \| :edit .<CR>
+nnoremap <silent> <leader>tn :Texplore<CR>
 nnoremap <silent> <leader>tp :wincmd T<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
 
@@ -131,9 +129,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
 
     Plug 'makerj/vim-pdf'
-    autocmd BufEnter *.pdf
-        \ setl nonumber |
-        \ setl nomodifiable
+    " FIXME: Modifiable should be set in order to reload buffer
+    autocmd BufEnter *.pdf setl nonumber readonly modifiable
 
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
@@ -343,6 +340,10 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:linediff_sign_highlight_group = 'Directory'
     nnoremap <silent> <leader>d :Linediff<CR>
     vnoremap <silent> <leader>d :Linediff<CR>
+    nnoremap <silent> <leader>ad :LinediffAdd<CR>
+    vnoremap <silent> <leader>ad :LinediffAdd<CR>
+    nnoremap <silent> <leader>rd :LinediffReset<CR>
+    nnoremap <silent> <leader>sd :LinediffShow<CR>
 
     Plug 'kevinhui/vim-docker-tools'
     cabbrev Docker DockerToolsToggle
@@ -373,7 +374,7 @@ cabbrev wq wqa
 
 if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
     cabbrev E vsplit . \| call dwm#layout()
-    cabbrev F edit . \| call dwm#focus_window(0, 1)
+    cabbrev F Explore \| call dwm#focus_window(0, 1)
     cabbrev wr wq \| call dwm#layout()
     nnoremap <silent> <leader>fix :call dwm#layout()<CR>
 else
