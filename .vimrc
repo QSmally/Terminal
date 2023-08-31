@@ -41,7 +41,7 @@ set shiftwidth=4
 
 " Highlighting
 syntax on
-colorscheme Colourscheme
+colorscheme default-dark
 set number
 set cursorline
 
@@ -206,6 +206,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <silent> gyf :CopyFileName<CR>
     nnoremap <silent> gyF :CopyPath<CR>
 
+    Plug 'tamamcglinn/quickfixdd'
     Plug 'tpope/vim-obsession'
     Plug 'artnez/vim-wipeout'
     Plug 'justinmk/vim-gtfo'
@@ -282,6 +283,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'thalesmello/vim-textobj-methodcall'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
+    Plug 'nishigori/increment-activator'
     Plug 'triglav/vim-visual-increment'
     Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown'] }
     Plug 'vesion/vim-textobj-restline'
@@ -337,6 +339,14 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'davidgamba/vim-vmath'
     vnoremap <expr> <leader>su VMATH_YankAndAnalyse()
 
+    Plug 'diepm/vim-rest-console', { 'for': 'rest' }
+    " FIXME: Buffer not managed by DWM due to missing 'buftype'
+    let g:vrc_output_buffer_name = 'rest-response'
+    let g:vrc_trigger = '<leader>h'
+
+    Plug 'jbarberu/vim-diffsaved'
+    nnoremap <silent> <leader>fd :DiffSaved<CR>
+
     Plug 'unblevable/quick-scope'
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
@@ -352,12 +362,10 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <silent> <leader>rd :LinediffReset<CR>
     nnoremap <silent> <leader>sd :LinediffShow<CR>
 
-    Plug 'kevinhui/vim-docker-tools'
-    cabbrev Docker DockerToolsToggle
-
     Plug 'thirtythreeforty/lessspace.vim'
     let g:lessspace_normal = 0
 
+    Plug 'skanehira/docker-compose.vim'
     Plug 'kristijanhusak/vim-create-pr'
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'

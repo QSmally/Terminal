@@ -1,5 +1,5 @@
 
-let colors_name = 'Colourscheme'
+let colors_name = 'default-dark'
 
 " Default syntax highlights
 if exists('syntax_on')

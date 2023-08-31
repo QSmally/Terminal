@@ -3,7 +3,7 @@
 declare -r files=(
     ~/.bash_profile
     ~/.vimrc
-    ~/.vim/colors/Colourscheme.vim
+    ~/.vim/colors/default-dark.vim
 )
 
 declare -i linked_file_count=0
