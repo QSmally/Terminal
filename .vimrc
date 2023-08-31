@@ -7,6 +7,7 @@ set wildmenu
 set autoread
 set incsearch
 set noruler
+set secure
 
 set belloff+=esc
 set laststatus=1
@@ -18,14 +19,19 @@ let mapleader = ','
 let maplocalleader = ','
 filetype plugin indent on
 
-" Scrolling
+" Shape of cursors
+let &t_SI .= "\<Esc>[3 q"
+let &t_SR .= "\<Esc>[3 q"
+let &t_EI .= "\<Esc>[3 q"
+
+" Scroll and mouse
 set nowrap
 
 set mouse=a
 set scrolloff=4
 set sidescrolloff=12
 
-" Tabs
+" Indentations
 set smarttab
 set expandtab
 set autoindent
@@ -50,6 +56,8 @@ set hlsearch
 set ignorecase
 set smartcase
 
+noh
+
 cabbrev ml g//p
 cabbrev mc %s///ng
 
@@ -58,7 +66,12 @@ if has('macunix')
     nnoremap <silent> <Esc> :nohl<CR><Esc>
 endif
 
-" Newline-column commands
+" Terminal
+command! T :vert term ++close /bin/bash -l
+autocmd TerminalOpen * setl nonumber signcolumn=no
+tnoremap <Esc> <C-\><C-n>
+
+" Commands: column width
 command! C80 :set colorcolumn=80
 command! CC80 :set colorcolumn=80,84,88,92
 command! C100 :set colorcolumn=100
@@ -68,28 +81,23 @@ command! W80 :set textwidth=80
 command! W100 :set textwidth=100
 command! WR :set textwidth=
 
-" Terminal command and binding
-command! T :vert term ++close /bin/bash -l
-autocmd TerminalOpen * setl nonumber signcolumn=no
-tnoremap <Esc> <C-\><C-n>
-
-" Clipboard bindings
+" Bindings: clipboard
 noremap Y "*y
 nnoremap YY "*yy
 noremap <leader>o y'>p']
 nnoremap <leader>o yyp
 
-" Indentation bindings
+" Bindings: indentations
 xnoremap > >gv
 xnoremap < <gv
 
-" Movement bindings
+" Bindings: text movement
 nnoremap <silent> <leader>j :m .+1<CR>==
 nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
-" Tab bindings
+" Bindings: tabs
 nnoremap <silent> <leader>t] :tabnext<CR>
 nnoremap <silent> <leader>t[ :tabprev<CR>
 nnoremap <silent> <leader>tn :Texplore<CR>
@@ -129,7 +137,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
 
     Plug 'makerj/vim-pdf'
-    " FIXME: Modifiable should be set in order to reload buffer
     autocmd BufEnter *.pdf setl nonumber readonly modifiable
 
     Plug 'ziglang/zig.vim'
@@ -369,7 +376,7 @@ let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
 
-autocmd FileType netrw nmap <Space> mfj
+autocmd FileType netrw nmap <buffer> <Space> mfj
 cabbrev wq wqa
 
 if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
