@@ -98,8 +98,6 @@ vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
 " Bindings: tabs
-nnoremap <silent> <leader>t] :tabnext<CR>
-nnoremap <silent> <leader>t[ :tabprev<CR>
 nnoremap <silent> <leader>tn :Texplore<CR>
 nnoremap <silent> <leader>tp :wincmd T<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
@@ -319,9 +317,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'tyru/nextfile.vim'
     let g:nf_include_dotfiles = 1
-    let g:nf_map_previous = '<leader>['
+    let g:nf_map_previous = '<leader>f['
     let g:nf_ignore_ext = ['swp']
-    let g:nf_map_next = '<leader>]'
+    let g:nf_map_next = '<leader>f]'
 
     Plug 'olical/vim-expand'
     nnoremap <silent> <leader>e :Expand<CR>
@@ -387,7 +385,7 @@ let g:netrw_hide = 1
 autocmd FileType netrw nmap <buffer> <Space> mfj
 cabbrev wq wqa
 
-if filereadable(expand('~/.vim/plugged/DWM/plugin/dwm.vim'))
+if isdirectory(expand('~/.vim/plugged/DWM'))
     cabbrev E vsplit . \| call dwm#layout()
     cabbrev F Explore \| call dwm#focus_window(0, 1)
     cabbrev wr wq \| call dwm#layout()
@@ -396,4 +394,13 @@ else
     cabbrev E vsplit .
     cabbrev F edit .
     cabbrev wr wq
+endif
+
+" Dynamic file iteration
+nnoremap <silent> <leader>[ :prev<CR>
+nnoremap <silent> <leader>] :next<CR>
+
+if isdirectory(expand('~/.vim/plugged/nextfile.vim'))
+    nnoremap <silent> <leader>[ :exec argc() > 1 ? ':prev' : 'norm <leader>f['<CR>
+    nnoremap <silent> <leader>] :exec argc() > 1 ? ':next' : 'norm <leader>f]'<CR>
 endif

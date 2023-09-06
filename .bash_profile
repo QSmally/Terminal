@@ -13,6 +13,7 @@ alias forward="git merge --ff-only"
 alias merge="git merge --no-ff --no-commit"
 alias refs="git rev-list --left-right --oneline"
 alias submodules="git submodule update --init --recursive"
+alias project="git status && ls -lAh --color=always"
 alias prune="git remote prune origin && git branch -v | grep \"\\[gone\\]\" | awk '{print \$1}' | xargs git branch -D"
 alias mods="vim \$(git status --porcelain | awk '{print \$2}')"
 
