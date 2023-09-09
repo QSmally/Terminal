@@ -386,13 +386,17 @@ autocmd FileType netrw nmap <buffer> <Space> mfj
 cabbrev wq wqa
 
 if isdirectory(expand('~/.vim/plugged/DWM'))
-    cabbrev E vsplit . \| call dwm#layout()
+    cabbrev E Vexplore \| call dwm#layout()
+    cabbrev EE vsplit . \| call dwm#layout()
     cabbrev F Explore \| call dwm#focus_window(0, 1)
+    cabbrev FF edit . \| call dwm#focus_window(0, 1)
     cabbrev wr wq \| call dwm#layout()
     nnoremap <silent> <leader>fix :call dwm#layout()<CR>
 else
-    cabbrev E vsplit .
-    cabbrev F edit .
+    cabbrev E Vexplore
+    cabbrev EE vsplit .
+    cabbrev F Explore
+    cabbrev FF edit .
     cabbrev wr wq
 endif
 
