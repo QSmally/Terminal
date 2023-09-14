@@ -134,7 +134,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
 
     Plug 'makerj/vim-pdf'
-    autocmd BufEnter *.pdf setl nonumber readonly modifiable
+    autocmd FileType pdf setl nonumber readonly modifiable
 
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
@@ -178,6 +178,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     " Mark: window management
     Plug 'romainl/vim-qf'
+    let g:qf_mapping_ack_style = 1
     let g:qf_auto_resize = 0
     nnoremap <leader>q <Plug>(qf_qf_toggle)
     nnoremap <leader>w <Plug>(qf_qf_switch)
@@ -227,6 +228,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:sneak#use_ic_scs = 1
     let g:sneak#prompt = ''
     highlight link Sneak None
+
+    Plug 'tpope/vim-commentary'
+    autocmd FileType c,cpp setl commentstring=//%s
 
     Plug 'mg979/vim-visual-multi'
     let g:VM_default_mappings = 0
@@ -286,7 +290,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'vesion/vim-textobj-restline'
     Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
-    Plug 'tpope/vim-commentary'
     Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
