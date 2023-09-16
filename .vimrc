@@ -96,6 +96,11 @@ nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
+" Bindings: completion menu
+" See keyword completion with C-n and C-p
+inoremap <C-]> <C-x><C-]>
+inoremap <C-f> <C-x><C-f>
+
 " Bindings: tabs
 nnoremap <silent> <leader>tn :Texplore<CR>
 nnoremap <silent> <leader>tp :wincmd T<CR>

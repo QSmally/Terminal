@@ -36,3 +36,13 @@ highlight DiffText cterm=none ctermfg=none ctermbg=242
 " Search
 highlight Search ctermfg=black
 highlight CurSearch ctermfg=black ctermbg=white
+
+" Menu popup
+highlight Pmenu ctermfg=248 ctermbg=0
+highlight PmenuSel ctermfg=13 ctermbg=0
+highlight PmenuKind ctermfg=251 ctermbg=0
+highlight PmenuExtra ctermfg=251 ctermbg=0
+highlight! link PmenuKindSel PmenuSel
+highlight! link PmenuExtraSel PmenuSel
+highlight PmenuSbar ctermbg=240
+highlight PmenuThumb ctermbg=254
