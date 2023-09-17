@@ -43,12 +43,14 @@ syntax on
 colorscheme default-dark
 set number
 set cursorline
+set nospell
 
 set signcolumn=yes
 set cursorlineopt=number
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
+nnoremap <silent> <leader>sp :set spell!<CR>
 
 " Search
 set hlsearch
@@ -100,6 +102,7 @@ vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 " See keyword completion with C-n and C-p
 inoremap <C-]> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
+inoremap <C-s> <C-x>s
 
 " Bindings: tabs
 nnoremap <silent> <leader>tn :Texplore<CR>
