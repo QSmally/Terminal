@@ -389,6 +389,7 @@ let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
 
+autocmd FileType netrw nnoremap <buffer> mp <nop>
 autocmd FileType netrw nmap <buffer> <Space> mfj
 cabbrev wq wqa
 
