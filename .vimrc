@@ -12,8 +12,13 @@ set secure
 set belloff+=esc
 set laststatus=1
 set ttimeoutlen=50
+set formatoptions+=j
 set shortmess=filmnxtToOsS
 set backspace=indent,eol,start
+
+if !exists('g:loaded_man')
+    runtime ftplugin/man.vim
+endif
 
 let mapleader = ','
 let maplocalleader = ','
@@ -73,14 +78,18 @@ autocmd TerminalOpen * setl nonumber signcolumn=no
 tnoremap <Esc> <C-\><C-n>
 
 " Commands: column width
-command! C80 :set colorcolumn=80
-command! CC80 :set colorcolumn=80,84,88,92
-command! C100 :set colorcolumn=100
-command! CC100 :set colorcolumn=100,104,108,112
-command! CR :set colorcolumn=
-command! W80 :set textwidth=80
-command! W100 :set textwidth=100
-command! WR :set textwidth=
+command! -nargs=+ -complete=command Windo
+    \ let s:curwin = winnr() |
+    \ exec 'noautocmd keepjumps windo <args>' |
+    \ exec s:curwin . 'wincmd w'
+command! C80 :Windo set colorcolumn=80
+command! CC80 :Windo set colorcolumn=80,92
+command! C100 :Windo set colorcolumn=100
+command! CC100 :Windo set colorcolumn=100,112
+command! CR :Windo set colorcolumn=
+command! W80 :Windo set textwidth=80
+command! W100 :Windo set textwidth=100
+command! WR :Windo set textwidth=0
 
 " Bindings: clipboard
 noremap Y "*y
@@ -103,6 +112,17 @@ vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 inoremap <C-]> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-s> <C-x>s
+
+" Bindings: compiler
+nnoremap <leader>mm :make!<CR>
+nnoremap <leader>mk :make! clean<CR>
+
+" Bindings: sort
+nnoremap <silent> <leader>so vip \| :sort<CR>}
+vnoremap <silent> <leader>so :sort<CR>}
+
+" Bindings: 'as' top header
+nnoremap <silent> <leader>as [m
 
 " Bindings: tabs
 nnoremap <silent> <leader>tn :Texplore<CR>
@@ -148,7 +168,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:zig_fmt_autosave = 0
 
     Plug 'gi1242/vim-tex-autoclose', { 'for': 'tex' }
-    autocmd FileType tex nnoremap <silent> <buffer> <leader>c :call TexACClosePrev('n')<CR>
+    autocmd FileType tex inoremap <silent> <buffer> <C-e> <C-o>:call TexACClosePrev('n')<CR>
 
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
@@ -166,18 +186,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'jceb/vim-orgmode'
 
     " Mark: Git integration
-    Plug 'cohama/agit.vim'
-    cabbrev R Agit
-    cabbrev C AgitFile
-
     Plug 'tpope/vim-fugitive'
     autocmd FileType git,fugitive setl nonumber
 
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_terminal_reports_focus = 0
-
-    Plug 'zivyangll/git-blame.vim'
-    nnoremap <silent> <leader>b :call gitblame#echo()<CR>
 
     Plug 'vim-scripts/ConflictMotions'
     nnoremap <silent> <leader>x/ :ConflictTake all<CR>
@@ -204,15 +217,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     noremap <silent> ± :PreviewScroll -1<CR>
     noremap <silent> § :PreviewScroll +1<CR>
 
-    Plug 'andrewradev/undoquit.vim'
-    cabbrev Q Undoquit
-
     Plug 'vim-scripts/copypath.vim'
     let g:copypath_copy_to_unnamed_register = 1
     nnoremap <silent> gyf :CopyFileName<CR>
     nnoremap <silent> gyF :CopyPath<CR>
 
-    Plug 'tamamcglinn/quickfixdd'
     Plug 'tpope/vim-obsession'
     Plug 'artnez/vim-wipeout'
     Plug 'justinmk/vim-gtfo'
@@ -263,13 +272,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     noremap gy <Plug>YankCode
 
     Plug 'junegunn/vim-after-object'
-    if exists('after_object#enable')
-        autocmd VimEnter * call after_object#enable(['a'], '=', ':')
-    endif
-
-    Plug 'haya14busa/vim-edgemotion'
-    noremap ) <Plug>(edgemotion-j)
-    noremap ( <Plug>(edgemotion-k)
+    autocmd VimEnter * silent! call after_object#enable(['a'], '=', ':')
 
     Plug 'vim-scripts/transpose-words'
     nnoremap g/ <Plug>Transposewords
@@ -294,7 +297,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'nishigori/increment-activator'
     Plug 'triglav/vim-visual-increment'
-    Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown'] }
+    Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown', 'quarto', 'pdf'] }
     Plug 'vesion/vim-textobj-restline'
     Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
@@ -303,10 +306,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'wellle/targets.vim'
     Plug 'machakann/vim-swap'
     Plug 'glts/vim-radical'
+    Plug 'tpope/vim-repeat'
 
     " Mark: modes
     Plug 'genezharov/vim-scrollmode'
-    let g:scrollmode_distance = 10
+    let g:scrollmode_distance = 15
     let g:scrollmode_mappings = {
         \ ':-5<CR>': ['K', '<S-Up>'],
         \ ':+5<CR>': ['J', '<S-Down>'] }
@@ -320,11 +324,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
+    autocmd FileType org,markdown,quarto silent TableModeEnable
 
     " Mark: miscellaneous tools
-    Plug 'yegappan/mru'
-    let MRU_File = expand('~/.cache/mru')
-
     Plug 'tyru/nextfile.vim'
     let g:nf_include_dotfiles = 1
     let g:nf_map_previous = '<leader>f['
@@ -332,13 +334,22 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:nf_map_next = '<leader>f]'
 
     Plug 'olical/vim-expand'
-    nnoremap <silent> <leader>e :Expand<CR>
-    vnoremap <silent> <leader>e :Expand<CR>
+    nnoremap <silent> <leader>ex :Expand<CR>
+    vnoremap <silent> <leader>ex :Expand<CR>
+
+    Plug 'ctrlpvim/ctrlp.vim'
+    let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:30'
+    let g:ctrlp_show_hidden = 1
+    nnoremap <silent> <C-d> :CtrlPCurWD<CR>
+    cabbrev MRU CtrlPMRUFiles
+    cabbrev Tags CtrlPTag
+    cabbrev Qf CtrlPQuickfix
 
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
     Plug 'townk/vim-autoclose'
+    " FIXME: Has a lot of issues related to faulty closing
     let g:AutoClosePairs_del = '`'
 
     Plug 'mopp/autodirmake.vim'
@@ -350,7 +361,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'diepm/vim-rest-console', { 'for': 'rest' }
     " FIXME: Buffer not managed by DWM due to missing 'buftype'
     let g:vrc_output_buffer_name = 'rest-response'
-    let g:vrc_trigger = '<leader>h'
+    let g:vrc_trigger = '<leader>tr'
 
     Plug 'jbarberu/vim-diffsaved'
     nnoremap <silent> <leader>fd :DiffSaved<CR>
@@ -370,18 +381,23 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <silent> <leader>rd :LinediffReset<CR>
     nnoremap <silent> <leader>sd :LinediffShow<CR>
 
+    Plug 'skanehira/docker-compose.vim'
+    nnoremap <leader>cu :DockerComposeUp<CR>
+    nnoremap <leader>cd :DockerComposeDown<CR>
+    nnoremap <leader>cb :DockerComposeBuild<CR>
+    nnoremap <leader>cl :DockerComposeList<CR>
+
     Plug 'thirtythreeforty/lessspace.vim'
     let g:lessspace_normal = 0
 
-    Plug 'skanehira/docker-compose.vim'
     Plug 'kristijanhusak/vim-create-pr'
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
-    Plug 'tpope/vim-dadbod'
+    Plug 'tpope/vim-endwise'
     Plug 'tpope/vim-eunuch'
-    Plug 'reedes/vim-wordy'
+    Plug 'reedes/vim-wordy', { 'for': ['org', 'tex', 'markdown', 'quarto'] }
 
     call plug#end()
 endif
