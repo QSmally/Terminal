@@ -1,0 +1,24 @@
+#!/bin/sh
+
+#
+# Precommit message validation to conform to the standard 'Title (opt): message'
+# specification.
+#
+# Copy commit-msgconv to .git/hooks/:
+#   cp commit-msgconv .git/hooks/commit-msg
+#
+# Foo: bar roo
+# Foo (bar): roo
+# 24: foo bar
+# 25 (foo): bar roo
+# Foo: 26 bar roo
+#
+
+commit_msg=$(grep -v '^#\|^$' "$1")
+
+if echo "$commit_msg" | egrep '^[A-Z0-9].*:\s.+' > /dev/null; then
+    exit 0
+else
+    echo >&2 "hooks/commit-msgconv: not conforming to 'Title (opt)?: message' spec; aborted"
+    exit 1
+fi
