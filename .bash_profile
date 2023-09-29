@@ -1,33 +1,22 @@
 
 # Homebrew
-alias gimme="brew install"
+alias gimme="brew install" # <package>
 alias packages="brew leaves | tee"
 alias casks="brew list --casks | tee"
 alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 
-# Git
-alias save="git stash save --include-untracked"
-alias restore="git stash pop"
-alias drop="git checkout ."
-alias forward="git merge --ff-only"
-alias merge="git merge --no-ff --no-commit"
-alias refs="git rev-list --left-right --oneline"
-alias submodules="git submodule update --init --recursive"
-alias project="git status && git stash list && ls -lAh --color=always"
-alias prune="git remote prune origin && git branch -v | grep \"\\[gone\\]\" | awk '{print \$1}' | xargs git branch -D"
-alias mods="vim \$(git status --porcelain | awk '{print \$2}')"
-
 # Compression
-alias archive="tar -cvf Archive.tar"
-alias compress="tar -czvf Archive.tar.gz"
-alias extract="tar -xvf"
+alias archive="tar -cvf Archive.tar" # <directory>
+alias compress="tar -czvf Archive.tar.gz" # <directory>
+alias extract="tar -xvf" # <directory>
 
 # LaTeX
 alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode"
 
 # Miscellaneous
-alias ll="ls -lAh --color=always"
-alias usage="du -hd 1"
+alias ll="ls -lAh --color=always" # [directory]
+alias lt="ll -t" # [directory]
+alias usage="du -hd 1" # [directory]
 alias fetch="neofetch && cpufetch"
 
 # Shell
@@ -42,6 +31,10 @@ if [ -e ~/.bash_local ]; then
     . ~/.bash_local
 fi
 
-# Cursor and prefix colours
+# Cursor type
 printf '\033[3 q'
-PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# Terminal prefix for OSX
+if [ $(uname) == "Darwin" ]; then
+    PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+fi

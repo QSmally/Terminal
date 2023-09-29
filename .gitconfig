@@ -1,0 +1,26 @@
+
+[user]
+	name = QSmally
+	email = github@qbot.eu
+
+[init]
+	defaultBranch = master
+
+[pull]
+    rebase = false
+
+[alias]
+    conflicts = "diff --name-only --diff-filter=U"
+    ff = "merge --ff-only"
+    graph = "log --oneline --graph"
+    mods = "submodule update --init --recursive"
+    mr = "merge --no-off --no-commit"
+    project = "!bash -c 'git status && \
+        git stash list && \
+        ls -lAh --color=always'"
+    purge = "!bash -c 'git remote prune origin && \
+        git branch -v | \
+        grep \"\\[gone\\]\" | \
+        awk \"{print $1}\" | \
+        xargs git branch -D'"
+    save = "stash save --include-untracked"

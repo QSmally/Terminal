@@ -2,8 +2,9 @@
 
 declare -r files=(
     ~/.bash_profile
-    ~/.vimrc
+    ~/.gitconfig
     ~/.vim/colors/default-dark.vim
+    ~/.vimrc
 )
 
 declare -i linked_file_count=0
