@@ -22,6 +22,7 @@ endif
 
 let mapleader = ','
 let maplocalleader = ','
+filetype plugin indent on
 
 " Shape of cursors
 let &t_SI .= "\<Esc>[3 q"
@@ -436,6 +437,3 @@ if isdirectory(expand('~/.vim/plugged/nextfile.vim'))
     nnoremap <silent> <leader>[ :exec argc() > 1 ? ':prev' : 'norm <leader>f['<CR>
     nnoremap <silent> <leader>] :exec argc() > 1 ? ':next' : 'norm <leader>f]'<CR>
 endif
-
-" Filetype detection
-filetype plugin indent on
