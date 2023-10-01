@@ -1,10 +1,10 @@
 
 [user]
-	name = QSmally
-	email = github@qbot.eu
+    name = QSmally
+    email = github@qbot.eu
 
 [init]
-	defaultBranch = master
+    defaultBranch = master
 
 [pull]
     rebase = false
