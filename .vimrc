@@ -125,6 +125,9 @@ vnoremap <silent> <leader>so :sort<CR>}
 " Bindings: 'as' top header
 nnoremap <silent> <leader>as [m
 
+" Bindings: folds
+vnoremap za <Esc>`<kzfgg`>jzfG`<
+
 " Bindings: tabs
 nnoremap <silent> <leader>tn :Texplore<CR>
 nnoremap <silent> <leader>tp :wincmd T<CR>
