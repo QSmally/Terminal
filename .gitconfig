@@ -6,6 +6,9 @@
 [init]
     defaultBranch = master
 
+[core]
+    excludesFile = ~/.gitignore
+
 [pull]
     rebase = false
 

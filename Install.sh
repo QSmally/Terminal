@@ -3,6 +3,7 @@
 declare -r files=(
     ~/.bash_profile
     ~/.gitconfig
+    ~/.gitignore
     ~/.vim/colors/default-dark.vim
     ~/.vimrc
 )
