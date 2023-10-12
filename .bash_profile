@@ -29,6 +29,8 @@ export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
 
 if [ $(which brew 2> /dev/null) ]; then
     eval $(brew shellenv)
+elif [ -d /opt/homebrew ]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
 if [ -e ~/.bash_local ]; then
