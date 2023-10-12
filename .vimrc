@@ -114,10 +114,6 @@ inoremap <C-]> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-s> <C-x>s
 
-" Bindings: compiler
-nnoremap <leader>mm :make!<CR>
-nnoremap <leader>mk :make! clean<CR>
-
 " Bindings: sort
 nnoremap <silent> <leader>so vip \| :sort<CR>}
 vnoremap <silent> <leader>so :sort<CR>}
@@ -148,6 +144,13 @@ nnoremap <silent> <leader>t< :-tabmove<CR>
 nnoremap <silent> <leader>t> :+tabmove<CR>
 nnoremap <silent> <leader>t/ :0tabmove<CR>
 
+" Compiler defaults
+autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
+    \ nnoremap <buffer> <leader>ll :make!<CR>|
+    \ nnoremap <buffer> <leader>lk :make! clean<CR>|
+    \ endif
+autocmd FileType tex,markdown let b:cnodefault = 1
+
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
     call plug#begin()
@@ -161,11 +164,13 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     " Mark: language integration
     Plug 'lervag/vimtex', { 'for': 'tex' }
-    let g:vimtex_compiler_latexmk = { 'build_dir': 'Compilation' }
+    let g:vimtex_compiler_latexmk = {
+        \ 'build_dir': 'Compilation',
+        \ 'out_dir': 'Compilation' }
     let g:vimtex_view_method = 'skim'
-    autocmd FileType tex nnoremap <silent> <buffer> <leader>l; <Plug>(vimtex-compile-ss)
+    autocmd FileType tex nnoremap <silent> <buffer> <leader>lb <Plug>(vimtex-compile-ss)
 
-    Plug 'makerj/vim-pdf'
+    Plug 'makerj/vim-pdf', { 'for': 'pdf' }
     autocmd FileType pdf setl nonumber readonly modifiable
 
     Plug 'ziglang/zig.vim'
@@ -251,7 +256,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     highlight link Sneak None
 
     Plug 'tpope/vim-commentary'
-    autocmd FileType c,cpp setl commentstring=//%s
+    autocmd FileType c,cpp,cs setl commentstring=//%s
 
     Plug 'mg979/vim-visual-multi'
     let g:VM_default_mappings = 0
@@ -328,7 +333,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
-    autocmd FileType org,markdown,quarto silent TableModeEnable
+    autocmd FileType markdown silent TableModeEnable
 
     " Mark: miscellaneous tools
     Plug 'tyru/nextfile.vim'
@@ -342,7 +347,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     vnoremap <silent> <leader>ex :Expand<CR>
 
     Plug 'ctrlpvim/ctrlp.vim'
-    let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:30'
+    let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:15'
+    let g:ctrlp_by_filename = 1
     let g:ctrlp_show_hidden = 1
     nnoremap <silent> <C-d> :CtrlPCurWD<CR>
     cabbrev MRU CtrlPMRUFiles
@@ -415,6 +421,7 @@ let g:netrw_hide = 1
 autocmd FileType netrw nnoremap <buffer> mp <nop>
 autocmd FileType netrw nmap <buffer> <Space> mfj
 cabbrev wq wqa
+cabbrev S sp
 
 if isdirectory(expand('~/.vim/plugged/DWM'))
     cabbrev E Vexplore \| call dwm#layout()
