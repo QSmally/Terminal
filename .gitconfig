@@ -5,9 +5,13 @@
 
 [init]
     defaultBranch = master
+    templatedir = ~/.gittemplate
 
 [core]
     excludesFile = ~/.gitignore
+
+[status]
+    submodulesummary = true
 
 [pull]
     rebase = false
@@ -16,6 +20,7 @@
     conflicts = "diff --name-only --diff-filter=U"
     ff = "merge --ff-only"
     graph = "log --oneline --graph"
+    lg = "log --pretty=format:\"%h%x09%ad   %s (%an)\" --date=short"
     mods = "submodule update --init --recursive"
     mr = "merge --no-off --no-commit"
     project = "!bash -c 'git status && \
