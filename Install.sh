@@ -45,6 +45,7 @@ dependency git git
 if [ $(uname) == "Linux" ]; then
     # Debian: default bashrc loads bash_aliases, use bash_local for locals
     install ~/.bash_profile .bash_aliases
+    install ~/.profile .bash_profile
     install ~/.xinitrc
     dependency xorg startx
     dependency xorg dwm
@@ -52,6 +53,7 @@ else
     install ~/.bash_profile
 fi
 
+dependency vim latexmk
 dependency vim ack
 dependency vim curl
 dependency vim ctags
