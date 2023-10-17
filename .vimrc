@@ -358,10 +358,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
-    Plug 'townk/vim-autoclose'
-    " FIXME: Has a lot of issues related to faulty closing
-    let g:AutoClosePairs_del = '`'
-
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
 
