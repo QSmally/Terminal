@@ -3,11 +3,11 @@
 declare -i linked_file_count=0
 
 install() {
-    path="$1"
-    filename=$(basename $path)
-    directory=$(dirname $path)
+    filename=$(basename $1)
+    directory=$(dirname $1)
+    target=$([ -z $2 ] && echo $filename || echo $2)
 
-    if [ -e $path ]; then
+    if [ -e "$directory/$target" ]; then
         echo "File $filename ignored because it already exists in $directory"
         return 1
     fi
@@ -17,11 +17,11 @@ install() {
         echo "Intermediate directory $directory created"
     fi
 
-    ln -s $(pwd)/$filename $directory/$2
+    ln -s $(pwd)/$filename "$directory/$target"
 
     if [ $? -eq 0 ]; then
         linked_file_count+=1
-        echo "Symlinked $filename to $directory"
+        echo "Symlinked $target to $directory"
     fi
 }
 
