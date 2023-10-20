@@ -18,11 +18,11 @@
 
 [alias]
     conflicts = "diff --name-only --diff-filter=U"
-    ff = "merge --ff-only"
+    ff = "merge --ff-only" # <branch>
     graph = "log --oneline --graph"
     lg = "log --pretty=format:\"%h%x09%ad   %s (%an)\" --date=short"
     mods = "submodule update --init --recursive"
-    mr = "merge --no-off --no-commit"
+    mr = "merge --no-ff --no-commit" # <branch>
     project = "!bash -c 'git status && \
         git stash list && \
         ls -lAh --color=always'"
@@ -31,4 +31,4 @@
         grep \"\\[gone\\]\" | \
         awk \"{print \\$1}\" | \
         xargs git branch -D'"
-    save = "stash save --include-untracked"
+    save = "stash save --include-untracked" # [message]
