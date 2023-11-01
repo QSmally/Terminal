@@ -170,7 +170,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:vimtex_view_method = 'skim'
     autocmd FileType tex nnoremap <silent> <buffer> <leader>lb <Plug>(vimtex-compile-ss)
 
-    Plug 'makerj/vim-pdf', { 'for': 'pdf' }
+    Plug 'makerj/vim-pdf'
     autocmd FileType pdf setl nonumber readonly modifiable
 
     Plug 'ziglang/zig.vim'
