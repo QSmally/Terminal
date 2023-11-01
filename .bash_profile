@@ -1,6 +1,7 @@
 
 alias ll="ls -lAh --color=always" # [directory]
 alias lt="ll -t" # [directory]
+alias diff="diff -u --color=always" # <file> <file>
 alias usage="du -hd 1" # [directory]
 
 # Homebrew
