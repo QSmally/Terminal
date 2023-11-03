@@ -4,6 +4,13 @@ alias lt="ll -t" # [directory]
 alias diff="diff -u --color=always" # <file> <file>
 alias usage="du -hd 1" # [directory]
 
+if [ $(uname) == "Darwin" ]; then
+    # stdout | copy, copy < file
+    alias copy="pbcopy"
+else
+    alias copy="xclip -sel c"
+fi
+
 # Homebrew
 if [ $(which brew 2> /dev/null) ]; then
     eval $(brew shellenv)
@@ -33,6 +40,8 @@ fi
 # Shell
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 if [ -e ~/.bash_local ]; then
     . ~/.bash_local
