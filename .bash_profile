@@ -1,11 +1,13 @@
 
+alias diff="diff -u --color=always" # <file> <file>
 alias ll="ls -lAh --color=always" # [directory]
 alias lt="ll -t" # [directory]
-alias diff="diff -u --color=always" # <file> <file>
 alias usage="du -hd 1" # [directory]
 
+range() { sed "$1!d" $2; } # <range> [file]
+
 if [ $(uname) == "Darwin" ]; then
-    # stdout | copy, copy < file
+    # copy < file, range x,y file | copy
     alias copy="pbcopy"
 else
     alias copy="xclip -sel c"
