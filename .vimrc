@@ -34,7 +34,7 @@ set nowrap
 
 set mouse=a
 set scrolloff=4
-set sidescrolloff=12
+set sidescrolloff=4
 
 " Indentations
 set smarttab
@@ -150,6 +150,10 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
     \ nnoremap <buffer> <leader>lk :make! clean<CR>|
     \ endif
 autocmd FileType tex,markdown let b:cnodefault = 1
+
+" Motions
+nmap dv "_d
+vmap dv "_d
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -278,7 +282,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     cabbrev Tab EasyAlign
 
     Plug 'AaronLasseigne/yank-code'
-    noremap gy <Plug>YankCode
+    noremap gb <Plug>YankCode
 
     Plug 'junegunn/vim-after-object'
     autocmd VimEnter * silent! call after_object#enable(['a'], '=', ':')
@@ -308,6 +312,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'triglav/vim-visual-increment'
     Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown', 'quarto', 'pdf'] }
     Plug 'vesion/vim-textobj-restline'
+    Plug 'vim-scripts/RepeatableYank'
     Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
     Plug 'andrewradev/dsf.vim'
