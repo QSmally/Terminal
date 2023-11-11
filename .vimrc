@@ -153,7 +153,6 @@ autocmd FileType tex,markdown let b:cnodefault = 1
 
 " Motions
 nmap dv "_d
-vmap dv "_d
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -192,7 +191,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \ nnoremap <silent> <buffer> <leader>lk :MarkdownPreviewStop<CR>
 
     Plug 'ludovicchabant/vim-gutentags'
-    let g:gutentags_enabled = filereadable('/usr/bin/ctags')
+    let g:gutentags_enabled = executable('ctags')
     let g:gutentags_ctags_tagfile = '.git/tags'
 
     Plug 'vim-scripts/a.vim'
@@ -360,6 +359,10 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     cabbrev Tags CtrlPTag
     cabbrev Qf CtrlPQuickfix
 
+    if executable('fd')
+        let g:ctrlp_user_command = 'fd %s -pLH -d 4 -t file'
+    endif
+
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
@@ -415,12 +418,18 @@ endif
 
 " Netrw/file browser
 let g:netrw_use_errorwindow = 0
-let g:netrw_list_hide= '.*\.swp$,^\.git\/,^\.DS_Store$'
+let g:netrw_sort_options = 'i'
+let g:netrw_browse_split = 0
+let g:netrw_sizestyle = 'H'
+let g:netrw_liststyle = 1
+let g:netrw_list_hide = netrw_gitignore#Hide() .. ',.*\.swp,^\.git\/,^\.DS_Store'
+let g:netrw_timefmt = '  %a %d %b %Y, %T'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
 
 autocmd FileType netrw nnoremap <buffer> mp <nop>
 autocmd FileType netrw nmap <buffer> <Space> mfj
+autocmd FileType netrw setl cursorlineopt=screenline
 cabbrev wq wqa
 cabbrev S sp
 

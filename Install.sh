@@ -53,11 +53,12 @@ else
     install ~/.bash_profile
 fi
 
-dependency vim latexmk
 dependency vim ack
 dependency vim curl
 dependency vim ctags
 dependency vim docker
+dependency vim fd
+dependency vim latexmk
 dependency vim xpdf
 
 echo "Installed a total of $linked_file_count configuration files"
