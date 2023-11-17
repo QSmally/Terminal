@@ -1,5 +1,6 @@
 
 alias diff="diff -u --color=always" # <file> <file>
+alias ls="ls --color=always" # [directory]
 alias ll="ls -lAh --color=always" # [directory]
 alias lt="ll -t" # [directory]
 alias usage="du -hd 1" # [directory]

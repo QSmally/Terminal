@@ -260,6 +260,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'tpope/vim-commentary'
     autocmd FileType c,cpp,cs setl commentstring=//%s
+    autocmd FileType sql setl commentstring=--%s
 
     Plug 'mg979/vim-visual-multi'
     let g:VM_default_mappings = 0
@@ -422,7 +423,7 @@ let g:netrw_sort_options = 'i'
 let g:netrw_browse_split = 0
 let g:netrw_sizestyle = 'H'
 let g:netrw_liststyle = 1
-let g:netrw_list_hide = netrw_gitignore#Hide() .. ',.*\.swp,^\.git\/,^\.DS_Store'
+let g:netrw_list_hide = '.*\.swp,^\.git\/,^\.DS_Store'
 let g:netrw_timefmt = '  %a %d %b %Y, %T'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
