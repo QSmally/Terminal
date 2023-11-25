@@ -7,6 +7,21 @@ alias usage="du -hd 1" # [directory]
 
 range() { sed "$1!d" $2; } # <range> [file]
 
+cr() {
+    destination=$(pwd)
+
+    while [ "$(pwd)" != "/" ]; do
+        if [ -d ".git" ]; then
+            destination=$(pwd)
+            break
+        fi
+
+        cd ..
+    done
+
+    cd "$destination"
+}
+
 if [ $(uname) == "Darwin" ]; then
     # copy < file, range x,y file | copy
     alias copy="pbcopy"
