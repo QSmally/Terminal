@@ -55,6 +55,11 @@ if [ $(which pdflatex 2> /dev/null) ]; then
     alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode"
 fi
 
+# Pandoc
+if [ $(which pandoc 2> /dev/null) ]; then
+    alias conv="pandoc -V geometry:margin=0.75in -o Document.pdf"
+fi
+
 # Shell
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
