@@ -258,6 +258,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:sneak#prompt = ''
     highlight link Sneak None
 
+    Plug 'QSmally/Text-Center'
+    vnoremap C :CenterText<CR>
+
     Plug 'tpope/vim-commentary'
     autocmd FileType c,cpp,cs setl commentstring=//%s
     autocmd FileType sql setl commentstring=--%s
@@ -338,7 +341,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
-    autocmd FileType markdown silent TableModeEnable
 
     " Mark: miscellaneous tools
     Plug 'tyru/nextfile.vim'
@@ -435,10 +437,10 @@ cabbrev wq wqa
 cabbrev S sp
 
 if isdirectory(expand('~/.vim/plugged/DWM'))
-    cabbrev E Vexplore \| call dwm#layout()
-    cabbrev EE vsplit . \| call dwm#layout()
-    cabbrev F Explore \| call dwm#focus_window(0, 1)
-    cabbrev FF edit . \| call dwm#focus_window(0, 1)
+    command! E Vexplore | call dwm#layout()
+    command! EE vsplit . | call dwm#layout()
+    command! F Explore | call dwm#focus_window(0, 1)
+    command! FF edit . | call dwm#focus_window(0, 1)
     cabbrev wr wq \| call dwm#layout()
     nnoremap <silent> <leader>fix :call dwm#layout()<CR>
 else
