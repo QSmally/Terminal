@@ -1,6 +1,17 @@
 #!/bin/bash
 
+#
+# © 2023 Joey Smalen
+#
+# Command usage:
+#   ./Install.sh
+#   ./Install.sh --server
+#
+# Installation of dotfiles and recommendations of dependencies.
+#
+
 declare -i linked_file_count=0
+declare not_server="! \"${1:-false}\" == \"--server\""
 
 install() {
     filename=$(basename $1)
@@ -34,10 +45,13 @@ dependency() {
 mkdir -p ~/.cache
 
 install ~/.gitconfig
-install ~/.gitignore
-install ~/.gittemplate/hooks/commit-msg
 install ~/.vim/colors/default-dark.vim
 install ~/.vimrc
+
+if [ $not_server ]; then
+    install ~/.gitignore
+    install ~/.gittemplate/hooks/commit-msg
+fi
 
 dependency vim vim
 dependency git git
@@ -45,20 +59,26 @@ dependency git git
 if [ $(uname) == "Linux" ]; then
     # Debian: default bashrc loads bash_aliases, use bash_local for locals
     install ~/.bash_profile .bash_aliases
-    install ~/.profile .bash_profile
-    install ~/.xinitrc
-    dependency xorg startx
-    dependency xorg dwm
+
+    if [ $not_server ]; then
+        install ~/.profile .bash_profile
+        install ~/.xinitrc
+        dependency xorg startx
+        dependency xorg dwm
+    fi
 else
     install ~/.bash_profile
 fi
 
 dependency vim ack
 dependency vim curl
-dependency vim ctags
-dependency vim docker
-dependency vim fd
-dependency vim latexmk
-dependency vim xpdf
+
+if [ $not_server ]; then
+    dependency vim ctags
+    dependency vim docker
+    dependency vim fd
+    dependency vim latexmk
+    dependency vim xpdf
+fi
 
 echo "Installed a total of $linked_file_count configuration files"
