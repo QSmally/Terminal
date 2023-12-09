@@ -217,7 +217,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <leader>w <Plug>(qf_qf_switch)
     autocmd FileType qf
         \ nnoremap <buffer> { <Plug>(qf_previous_file) |
-        \ nnoremap <buffer> } <Plug>(qf_next_file)
+        \ nnoremap <buffer> } <Plug>(qf_next_file) |
+        \ setl wrap
 
     Plug 'taylor/vim-zoomwin'
     nnoremap <silent> <C-q> :ZoomWin<CR>
