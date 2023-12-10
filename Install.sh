@@ -11,7 +11,11 @@
 #
 
 declare -i linked_file_count=0
-declare not_server="! \"${1:-false}\" == \"--server\""
+declare server="\"${1:-false}\" == \"--server\""
+
+if [ $server ]; then
+    echo "Installing server-based configuration..."
+fi
 
 install() {
     filename=$(basename $1)
@@ -48,7 +52,7 @@ install ~/.gitconfig
 install ~/.vim/colors/default-dark.vim
 install ~/.vimrc
 
-if [ $not_server ]; then
+if [ ! $server ]; then
     install ~/.gitignore
     install ~/.gittemplate/hooks/commit-msg
 fi
@@ -60,7 +64,7 @@ if [ $(uname) == "Linux" ]; then
     # Debian: default bashrc loads bash_aliases, use bash_local for locals
     install ~/.bash_profile .bash_aliases
 
-    if [ $not_server ]; then
+    if [ ! $server ]; then
         install ~/.profile .bash_profile
         install ~/.xinitrc
         dependency xorg startx
@@ -73,7 +77,7 @@ fi
 dependency vim ack
 dependency vim curl
 
-if [ $not_server ]; then
+if [ ! $server ]; then
     dependency vim ctags
     dependency vim docker
     dependency vim fd

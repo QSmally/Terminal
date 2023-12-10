@@ -118,6 +118,9 @@ inoremap <C-s> <C-x>s
 nnoremap <silent> <leader>so vip \| :sort<CR>}
 vnoremap <silent> <leader>so :sort<CR>}
 
+" Bindings: ruler
+nnoremap <silent> <leader>ru :set ruler!<CR>
+
 " Bindings: 'as' top header
 nnoremap <silent> <leader>as [m
 

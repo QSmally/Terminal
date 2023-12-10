@@ -6,21 +6,7 @@ alias lt="ll -t" # [directory]
 alias usage="du -hd 1" # [directory]
 
 range() { sed "$1!d" $2; } # <range> [file]
-
-cr() {
-    destination=$(pwd)
-
-    while [ "$(pwd)" != "/" ]; do
-        if [ -d ".git" ]; then
-            destination=$(pwd)
-            break
-        fi
-
-        cd ..
-    done
-
-    cd "$destination"
-}
+cr() { cd "$(git rev-parse --show-toplevel)"; }
 
 if [ $(uname) == "Darwin" ]; then
     # copy < file, range x,y file | copy
