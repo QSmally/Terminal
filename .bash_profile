@@ -46,6 +46,12 @@ if [ $(which pandoc 2> /dev/null) ]; then
     alias conv="pandoc -V geometry:margin=0.75in -o Document.pdf"
 fi
 
+# Docker
+if [ $(which docker 2> /dev/null) ]; then
+    dkrrmc() { docker rm -vf $(docker ps -aq); }
+    dkrrmi() { docker rmi -f $(docker images -aq); }
+fi
+
 # Shell
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
