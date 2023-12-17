@@ -114,6 +114,9 @@ inoremap <C-]> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-s> <C-x>s
 
+" Bindings: wrap
+inoremap <C-q> <C-o>gww
+
 " Bindings: sort
 nnoremap <silent> <leader>so vip \| :sort<CR>}
 vnoremap <silent> <leader>so :sort<CR>}
