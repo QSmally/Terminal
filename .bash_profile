@@ -38,12 +38,12 @@ fi
 
 # LaTeX
 if [ $(which pdflatex 2> /dev/null) ]; then
-    alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode"
+    alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode" # <files>
 fi
 
 # Pandoc
 if [ $(which pandoc 2> /dev/null) ]; then
-    alias conv="pandoc -V geometry:margin=0.75in -o Document.pdf"
+    alias conv="pandoc -V geometry:margin=0.75in -o Document.pdf" # <files>
 fi
 
 # Docker
