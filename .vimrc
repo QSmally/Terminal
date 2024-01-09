@@ -419,7 +419,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
-    Plug 'tpope/vim-endwise'
     Plug 'tpope/vim-eunuch'
     Plug 'reedes/vim-wordy', { 'for': ['org', 'tex', 'markdown', 'quarto'] }
 
