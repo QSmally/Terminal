@@ -159,6 +159,8 @@ autocmd FileType tex,markdown let b:cnodefault = 1
 
 " Motions
 nmap dv "_d
+vmap <leader>p dglP==
+nmap gF <C-w>f
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -184,6 +186,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'ziglang/zig.vim'
     let g:zig_fmt_autosave = 0
+    autocmd FileType zig
+        \ nnoremap <silent> <buffer> <leader>lt :compiler zig_test<CR>|
+        \ nnoremap <silent> <buffer> <leader>lb :compiler zig_build<CR>
 
     Plug 'gi1242/vim-tex-autoclose', { 'for': 'tex' }
     autocmd FileType tex inoremap <silent> <buffer> <C-e> <C-o>:call TexACClosePrev('n')<CR>
