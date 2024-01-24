@@ -157,10 +157,10 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
     \ endif
 autocmd FileType tex,markdown let b:cnodefault = 1
 
-" Motions
-nmap dv "_d
+" Specific motions
+nnoremap dv "_d
 vmap <leader>p dglP==
-nmap gF <C-w>f
+nnoremap gF <C-w>f
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -374,10 +374,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     cabbrev Tags CtrlPTag
     cabbrev Qf CtrlPQuickfix
 
-    if executable('fd')
-        let g:ctrlp_user_command = 'fd %s -pLH -d 4 -t file'
-    endif
-
     Plug 'junegunn/vim-slash'
     noremap <Plug>(slash-after) zz
 
@@ -414,10 +410,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <leader>cu :DockerComposeUp<CR>
     nnoremap <leader>cd :DockerComposeDown<CR>
     nnoremap <leader>cb :DockerComposeBuild<CR>
-    nnoremap <leader>cl :DockerComposeList<CR>
-
-    Plug 'thirtythreeforty/lessspace.vim'
-    let g:lessspace_normal = 0
+    nnoremap <leader>cl :DockerComposeLogs<CR>
 
     Plug 'kristijanhusak/vim-create-pr'
     Plug 'kshenoy/vim-signature'
@@ -441,9 +434,11 @@ let g:netrw_timefmt = '  %a %d %b %Y, %T'
 let g:netrw_banner = 0
 let g:netrw_hide = 1
 
-autocmd FileType netrw nnoremap <buffer> mp <nop>
-autocmd FileType netrw nmap <buffer> <Space> mfj
-autocmd FileType netrw setl cursorlineopt=screenline
+autocmd FileType netrw nnoremap <buffer> mp <nop>|
+    \ nmap <buffer> <Space> mfj|
+    \ nmap <buffer> j jp|
+    \ nmap <buffer> k kp|
+    \ setl cursorlineopt=screenline
 cabbrev wq wqa
 cabbrev S sp
 
@@ -455,10 +450,10 @@ if isdirectory(expand('~/.vim/plugged/DWM'))
     cabbrev wr wq \| call dwm#layout()
     nnoremap <silent> <leader>fix :call dwm#layout()<CR>
 else
-    cabbrev E Vexplore
-    cabbrev EE vsplit .
-    cabbrev F Explore
-    cabbrev FF edit .
+    command! E Vexplore
+    command! EE vsplit .
+    command! F Explore
+    command! FF edit .
     cabbrev wr wq
 endif
 
