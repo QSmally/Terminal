@@ -156,6 +156,7 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
     \ nnoremap <buffer> <leader>lk :make! clean<CR>|
     \ endif
 autocmd FileType tex,markdown let b:cnodefault = 1
+autocmd FileType cs compiler dotnet
 
 " Specific motions
 nnoremap dv "_d
