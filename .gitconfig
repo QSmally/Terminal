@@ -32,3 +32,4 @@
         awk \"{print \\$1}\" | \
         xargs git branch -D'"
     save = "stash save --include-untracked" # [message]
+    sq = "merge --squash" # <branch>
