@@ -55,6 +55,7 @@ install ~/.vimrc
 if [ ! $server ]; then
     install ~/.gitignore
     install ~/.gittemplate/hooks/commit-msg
+    install ~/.latexmkrc
 fi
 
 dependency vim vim
@@ -80,7 +81,6 @@ dependency vim curl
 if [ ! $server ]; then
     dependency vim ctags
     dependency vim docker
-    dependency vim fd
     dependency vim latexmk
     dependency vim xpdf
 fi
