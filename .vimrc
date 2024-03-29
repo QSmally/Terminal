@@ -179,7 +179,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:vimtex_compiler_latexmk = {
         \ 'build_dir': 'Compilation',
         \ 'out_dir': 'Compilation' }
-    let g:vimtex_view_method = 'skim'
+    if executable('okular') |
+        \ let g:vimtex_view_general_viewer = 'okular' |
+        \ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex' |
+    \ else |
+        \ let g:vimtex_view_method = 'skim' |
+        \ endif
     autocmd FileType tex nnoremap <silent> <buffer> <leader>lb <Plug>(vimtex-compile-ss)
 
     Plug 'makerj/vim-pdf'
