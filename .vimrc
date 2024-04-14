@@ -158,6 +158,11 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
 autocmd FileType tex,markdown let b:cnodefault = 1
 autocmd FileType cs compiler dotnet
 
+" File shortcuts: TeX
+autocmd FileType tex
+    \ nnoremap <silent> <buffer> <leader>lfr :call _fopen('References.bib')<CR>|
+    \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>
+
 " Specific motions
 nnoremap dv "_d
 vmap <leader>p dglP==
@@ -447,6 +452,13 @@ autocmd FileType netrw nnoremap <buffer> mp <nop>|
     \ setl cursorlineopt=screenline
 cabbrev wq wqa
 cabbrev S sp
+
+function! _fopen(fname)
+    exec "vsplit " . a:fname
+    if isdirectory(expand('~/.vim/plugged/DWM'))
+        call dwm#layout()
+    endif
+endfunction
 
 if isdirectory(expand('~/.vim/plugged/DWM'))
     command! E Vexplore | call dwm#layout()
