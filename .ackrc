@@ -1,0 +1,5 @@
+
+--ignore-dir=obj
+--ignore-dir=bin
+--ignore-dir=dist
+--ignore-dir=Deploy

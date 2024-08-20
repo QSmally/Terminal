@@ -48,6 +48,7 @@ dependency() {
 
 mkdir -p ~/.cache
 
+install ~/.ackrc
 install ~/.gitconfig
 install ~/.vim/colors/default-dark.vim
 install ~/.vimrc
