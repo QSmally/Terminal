@@ -155,13 +155,17 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
     \ nnoremap <buffer> <leader>ll :make!<CR>|
     \ nnoremap <buffer> <leader>lk :make! clean<CR>|
     \ endif
-autocmd FileType tex,markdown let b:cnodefault = 1
+autocmd FileType tex,markdown,quarto let b:cnodefault = 1
 autocmd FileType cs compiler dotnet
+autocmd FileType asm setl tabstop=6 shiftwidth=6
 
 " File shortcuts: TeX
 autocmd FileType tex
     \ nnoremap <silent> <buffer> <leader>lfr :call _fopen('References.bib')<CR>|
     \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>
+
+" File shortcuts
+nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
 
 " Specific motions
 nnoremap dv "_d
