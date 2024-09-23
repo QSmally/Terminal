@@ -381,6 +381,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     vnoremap <silent> <leader>ex :Expand<CR>
 
     Plug 'ctrlpvim/ctrlp.vim'
+    let g:ctrlp_custom_ignore = {
+        \ 'dir': '\v(obj|bin|dist|Deploy|node_modules|\.git)$',
+        \ 'file': '\v(\.swp)$' }
     let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:15'
     let g:ctrlp_by_filename = 1
     let g:ctrlp_show_hidden = 1
