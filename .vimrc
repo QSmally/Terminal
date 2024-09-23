@@ -155,16 +155,16 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
     \ nnoremap <buffer> <leader>ll :make!<CR>|
     \ nnoremap <buffer> <leader>lk :make! clean<CR>|
     \ endif
-autocmd FileType tex,markdown,quarto let b:cnodefault = 1
+autocmd FileType tex,markdown,quarto,org let b:cnodefault = 1
 autocmd FileType cs compiler dotnet
 autocmd FileType asm setl tabstop=6 shiftwidth=6
 
-" File shortcuts: TeX
+" File shortcuts
 autocmd FileType tex
     \ nnoremap <silent> <buffer> <leader>lfr :call _fopen('References.bib')<CR>|
     \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>
-
-" File shortcuts
+autocmd FileType org
+    \ nnoremap <silent> <buffer> <leader>ll :!pandoc -V geometry:margin=0.75in -o Document.pdf %<CR>
 nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
 
 " Specific motions
@@ -249,20 +249,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'taylor/vim-zoomwin'
     nnoremap <silent> <C-q> :ZoomWin<CR>
 
-    Plug 'skywind3000/vim-preview'
-    cabbrev D PreviewFile
-    cabbrev DD PreviewClose
-    " NOTE: for me, these characters is the key besides the numerical row
-    noremap <silent> ± :PreviewScroll -1<CR>
-    noremap <silent> § :PreviewScroll +1<CR>
-
     Plug 'vim-scripts/copypath.vim'
     let g:copypath_copy_to_unnamed_register = 1
     nnoremap <silent> gyf :CopyFileName<CR>
     nnoremap <silent> gyF :CopyPath<CR>
 
     Plug 'tpope/vim-obsession'
-    Plug 'artnez/vim-wipeout'
     Plug 'justinmk/vim-gtfo'
     Plug 'mileszs/ack.vim'
     Plug 'QSmally/DWM'
@@ -271,19 +263,15 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'jayflo/vim-skip'
     let g:vimskip_mapforwardskip = 'S'
 
-    Plug 'gcmt/wildfire.vim'
-    let g:wildfire_objects = [
-        \ 'i''', 'a''', 'i"', 'a"', 'i)', 'a)',
-        \ 'i]', 'a]', 'i}', 'a}', 'ip', 'it',
-        \ 'at']
-    noremap + <Plug>(wildfire-fuel)
-    vnoremap _ <Plug>(wildfire-water)
-    nnoremap _ V \| <Plug>(wildfire-water)
-
     Plug 'justinmk/vim-sneak'
     let g:sneak#use_ic_scs = 1
     let g:sneak#prompt = ''
     highlight link Sneak None
+
+    Plug 'machakann/vim-swap'
+    let g:swap_no_default_key_mappings = 1
+    nmap g< <Plug>(swap-prev)
+    nmap g> <Plug>(swap-next)
 
     Plug 'QSmally/Text-Center'
     vnoremap C :CenterText<CR>
@@ -311,17 +299,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap \ <Plug>(EasyAlign)
     cabbrev Tab EasyAlign
 
-    Plug 'AaronLasseigne/yank-code'
-    noremap gb <Plug>YankCode
-
     Plug 'junegunn/vim-after-object'
     autocmd VimEnter * silent! call after_object#enable(['a'], '=', ':')
 
     Plug 'vim-scripts/transpose-words'
     nnoremap g/ <Plug>Transposewords
-
-    Plug 'saaguero/vim-textobj-pastedtext'
-    let g:pastedtext_select_key = 'gp'
 
     Plug 'inkarkat/vim-unconditionalpaste'
     let g:UnconditionalPaste_no_mappings = 1
@@ -335,37 +317,20 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'julian/vim-textobj-variable-segment'
     Plug 'coderifous/textobj-word-column.vim'
     Plug 'beloglazov/vim-textobj-punctuation'
-    Plug 'thalesmello/vim-textobj-methodcall'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'nishigori/increment-activator'
     Plug 'triglav/vim-visual-increment'
-    Plug 'reedes/vim-textobj-sentence', { 'for': ['org', 'tex', 'markdown', 'quarto', 'pdf'] }
     Plug 'vesion/vim-textobj-restline'
-    Plug 'vim-scripts/RepeatableYank'
     Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
     Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
-    Plug 'machakann/vim-swap'
     Plug 'glts/vim-radical'
     Plug 'tpope/vim-repeat'
 
     " Mark: modes
-    Plug 'genezharov/vim-scrollmode'
-    let g:scrollmode_distance = 15
-    let g:scrollmode_mappings = {
-        \ ':-5<CR>': ['K', '<S-Up>'],
-        \ ':+5<CR>': ['J', '<S-Down>'] }
-    let g:scrollmode_actions = {
-        \ 'pageup': ['l'],
-        \ 'pagedown': ['h'],
-        \ 'exit': ['<Esc>'],
-        \ 'bdelete': [] }
-    nnoremap <silent> <leader>sm <Plug>ScrollMode
-    nnoremap <silent> ; <Plug>ScrollMode
-
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
 

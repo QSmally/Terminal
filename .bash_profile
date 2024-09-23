@@ -36,9 +36,18 @@ if [ $(which tar 2> /dev/null) ]; then
     alias extract="tar -xvf" # <directory>
 fi
 
+# Fuzzy finder
+if [ $(which fzf 2> /dev/null) ]; then
+    eval "$(fzf --bash)"
+fi
+
 # LaTeX
 if [ $(which pdflatex 2> /dev/null) ]; then
     alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode" # <files>
+fi
+
+if [ $(which gs 2> /dev/null) ]; then
+    alias smallify="gs -sDEVICE=pdfwrite -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=Document.small.pdf" # <file>
 fi
 
 # Pandoc

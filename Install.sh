@@ -70,6 +70,7 @@ if [ $(uname) == "Linux" ]; then
         install ~/.profile .bash_profile
         install ~/.xinitrc
         dependency xorg startx
+        dependency xorg xclip
         dependency xorg dwm
     fi
 else
@@ -80,6 +81,9 @@ dependency vim ack
 dependency vim curl
 
 if [ ! $server ]; then
+    dependency bash fzf
+    dependency bash gs
+    dependency bash pandoc
     dependency vim ctags
     dependency vim docker
     dependency vim latexmk
