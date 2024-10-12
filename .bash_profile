@@ -47,7 +47,7 @@ if [ $(which pdflatex 2> /dev/null) ]; then
 fi
 
 if [ $(which gs 2> /dev/null) ]; then
-    alias smallify="gs -sDEVICE=pdfwrite -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=Document.small.pdf" # <file>
+    alias smallify="gs -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=Document.small.pdf" # <file>
 fi
 
 # Pandoc
