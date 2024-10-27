@@ -1,5 +1,7 @@
 
+# ack already disregards common junkyards
 --ignore-dir=obj
 --ignore-dir=bin
 --ignore-dir=dist
 --ignore-dir=Deploy
+--ignore-dir=.zig-cache

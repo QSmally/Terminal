@@ -34,3 +34,4 @@
         xargs git branch -D'"
     save = "stash save --include-untracked" # [message]
     sq = "merge --squash" # <branch>
+    update = "!bash -c 'git pull && git mods && git purge'"

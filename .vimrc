@@ -20,6 +20,8 @@ if !exists('g:loaded_man')
     runtime ftplugin/man.vim
 endif
 
+autocmd FileType man setl nowrap
+
 let mapleader = ','
 let maplocalleader = ','
 filetype plugin indent on
@@ -31,26 +33,24 @@ let &t_EI .= "\<Esc>[3 q"
 
 " Scroll and mouse
 set nowrap
-
 set mouse=a
-set scrolloff=4
+set scrolloff=8
 set sidescrolloff=4
 
 " Indentations
 set smarttab
 set expandtab
 set autoindent
-
 set tabstop=4
 set shiftwidth=4
 
 " Highlighting
 syntax on
 colorscheme default-dark
+
 set number
 set cursorline
 set nospell
-
 set signcolumn=yes
 set cursorlineopt=number
 
@@ -64,7 +64,6 @@ set ignorecase
 set smartcase
 
 noh
-
 cabbrev ml g//p
 cabbrev mc %s///ng
 
@@ -78,7 +77,7 @@ command! T :vert term ++close /bin/bash -l
 autocmd TerminalOpen * setl nonumber signcolumn=no
 tnoremap <Esc> <C-\><C-n>
 
-" Commands: column width
+" Column widths
 command! -nargs=+ -complete=command Windo
     \ let s:curwin = winnr() |
     \ exec 'noautocmd keepjumps windo <args>' |
@@ -92,59 +91,38 @@ command! W80 :Windo set textwidth=80
 command! W100 :Windo set textwidth=100
 command! WR :Windo set textwidth=0
 
-" Bindings: clipboard
+" Clipboard
 noremap Y "*y
 nnoremap YY "*yy
 noremap <leader>o y'>p']
 nnoremap <leader>o yyp
 
-" Bindings: indentations
+" Group indentation
 xnoremap > >gv
 xnoremap < <gv
 
-" Bindings: text movement
+" Text movement
 nnoremap <silent> <leader>j :m .+1<CR>==
 nnoremap <silent> <leader>k :m .-2<CR>==
 vnoremap <silent> <leader>j :m '>+1<CR>gv=gv
 vnoremap <silent> <leader>k :m '<-2<CR>gv=gv
 
-" Bindings: completion menu
+" Completion menu
 " See keyword completion with C-n and C-p
 inoremap <C-]> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-s> <C-x>s
 
-" Bindings: wrap
-inoremap <C-q> <C-o>gqq<C-o>$
-
-" Bindings: sort
+" Bindings
 nnoremap <silent> <leader>so vip \| :sort<CR>}
 vnoremap <silent> <leader>so :sort<CR>}
-
-" Bindings: ruler
 nnoremap <silent> <leader>ru :set ruler!<CR>
+nnoremap <silent> <leader>wr :set wrap!<CR>
 
-" Bindings: 'as' top header
-nnoremap <silent> <leader>as [m
-
-" Bindings: folds
-vnoremap za <Esc>`<kzfgg`>jzfG`<
-
-" Bindings: tabs
+" Tabs
 nnoremap <silent> <leader>tn :Texplore<CR>
 nnoremap <silent> <leader>tp :wincmd T<CR>
 nnoremap <silent> <leader>tc :tabclose<CR>
-
-nnoremap <silent> <leader>t1 :1tabnext<CR>
-nnoremap <silent> <leader>t2 :2tabnext<CR>
-nnoremap <silent> <leader>t3 :3tabnext<CR>
-nnoremap <silent> <leader>t4 :4tabnext<CR>
-nnoremap <silent> <leader>t5 :5tabnext<CR>
-nnoremap <silent> <leader>t6 :6tabnext<CR>
-nnoremap <silent> <leader>t7 :7tabnext<CR>
-nnoremap <silent> <leader>t8 :8tabnext<CR>
-nnoremap <silent> <leader>t9 :9tabnext<CR>
-nnoremap <silent> <leader>t0 :tabnext #<CR>
 
 nnoremap <silent> <leader>t< :-tabmove<CR>
 nnoremap <silent> <leader>t> :+tabmove<CR>
@@ -163,14 +141,15 @@ autocmd FileType asm setl tabstop=6 shiftwidth=6
 autocmd FileType tex
     \ nnoremap <silent> <buffer> <leader>lfr :call _fopen('References.bib')<CR>|
     \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>
-autocmd FileType org
+autocmd FileType org,text
     \ nnoremap <silent> <buffer> <leader>ll :!pandoc -V geometry:margin=0.75in -o Document.pdf %<CR>
 nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
 
-" Specific motions
+" Miscellaneous
 nnoremap dv "_d
 vmap <leader>p dglP==
 nnoremap gF <C-w>f
+inoremap <C-q> <C-o>gqq<C-o>$
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -205,8 +184,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \ nnoremap <silent> <buffer> <leader>lt :compiler zig_test<CR>|
         \ nnoremap <silent> <buffer> <leader>lb :compiler zig_build<CR>
 
-    Plug 'gi1242/vim-tex-autoclose', { 'for': 'tex' }
-    autocmd FileType tex inoremap <silent> <buffer> <C-e> <C-o>:call TexACClosePrev('n')<CR>
+    Plug 'SirVer/ultisnips'
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsSnippetDirectories = ['snippet']
 
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
@@ -220,6 +200,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:gutentags_enabled = executable('ctags')
     let g:gutentags_ctags_tagfile = '.git/tags'
 
+    Plug 'rhysd/vim-fixjson', {
+        \ 'do': { -> fixjson#npm#local_command() },
+        \ 'for': ['json', 'vim-plug'] }
     Plug 'vim-scripts/a.vim'
     Plug 'jceb/vim-orgmode'
 
@@ -260,9 +243,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'QSmally/DWM'
 
     " Mark: text objects
-    Plug 'jayflo/vim-skip'
-    let g:vimskip_mapforwardskip = 'S'
-
     Plug 'justinmk/vim-sneak'
     let g:sneak#use_ic_scs = 1
     let g:sneak#prompt = ''
@@ -297,13 +277,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'junegunn/vim-easy-align'
     xnoremap \ <Plug>(EasyAlign)
     nnoremap \ <Plug>(EasyAlign)
+    vmap ; \*&
     cabbrev Tab EasyAlign
-
-    Plug 'junegunn/vim-after-object'
-    autocmd VimEnter * silent! call after_object#enable(['a'], '=', ':')
-
-    Plug 'vim-scripts/transpose-words'
-    nnoremap g/ <Plug>Transposewords
 
     Plug 'inkarkat/vim-unconditionalpaste'
     let g:UnconditionalPaste_no_mappings = 1
@@ -314,16 +289,14 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap glp <Plug>UnconditionalPasteLineAfter
     nnoremap glP <Plug>UnconditionalPasteLineBefore
 
-    Plug 'julian/vim-textobj-variable-segment'
     Plug 'coderifous/textobj-word-column.vim'
-    Plug 'beloglazov/vim-textobj-punctuation'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'nishigori/increment-activator'
     Plug 'triglav/vim-visual-increment'
     Plug 'vesion/vim-textobj-restline'
-    Plug 'tommcdo/vim-nowchangethat'
     Plug 'arthurxavierx/vim-caser'
+    Plug 'chaoren/vim-wordmotion'
     Plug 'andrewradev/dsf.vim'
     Plug 'tpope/vim-surround'
     Plug 'wellle/targets.vim'
@@ -342,13 +315,13 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:nf_map_next = '<leader>f]'
 
     Plug 'olical/vim-expand'
-    nnoremap <silent> <leader>ex :Expand<CR>
-    vnoremap <silent> <leader>ex :Expand<CR>
+    nnoremap <silent> <tab> :Expand<CR>
+    vnoremap <silent> <tab> :Expand<CR>
 
     Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_custom_ignore = {
-        \ 'dir': '\v(obj|bin|dist|Deploy|node_modules|\.git)$',
-        \ 'file': '\v(\.swp)$' }
+        \ 'dir': '\v(obj|bin|dist|Deploy|node_modules|\.zig-cache|\.git)$',
+        \ 'file': '\v(\.DS_Store|\.swp)$' }
     let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:15'
     let g:ctrlp_by_filename = 1
     let g:ctrlp_show_hidden = 1
@@ -363,22 +336,14 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'mopp/autodirmake.vim'
     let g:autodirmake#is_confirm = 0
 
-    Plug 'davidgamba/vim-vmath'
-    vnoremap <expr> <leader>su VMATH_YankAndAnalyse()
-
-    Plug 'diepm/vim-rest-console', { 'for': 'rest' }
-    " FIXME: Buffer not managed by DWM due to missing 'buftype'
-    let g:vrc_output_buffer_name = 'rest-response'
-    let g:vrc_trigger = '<leader>tr'
+    Plug 'nixon/vim-vmath'
+    vnoremap <expr> + VMATH_YankAndAnalyse()
 
     Plug 'jbarberu/vim-diffsaved'
     nnoremap <silent> <leader>fd :DiffSaved<CR>
 
     Plug 'unblevable/quick-scope'
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-    Plug 'vim-scripts/loremipsum'
-    cabbrev L Loremipsum
 
     Plug 'andrewradev/linediff.vim'
     let g:linediff_sign_highlight_group = 'Directory'
@@ -394,8 +359,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <leader>cd :DockerComposeDown<CR>
     nnoremap <leader>cb :DockerComposeBuild<CR>
     nnoremap <leader>cl :DockerComposeLogs<CR>
+    nnoremap <leader>cs :DockerComposeList<CR>
 
-    Plug 'kristijanhusak/vim-create-pr'
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'

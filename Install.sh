@@ -57,6 +57,9 @@ if [ ! $server ]; then
     install ~/.gitignore
     install ~/.gittemplate/hooks/commit-msg
     install ~/.latexmkrc
+    install ~/.vim/snippet/all.snippets
+    install ~/.vim/snippet/tex.snippets
+    install ~/.vim/snippet/zig.snippets
 fi
 
 dependency vim vim

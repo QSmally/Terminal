@@ -1,0 +1,38 @@
+
+snippet newdocument "\documentclass ..." b
+\documentclass[a4paper,10pt]{report}
+
+% ...
+
+\begin{document}
+
+\end{document}
+endsnippet
+
+snippet document "\documentclass ..." b
+\documentclass[00-Title.tex]{subfiles}
+\begin{document}
+
+\chapter{$0}
+\label{$1}
+
+% ...
+
+\end{document}
+endsnippet
+
+snippet "begin( (\S+))?" "begin{...} ... end{...}" br
+\begin{${1:`!p
+snip.rv = match.group(2) if match.group(1) is not None else "something"`}}
+	${2:${VISUAL}}
+\end{$1}$0
+endsnippet
+
+snippet figure "\begin{figure} ... \end{figure}" b
+\begin{figure}[ht]
+	\centering
+	${0:\includegraphics[width=\linewidth]{$1}}
+	\caption{$2}
+	\label{figure:$3}
+\end{figure}
+endsnippet
