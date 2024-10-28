@@ -184,9 +184,18 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \ nnoremap <silent> <buffer> <leader>lt :compiler zig_test<CR>|
         \ nnoremap <silent> <buffer> <leader>lb :compiler zig_build<CR>
 
-    Plug 'SirVer/ultisnips'
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsSnippetDirectories = ['snippet']
+    if has("python3")
+        Plug 'jceb/vim-orgmode'
+        Plug 'SirVer/ultisnips'
+        let g:UltiSnipsExpandTrigger = '<tab>'
+        let g:UltiSnipsSnippetDirectories = ['snippet']
+    endif
+
+    if executable("npm")
+        Plug 'rhysd/vim-fixjson', {
+            \ 'do': { -> fixjson#npm#local_command() },
+            \ 'for': ['json', 'vim-plug'] }
+    endif
 
     Plug 'iamcco/markdown-preview.nvim', {
         \ 'do': { -> mkdp#util#install() },
@@ -200,11 +209,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:gutentags_enabled = executable('ctags')
     let g:gutentags_ctags_tagfile = '.git/tags'
 
-    Plug 'rhysd/vim-fixjson', {
-        \ 'do': { -> fixjson#npm#local_command() },
-        \ 'for': ['json', 'vim-plug'] }
     Plug 'vim-scripts/a.vim'
-    Plug 'jceb/vim-orgmode'
 
     " Mark: Git integration
     Plug 'tpope/vim-fugitive'
