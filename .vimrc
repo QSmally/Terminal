@@ -117,7 +117,7 @@ inoremap <C-s> <C-x>s
 nnoremap <silent> <leader>so vip \| :sort<CR>}
 vnoremap <silent> <leader>so :sort<CR>}
 nnoremap <silent> <leader>ru :set ruler!<CR>
-nnoremap <silent> <leader>wr :set wrap!<CR>
+nnoremap <silent> <leader>rp :set wrap!<CR>
 
 " Tabs
 nnoremap <silent> <leader>tn :Texplore<CR>
