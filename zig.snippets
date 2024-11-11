@@ -7,7 +7,7 @@ pub fn build(b: *std.Build) void {
 	const optimize = b.standardOptimizeOption(.{});
 
 	const exec = b.addExecutable(.{
-		.name = "${0:binary name}",
+		.name = "${1:binary name}",
 		.root_source_file = b.path("Sources/main.zig"),
 		.target = target,
 		.optimize = optimize });

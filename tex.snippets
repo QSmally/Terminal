@@ -13,8 +13,8 @@ snippet document "\documentclass ..." b
 \documentclass[00-Title.tex]{subfiles}
 \begin{document}
 
-\chapter{$0}
-\label{$1}
+\chapter{$1}
+\label{$2}
 
 % ...
 
@@ -31,8 +31,33 @@ endsnippet
 snippet figure "\begin{figure} ... \end{figure}" b
 \begin{figure}[ht]
 	\centering
-	${0:\includegraphics[width=\linewidth]{$1}}
-	\caption{$2}
-	\label{figure:$3}
+	${1:\includegraphics[width=\linewidth]{$2}}
+	\caption{$3}
+	\label{figure:$4}
 \end{figure}
+endsnippet
+
+snippet subfigure "\begin{figure} \begin{subfigure} ... \end{subfigure} \end{figure}"
+\begin{figure}
+	\begin{subfigure}{${1:.495}\linewidth}
+		\includegraphics[width=\linewidth]{$2}
+		\caption{$3}
+		\label{figure:a:$4}
+	\end{subfigure}%
+	\hfill%
+	\begin{subfigure}{${1:.495}\linewidth}
+		\includegraphics[width=\linewidth]{$5}
+		\caption{$6}
+		\label{figure:b:$4}
+	\end{subfigure}
+
+	\caption{$7}
+	\label{figure:$4}
+\end{figure}
+endsnippet
+
+snippet tabularx "\begin{tabularx}{...}{...} ... \end{tabularx}"
+\begin{tabularx}{${1:\linewidth}}{${2:lX}}
+	${3:\textbf{something} & something}
+\end{tabularx}
 endsnippet

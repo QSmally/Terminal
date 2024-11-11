@@ -325,7 +325,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_custom_ignore = {
-        \ 'dir': '\v(obj|bin|dist|Deploy|node_modules|\.zig-cache|\.git)$',
+        \ 'dir': '\v(obj|bin|dist|Deploy|Compilation|node_modules|\.zig-cache|\.git)$',
         \ 'file': '\v(\.DS_Store|\.swp)$' }
     let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:15'
     let g:ctrlp_by_filename = 1
