@@ -6,6 +6,13 @@ snippet newdocument "\documentclass ..." b
 
 \begin{document}
 
+\tableofcontents
+% \listoffigures
+% \listoftables
+
+% \chapter{Introduction}
+% \label{introduction}
+
 \end{document}
 endsnippet
 
@@ -38,21 +45,21 @@ snippet figure "\begin{figure} ... \end{figure}" b
 endsnippet
 
 snippet subfigure "\begin{figure} \begin{subfigure} ... \end{subfigure} \end{figure}"
-\begin{figure}
-	\begin{subfigure}{${1:.495}\linewidth}
-		\includegraphics[width=\linewidth]{$2}
-		\caption{$3}
-		\label{figure:a:$4}
+\begin{figure}[ht]
+	\begin{subfigure}{.495\linewidth}
+		\includegraphics[width=\linewidth]{$1}
+		\caption{$2}
+		\label{figure:a:$3}
 	\end{subfigure}%
 	\hfill%
-	\begin{subfigure}{${1:.495}\linewidth}
-		\includegraphics[width=\linewidth]{$5}
-		\caption{$6}
-		\label{figure:b:$4}
+	\begin{subfigure}{.495\linewidth}
+		\includegraphics[width=\linewidth]{$4}
+		\caption{$5}
+		\label{figure:b:$3}
 	\end{subfigure}
 
-	\caption{$7}
-	\label{figure:$4}
+	\caption{$6}
+	\label{figure:$3}
 \end{figure}
 endsnippet
 
