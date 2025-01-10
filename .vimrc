@@ -282,7 +282,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'junegunn/vim-easy-align'
     xnoremap \ <Plug>(EasyAlign)
     nnoremap \ <Plug>(EasyAlign)
-    vmap ; \*&
+    nmap ; vii\*&
     cabbrev Tab EasyAlign
 
     Plug 'inkarkat/vim-unconditionalpaste'
