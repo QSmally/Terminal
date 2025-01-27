@@ -140,7 +140,8 @@ autocmd FileType asm setl tabstop=6 shiftwidth=6
 " File shortcuts
 autocmd FileType tex
     \ nnoremap <silent> <buffer> <leader>lfr :call _fopen('References.bib')<CR>|
-    \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>
+    \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>|
+    \ nnoremap <silent> <buffer> <leader>lf0 :call _fopen('00-Title.tex')<CR>
 autocmd FileType org,text
     \ nnoremap <silent> <buffer> <leader>ll :!pandoc -V geometry:margin=0.75in -o Document.pdf %<CR>
 nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
@@ -182,6 +183,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:zig_fmt_autosave = 0
     autocmd FileType zig
         \ nnoremap <silent> <buffer> <leader>lt :compiler zig_test<CR>|
+        \ nnoremap <silent> <buffer> <leader>ld :set makeprg=zig\ build\ test<CR>|
+        \ nnoremap <silent> <buffer> <leader>lD :set makeprg=zig\ build\ test\ -Ddump<CR>|
         \ nnoremap <silent> <buffer> <leader>lb :compiler zig_build<CR>
 
     if has("python3")

@@ -8,6 +8,8 @@ alias usage="du -hd 1" # [directory]
 range() { sed "$1!d" $2; } # <range> [file]
 cr() { cd "$(git rev-parse --show-toplevel)"; }
 
+alias choochoo="while true; do sl; done"
+
 if [ $(uname) == "Darwin" ]; then
     # copy < file, range x,y file | copy
     alias copy="pbcopy"
