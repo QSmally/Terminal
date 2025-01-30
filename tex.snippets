@@ -44,7 +44,7 @@ snippet figure "\begin{figure} ... \end{figure}" b
 \end{figure}
 endsnippet
 
-snippet subfigure "\begin{figure} \begin{subfigure} ... \end{subfigure} \end{figure}"
+snippet subfigure "\begin{figure} \begin{subfigure} ... \end{subfigure} \end{figure}" b
 \begin{figure}[ht]
 	\begin{subfigure}{.495\linewidth}
 		\includegraphics[width=\linewidth]{$1}
@@ -63,8 +63,12 @@ snippet subfigure "\begin{figure} \begin{subfigure} ... \end{subfigure} \end{fig
 \end{figure}
 endsnippet
 
-snippet tabularx "\begin{tabularx}{...}{...} ... \end{tabularx}"
+snippet tabularx "\begin{tabularx}{...}{...} ... \end{tabularx}" b
 \begin{tabularx}{${1:\linewidth}}{${2:lX}}
 	${3:\textbf{${4:something}}: & ${5:something}}
 \end{tabularx}
+endsnippet
+
+snippet row "\textbf{...}: & ..."
+\textbf{${1:something}}: & ${2:something}
 endsnippet

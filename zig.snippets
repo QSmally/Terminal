@@ -22,3 +22,15 @@ pub fn build(b: *std.Build) void {
 	run_step.dependOn(&run.step);
 }
 endsnippet
+
+snippet main "pub fn main() void" b
+const std = @import("std");
+
+pub fn main() void {
+	${1:std.debug.print("Hello world!\n", .{});}
+}
+endsnippet
+
+snippet import "const ... = @import(...)" b
+const ${1:std} = @import("${2:std}");
+endsnippet
