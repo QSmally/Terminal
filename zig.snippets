@@ -13,13 +13,13 @@ pub fn build(b: *std.Build) void {
 		.optimize = optimize });
 	b.installArtifact(exec);
 
-	const run = b.addRunArtifact(exec);
-	run.step.dependOn(b.getInstallStep());
-
-	if (b.args) |args|
-		run.addArgs(args);
-	const run_step = b.step("run", "build and execute");
-	run_step.dependOn(&run.step);
+	const tests = b.addTest(.{
+		.root_source_file = b.path("Sources/main.zig"),
+		.target = target,
+		.optimize = optimize });
+	const run_tests = b.addRunArtifact(tests);
+	const test_step = b.step("test", "use-case tests");
+	test_step.dependOn(&run_tests.step);
 }
 endsnippet
 

@@ -18,21 +18,21 @@ if [ $server ]; then
 fi
 
 install() {
-    filename=$(basename $1)
-    directory=$(dirname $1)
-    target=$([ -z $2 ] && echo $filename || echo $2)
+    filename="$(basename $1)"
+    directory="$(dirname $1)"
+    target="$([ -z $2 ] && echo $filename || echo $2)"
 
     if [ -e "$directory/$target" ]; then
-        echo "File $filename ignored because it already exists in $directory"
+        echo "File $filename ignored because $target already exists in $directory"
         return 1
     fi
 
-    if [ ! -d $directory ]; then
-        mkdir -p $directory
+    if [ ! -d "$directory" ]; then
+        mkdir -p "$directory"
         echo "Intermediate directory $directory created"
     fi
 
-    ln -s $(pwd)/$filename "$directory/$target"
+    ln -s "$(pwd)/$filename" "$directory/$target"
 
     if [ $? -eq 0 ]; then
         linked_file_count+=1
@@ -70,6 +70,7 @@ if [ $(uname) == "Linux" ]; then
     install ~/.bash_profile .bash_aliases
 
     if [ ! $server ]; then
+        # *: bash_profile is loaded on login shell
         install ~/.profile .bash_profile
         install ~/.xinitrc
         dependency xorg startx
@@ -82,6 +83,8 @@ fi
 
 dependency vim ack
 dependency vim curl
+dependency vim node
+dependency vim python3
 
 if [ ! $server ]; then
     dependency bash fzf

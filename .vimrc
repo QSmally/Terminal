@@ -146,6 +146,11 @@ autocmd FileType org,text
     \ nnoremap <silent> <buffer> <leader>ll :!pandoc -V geometry:margin=0.75in -o Document.pdf %<CR>
 nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
 
+" LaTeX
+autocmd FileType tex setl colorcolumn=100 spell
+command! Dutch set spelllang=nl
+command! Scratch new
+
 " Miscellaneous
 nnoremap dv "_d
 vmap <leader>p dglP==
@@ -373,6 +378,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'antoyo/vim-licenses'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
+    Plug 'artnez/vim-wipeout'
     Plug 'tpope/vim-eunuch'
     Plug 'reedes/vim-wordy', { 'for': ['org', 'tex', 'markdown', 'quarto'] }
 
