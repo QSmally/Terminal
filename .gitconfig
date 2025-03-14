@@ -2,6 +2,7 @@
 [user]
     name = QSmally
     email = github@qsmally.org
+    signingkey = 50D4A8E4
 
 [init]
     defaultBranch = master
@@ -12,6 +13,12 @@
 
 [status]
     submodulesummary = true
+
+[commit]
+    gpgSign = true
+
+[tag]
+    gpgSign = true
 
 [pull]
     rebase = false

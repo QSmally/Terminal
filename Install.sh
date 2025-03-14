@@ -56,10 +56,13 @@ install ~/.vimrc
 if [ ! $server ]; then
     install ~/.gitignore
     install ~/.gittemplate/hooks/commit-msg
+    install ~/.gnupg/gpg.conf
     install ~/.latexmkrc
     install ~/.vim/snippet/all.snippets
     install ~/.vim/snippet/tex.snippets
     install ~/.vim/snippet/zig.snippets
+
+    chmod 700 ~/.gnupg
 fi
 
 dependency vim vim
@@ -90,6 +93,7 @@ if [ ! $server ]; then
     dependency bash fzf
     dependency bash gs
     dependency bash pandoc
+    dependency git gpg
     dependency vim ctags
     dependency vim docker
     dependency vim latexmk
