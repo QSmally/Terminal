@@ -20,6 +20,9 @@ if !exists('g:loaded_man')
     runtime ftplugin/man.vim
 endif
 
+packadd netrw
+packadd helptoc
+
 autocmd FileType man setl nowrap
 
 let mapleader = ','
@@ -134,7 +137,7 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
     \ nnoremap <buffer> <leader>lk :make! clean<CR>|
     \ endif
 autocmd FileType tex,markdown,quarto,org let b:cnodefault = 1
-autocmd FileType cs compiler dotnet
+autocmd FileType cs,razor compiler dotnet
 autocmd FileType asm setl tabstop=6 shiftwidth=6
 
 " File shortcuts
@@ -197,6 +200,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         Plug 'SirVer/ultisnips'
         let g:UltiSnipsExpandTrigger = '<tab>'
         let g:UltiSnipsSnippetDirectories = ['snippet']
+
+        if isdirectory(expand('~/.vim/thesaurus'))
+            Plug 'Ron89/thesaurus_query.vim'
+            let g:tq_enabled_backends = ['openoffice_en']
+            let g:tq_openoffice_en_file = '~/.vim/thesaurus/th_en_US_new'
+        endif
     endif
 
     if executable("npm")
@@ -230,6 +239,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <silent> <leader>x/ :ConflictTake all<CR>
 
     Plug 'k0kubun/vim-open-github'
+    Plug 'jlcrochet/vim-razor' " not ideal highlighting, but it works!
 
     " Mark: window management
     Plug 'romainl/vim-qf'
@@ -290,7 +300,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'junegunn/vim-easy-align'
     xnoremap \ <Plug>(EasyAlign)
     nnoremap \ <Plug>(EasyAlign)
-    nmap ; vii\*&
+    autocmd FileType tex nmap <buffer> ; vii\*&
     cabbrev Tab EasyAlign
 
     Plug 'inkarkat/vim-unconditionalpaste'
@@ -317,6 +327,17 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'tpope/vim-repeat'
 
     " Mark: modes
+    Plug 'brennier/quicktex'
+    let g:quicktex_tex = {
+        \'prf':  "\\begin{proof}\<CR><+++>\<CR>\\end{proof}",
+        \'m':    '\( <+++> \)' }
+    let g:quicktex_math = {
+        \' ':    "\<ESC>:call search('<+.*+>')\<CR>\"_c/+>/e\<CR>",
+        \'eq':   '= ',
+        \'set':  '\{ <+++> \} <++>',
+        \'frac': '\frac{<+++>}{<++>} <++>',
+        \'l':    '\mathrm{<+++>} <++>' }
+
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
 
@@ -372,7 +393,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     nnoremap <leader>cd :DockerComposeDown<CR>
     nnoremap <leader>cb :DockerComposeBuild<CR>
     nnoremap <leader>cl :DockerComposeLogs<CR>
-    nnoremap <leader>cs :DockerComposeList<CR>
+    nnoremap <leader>cL :DockerComposeList<CR>
 
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'

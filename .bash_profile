@@ -2,6 +2,7 @@
 alias diff="diff -u --color=always" # <file> <file>
 alias ls="ls --color=always" # [directory]
 alias ll="ls -lAh --color=always" # [directory]
+alias lll="ls -lh --color=always" # [directory]
 alias lt="ll -t" # [directory]
 alias usage="du -hd 1" # [directory]
 
@@ -61,6 +62,7 @@ fi
 if [ $(which docker 2> /dev/null) ]; then
     dkrrmc() { docker rm -vf $(docker ps -aq); }
     dkrrmi() { docker rmi -f $(docker images -aq); }
+    dkrrmv() { docker volume rm -f $(docker volume ls -q); }
 fi
 
 # GPG

@@ -18,8 +18,8 @@ if [ $server ]; then
 fi
 
 install() {
-    filename="$(basename $1)"
-    directory="$(dirname $1)"
+    filename="$(basename "$1")"
+    directory="$(dirname "$1")"
     target="$([ -z $2 ] && echo $filename || echo $2)"
 
     if [ -e "$directory/$target" ]; then
@@ -44,6 +44,31 @@ dependency() {
     if [ ! $(which $2 2> /dev/null) ]; then
         echo "Caveat: $1 may require executable $2, but it's not in PATH"
     fi
+}
+
+download() {
+    directory="$1"
+    url="$2"
+    unpack="$3"
+
+    if [ -d "$directory" ]; then
+        echo "Download $directory ignored because directory already exists"
+        return 1
+    fi
+
+    mkdir -p "$directory"
+    echo "Downloading $url to $directory..."
+    cd "$directory"
+
+    curl -q "$url" | tar -xf- -C . || exit 1
+
+    if [ ! -z "$unpack" ]; then
+        mv $unpack/* . || exit 1
+        rm -r $unpack || exit 1
+    fi
+
+    echo "Installed content in $directory"
+    linked_file_count+=1
 }
 
 mkdir -p ~/.cache
@@ -98,6 +123,10 @@ if [ ! $server ]; then
     dependency vim docker
     dependency vim latexmk
     dependency vim xpdf
+fi
+
+if [ ! $server ]; then
+    download ~/.vim/thesaurus "https://www.openoffice.org/lingucomponent/MyThes-1.zip" "MyThes-1.0"
 fi
 
 echo "Installed a total of $linked_file_count configuration files"
