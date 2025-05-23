@@ -23,6 +23,15 @@ pub fn build(b: *std.Build) void {
 }
 endsnippet
 
+snippet docs "const docs = b.addInstallDirectory(...)" b
+const docs = b.addInstallDirectory(.{
+	.source_dir = tests.getEmittedDocs(),
+	.install_dir = .prefix,
+	.install_subdir = "docs" });
+const docs_step = b.step("docs", "generate docs");
+docs_step.dependOn(&docs.step);
+endsnippet
+
 snippet main "pub fn main() void" b
 const std = @import("std");
 
@@ -41,4 +50,29 @@ endsnippet
 
 snippet import "const ... = @import(...)" b
 const ${1:std} = @import("${2:std}");
+endsnippet
+
+snippet tests "std.testing.refAllDecls(@This())" b
+test {
+	const std = @import("std");
+	std.testing.refAllDecls(@This());
+}
+endsnippet
+
+snippet signal "fn register_signal(signal:, handler:) !void" b
+// try register_signal(std.posix.SIG.INT, on_signal);
+// try register_signal(std.posix.SIG.TERM, on_signal);
+
+fn register_signal(signal: anytype, handler: anytype) !void {
+	var sigaction = std.posix.Sigaction {
+		.handler = .{ .handler = handler },
+		.mask = std.posix.empty_sigset,
+		.flags = std.posix.SA.RESTART };
+	std.posix.sigaction(signal, &sigaction, null);
+}
+
+fn on_signal(signal: i32) callconv(.C) void {
+	std.log.info("received signal {}, exiting...", .{ signal });
+	${1:// clean-up task...}
+}
 endsnippet
