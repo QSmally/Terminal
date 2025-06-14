@@ -59,20 +59,44 @@ test {
 }
 endsnippet
 
-snippet signal "fn register_signal(signal:, handler:) !void" b
-// try register_signal(std.posix.SIG.INT, on_signal);
-// try register_signal(std.posix.SIG.TERM, on_signal);
+snippet signal "fn register_signal(signal:, handler:) void" b
+// register_signal(std.posix.SIG.INT, on_signal);
+// register_signal(std.posix.SIG.TERM, on_signal);
 
-fn register_signal(signal: anytype, handler: anytype) !void {
-	var sigaction = std.posix.Sigaction {
+fn register_signal(signal: anytype, handler: anytype) void {
+	const sigaction = std.posix.Sigaction {
 		.handler = .{ .handler = handler },
 		.mask = std.posix.empty_sigset,
-		.flags = std.posix.SA.RESTART };
+		.flags = std.posix.SA.SIGINFO };
 	std.posix.sigaction(signal, &sigaction, null);
 }
 
 fn on_signal(signal: i32) callconv(.C) void {
 	std.log.info("received signal {}, exiting...", .{ signal });
 	${1:// clean-up task...}
+}
+endsnippet
+
+snippet log "pub fn log(level:, scope:, format:, args:) void" b
+pub const std_options = std.Options { .logFn = log };
+
+pub fn log(
+	comptime level: std.log.Level,
+	comptime scope: @Type(.enum_literal),
+	comptime format: []const u8,
+	args: anytype
+) void {
+	_ = scope;
+
+	const prefix = switch (level) {
+		.debug => "(debug) ",
+		.err => "(err) ",
+		else => ""
+	};
+
+	const stdout = std.io
+		.getStdOut()
+		.writer();
+	nosuspend stdout.print(prefix ++ format ++ "\n", args) catch return;
 }
 endsnippet
