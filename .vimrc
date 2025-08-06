@@ -8,6 +8,7 @@ set autoread
 set incsearch
 set noruler
 set secure
+set noshowcmd
 
 set belloff+=esc
 set laststatus=1
@@ -154,11 +155,21 @@ autocmd FileType tex setl colorcolumn=100 spell
 command! Dutch set spelllang=nl
 command! Scratch new
 
-" Miscellaneous
+" Delete into void
 nnoremap dv "_d
+
+" Extract visual into line above
 vmap <leader>p dglP==
+
+" Go-to file in new window
 nnoremap gF <C-w>f
+
+" Wrap line in insert mode at 80 chars
 inoremap <C-q> <C-o>gqq<C-o>$
+
+" (Better) jump list backward/forward
+nnoremap <C-o> g;
+nnoremap <C-i> g,
 
 " Plugins
 if filereadable(expand('~/.vim/autoload/plug.vim'))
