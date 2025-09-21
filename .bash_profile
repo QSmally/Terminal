@@ -14,8 +14,6 @@ alias choochoo="while true; do sl; done"
 if [ $(uname) == "Darwin" ]; then
     # copy < file, range x,y file | copy
     alias copy="pbcopy"
-else
-    alias copy="xclip -sel c"
 fi
 
 # Homebrew
@@ -76,6 +74,14 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+if [ $(which foot 2> /dev/null) ]; then
+    export TERMINAL=foot
+fi
+
+if [ $(which ghostty 2> /dev/null) ]; then
+    export TERMINAL=ghostty
+fi
 
 if [ -e ~/.bash_local ]; then
     . ~/.bash_local

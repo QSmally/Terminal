@@ -21,8 +21,10 @@ if !exists('g:loaded_man')
     runtime ftplugin/man.vim
 endif
 
-packadd netrw
-packadd helptoc
+if has('macunix')
+    packadd netrw
+    packadd helptoc
+endif
 
 autocmd FileType man setl nowrap
 

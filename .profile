@@ -1,8 +1,10 @@
 
-[ -e ~/.bashrc ] && . ~/.bashrc
+if [ -e ~/.bashrc ]; then
+    . ~/.bashrc
+fi
 
-if [ -z $DISPLAY ] && [ $(tty) = /dev/tty1 ]; then
-    echo "display detected, waiting 5 seconds before starting wm... (^C to cancel)"
-    sleep 5
-    startx
+if [ $(tty) = /dev/tty1 ]; then
+    echo "display detected, waiting 3 seconds before starting wm... (^C to cancel)"
+    sleep 3
+    exec river
 fi

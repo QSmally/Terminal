@@ -98,12 +98,10 @@ if [ $(uname) == "Linux" ]; then
     install ~/.bash_profile .bash_aliases
 
     if [ ! $server ]; then
-        # *: bash_profile is loaded on login shell
+        # bash_profile is loaded on login shell
         install ~/.profile .bash_profile
-        install ~/.xinitrc
-        dependency xorg startx
-        dependency xorg xclip
-        dependency xorg dwm
+        install ~/.config/river/init
+        dependency river river
     fi
 else
     install ~/.bash_profile
