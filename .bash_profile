@@ -37,6 +37,14 @@ if [ $(which tar 2> /dev/null) ]; then
     alias extract="tar -xvf" # <directory>
 fi
 
+# GPG
+if [ $(which gpg 2> /dev/null) ]; then
+    alias gpgs="gpg --list-keys"
+    alias gpgsprivate="gpg --list-secret-keys"
+fi
+
+alias tohex="hexdump -ve '1/1 \"%02x\"'"
+
 # Fuzzy finder
 if [ $(which fzf 2> /dev/null) ]; then
     eval "$(fzf --bash)"

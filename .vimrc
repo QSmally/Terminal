@@ -32,6 +32,9 @@ let mapleader = ','
 let maplocalleader = ','
 filetype plugin indent on
 
+unlet! skip_defaults_vim
+let skip_defaults_vim = 1
+
 " Shape of cursors
 let &t_SI .= "\<Esc>[3 q"
 let &t_SR .= "\<Esc>[3 q"
@@ -155,7 +158,6 @@ nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
 " LaTeX
 autocmd FileType tex setl colorcolumn=100 spell
 command! Dutch set spelllang=nl
-command! Scratch new
 
 " Delete into void
 nnoremap dv "_d
@@ -200,7 +202,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'makerj/vim-pdf'
     autocmd FileType pdf setl nonumber readonly modifiable
 
-    Plug 'ziglang/zig.vim'
+    Plug 'QSmally/zig.vim'
     let g:zig_fmt_autosave = 0
     autocmd FileType zig
         \ nnoremap <silent> <buffer> <leader>lt :compiler zig_test<CR>|
@@ -251,8 +253,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'vim-scripts/ConflictMotions'
     nnoremap <silent> <leader>x/ :ConflictTake all<CR>
 
-    Plug 'k0kubun/vim-open-github'
-    Plug 'jlcrochet/vim-razor' " not ideal highlighting, but it works!
+    Plug 'jlcrochet/vim-razor'
 
     " Mark: window management
     Plug 'romainl/vim-qf'
@@ -279,11 +280,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'QSmally/DWM'
 
     " Mark: text objects
-    Plug 'justinmk/vim-sneak'
-    let g:sneak#use_ic_scs = 1
-    let g:sneak#prompt = ''
-    highlight link Sneak None
-
     Plug 'machakann/vim-swap'
     let g:swap_no_default_key_mappings = 1
     nmap g< <Plug>(swap-prev)
@@ -328,9 +324,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'coderifous/textobj-word-column.vim'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'michaeljsmith/vim-indent-object'
-    Plug 'nishigori/increment-activator'
     Plug 'triglav/vim-visual-increment'
-    Plug 'vesion/vim-textobj-restline'
     Plug 'arthurxavierx/vim-caser'
     Plug 'chaoren/vim-wordmotion'
     Plug 'andrewradev/dsf.vim'
@@ -340,17 +334,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'tpope/vim-repeat'
 
     " Mark: modes
-    Plug 'brennier/quicktex'
-    let g:quicktex_tex = {
-        \'prf':  "\\begin{proof}\<CR><+++>\<CR>\\end{proof}",
-        \'m':    '\( <+++> \)' }
-    let g:quicktex_math = {
-        \' ':    "\<ESC>:call search('<+.*+>')\<CR>\"_c/+>/e\<CR>",
-        \'eq':   '= ',
-        \'set':  '\{ <+++> \} <++>',
-        \'frac': '\frac{<+++>}{<++>} <++>',
-        \'l':    '\mathrm{<+++>} <++>' }
-
     Plug 'dhruvasagar/vim-table-mode'
     let g:table_mode_c = '|'
 
@@ -439,7 +422,7 @@ cabbrev wq wqa
 cabbrev S sp
 
 function! _fopen(fname)
-    exec "vsplit " . a:fname
+    exec 'vsplit ' . a:fname
     if isdirectory(expand('~/.vim/plugged/DWM'))
         call dwm#layout()
     endif
