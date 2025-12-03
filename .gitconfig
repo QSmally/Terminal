@@ -1,8 +1,8 @@
 
 [user]
     name = QSmally
-    email = github@qsmally.org
-    signingkey = 50D4A8E4
+    email = git@qsmally.org
+    signingkey = 4F3BA282C00595CB
 
 [init]
     defaultBranch = master

@@ -77,6 +77,11 @@ if [ $(which gpgconf 2> /dev/null) ]; then
     gpgconf --launch gpg-agent
 fi
 
+# Rsync
+if [ $(which rsync 2> /dev/null) ]; then
+    alias djisync="rsync -vrt --exclude \"*.LRF\""
+fi
+
 # Shell
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"

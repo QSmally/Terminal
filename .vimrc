@@ -22,8 +22,10 @@ if !exists('g:loaded_man')
 endif
 
 if has('macunix')
-    packadd netrw
-    packadd helptoc
+    packadd! netrw
+    packadd! helptoc
+else
+    packadd! termdebug
 endif
 
 autocmd FileType man setl nowrap
@@ -83,6 +85,7 @@ endif
 
 " Terminal
 command! T :vert term ++close /bin/bash -l
+command! LLDB :vert term ++close lldb
 autocmd TerminalOpen * setl nonumber signcolumn=no
 tnoremap <Esc> <C-\><C-n>
 
