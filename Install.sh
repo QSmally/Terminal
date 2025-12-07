@@ -84,6 +84,7 @@ if [ ! $server ]; then
     install ~/.gnupg/gpg.conf
     install ~/.latexmkrc
     install ~/.vim/snippet/all.snippets
+    install ~/.vim/snippet/sh.snippets
     install ~/.vim/snippet/tex.snippets
     install ~/.vim/snippet/zig.snippets
 
@@ -113,7 +114,6 @@ dependency vim node
 dependency vim python3
 
 if [ ! $server ]; then
-    dependency bash fzf
     dependency bash gs
     dependency bash pandoc
     dependency git gpg
@@ -124,7 +124,7 @@ if [ ! $server ]; then
 fi
 
 if [ ! $server ]; then
-    download ~/.vim/thesaurus "https://www.openoffice.org/lingucomponent/MyThes-1.zip" "MyThes-1.0"
+    download ~/.vim/thesaurus "https://files.qsmally.org/cdn/thesaurus.zip" "MyThes-1.0"
 fi
 
 echo "Installed a total of $linked_file_count configuration files"
