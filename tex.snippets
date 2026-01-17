@@ -72,3 +72,11 @@ endsnippet
 snippet row "\textbf{...}: & ..."
 \textbf{${1:something}}: & ${2:something}
 endsnippet
+
+snippet newterm "\newglossaryentry" b
+\newglossaryentry{${1:label}}{name={${2:name}},description={${3:description}}}
+endsnippet
+
+snippet newabbr "\newacronym" b
+\newacronym{${1:label}}{${2:abbr}}{${3:description}}
+endsnippet

@@ -16,6 +16,9 @@ riverctl map normal Super Return spawn "$TERMINAL"
 riverctl map normal Super Q close
 riverctl map normal Super+Shift E exit
 
+# applications
+riverctl map normal Super+Shift S spawn "grim -l 4 ~/screenshot.png"
+
 # windows
 riverctl map normal Super J focus-view next
 riverctl map normal Super K focus-view previous
