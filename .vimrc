@@ -148,6 +148,7 @@ autocmd BufWinEnter * if !get(b:, 'cnodefault', 0) |
 autocmd FileType tex,markdown,quarto,org let b:cnodefault = 1
 autocmd FileType cs,razor compiler dotnet
 autocmd FileType asm setl tabstop=6 shiftwidth=6
+autocmd FileType c,cpp nnoremap <buffer> <leader>lcf :!clang-format --Werror -i %<CR>
 
 " File shortcuts
 autocmd FileType tex
