@@ -63,6 +63,17 @@ snippet subfigure "\begin{figure} \begin{subfigure} ... \end{subfigure} \end{fig
 \end{figure}
 endsnippet
 
+snippet table "\begin{table} ... \end{figure}" b
+\begin{table}[ht]
+	\caption{$1}
+	\label{table:$2}
+
+	\begin{tabularx}{\linewidth}{${3:lX}}
+		${4:\textbf{${5:something}} & ${6:something}}
+	\end{tabularx}
+\end{table}
+endsnippet
+
 snippet tabularx "\begin{tabularx}{...}{...} ... \end{tabularx}" b
 \begin{tabularx}{${1:\linewidth}}{${2:lX}}
 	${3:\textbf{${4:something}}: & ${5:something}}
