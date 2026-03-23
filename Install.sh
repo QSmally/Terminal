@@ -12,15 +12,29 @@
 
 declare -i linked_file_count=0
 declare server="\"${1:-false}\" == \"--server\""
+declare uninstall="\"${1:-false}\" == \"--uninstall\""
 
 if [ $server ]; then
     echo "Installing server-based configuration..."
+fi
+
+if [ $uninstall ]; then
+    echo "Uninstalling configuration..."
 fi
 
 install() {
     filename="$(basename "$1")"
     directory="$(dirname "$1")"
     target="$([ -z $2 ] && echo $filename || echo $2)"
+
+    if [ $uninstall ] && [ -L "$directory/$target" ]; then
+        rm "$directory/$target" || return 1
+        echo "$directory/$target is removed"
+        return 0
+    elif [ $uninstall ]; then
+        echo "Symlink $filename was not already installed"
+        return 0
+    fi
 
     if [ -e "$directory/$target" ]; then
         echo "File $filename ignored because $target already exists in $directory"
@@ -41,7 +55,7 @@ install() {
 }
 
 dependency() {
-    if [ ! $(which $2 2> /dev/null) ]; then
+    if [ ! $uninstall ] && [ ! $(which $2 2> /dev/null) ]; then
         echo "Caveat: $1 may require executable $2, but it's not in PATH"
     fi
 }
@@ -50,6 +64,11 @@ download() {
     directory="$1"
     url="$2"
     unpack="$3"
+
+    if [ $uninstall ]; then
+        [ -d "$directory" ] && echo "$directory is left intact, and you may wish to delete it"
+        return 0
+    fi
 
     if [ -d "$directory" ]; then
         echo "Download $directory ignored because directory already exists"
@@ -127,4 +146,6 @@ if [ ! $server ]; then
     download ~/.vim/thesaurus "https://files.qsmally.org/cdn/thesaurus.zip" "MyThes-1.0"
 fi
 
-echo "Installed a total of $linked_file_count configuration files"
+if [ ! $uninstall ]; then
+    echo "Installed a total of $linked_file_count configuration files"
+fi
