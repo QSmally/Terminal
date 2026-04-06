@@ -5,11 +5,8 @@ alias ll="ls -lAh --color=always" # [directory]
 alias lll="ls -lh --color=always" # [directory]
 alias lt="ll -t" # [directory]
 alias usage="du -hd 1" # [directory]
-
+alias tohex="hexdump -ve '1/1 \"%02x\"'"
 range() { sed "$1!d" $2; } # <range> [file]
-cr() { cd "$(git rev-parse --show-toplevel)"; }
-
-alias choochoo="while true; do sl; done"
 
 if [ $(uname) == "Darwin" ]; then
     # copy < file, range x,y file | copy
@@ -30,6 +27,16 @@ if [ $(which brew 2> /dev/null) ]; then
     alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 fi
 
+# Sl train
+if [ $(which sl 2> /dev/null) ]; then
+    alias choochoo="while true; do sl; done"
+fi
+
+# Git
+if [ $(which git 2> /dev/null) ]; then
+    cr() { cd "$(git rev-parse --show-toplevel)"; }
+fi
+
 # Compression
 if [ $(which tar 2> /dev/null) ]; then
     alias archive="tar -cvf Archive.tar" # <directory>
@@ -42,8 +49,6 @@ if [ $(which gpg 2> /dev/null) ]; then
     alias gpgs="gpg --list-keys"
     alias gpgsprivate="gpg --list-secret-keys"
 fi
-
-alias tohex="hexdump -ve '1/1 \"%02x\"'"
 
 # Fuzzy finder
 if [ $(which fzf 2> /dev/null) ]; then
@@ -80,6 +85,11 @@ fi
 # Rsync
 if [ $(which rsync 2> /dev/null) ]; then
     alias djisync="rsync -vrt --exclude \"*.LRF\""
+fi
+
+# Sigrok
+if [ $(which sigrok-cli 2> /dev/null) ]; then
+    alias sigrok="sigrok-cli --config samplerate=16m --channels D0,D1,D2,D3,D4,D5,D6,D7 -O vcd -o timings.vcd --time" # <milliseconds>
 fi
 
 # Shell
