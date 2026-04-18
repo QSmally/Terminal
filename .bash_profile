@@ -7,6 +7,7 @@ alias lt="ll -t" # [directory]
 alias usage="du -hd 1" # [directory]
 alias tohex="hexdump -ve '1/1 \"%02x\"'"
 range() { sed "$1!d" $2; } # <range> [file]
+lineratelimit() { awk "{ print; system(\"sleep ${1:-"0.1"}\") }"; } # [time]
 
 if [ $(uname) == "Darwin" ]; then
     # copy < file, range x,y file | copy
