@@ -1,5 +1,5 @@
 
-if [ -e ~/.bashrc ]; then
+if [ -x ~/.bashrc ]; then
     . ~/.bashrc
 fi
 

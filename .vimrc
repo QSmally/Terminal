@@ -201,7 +201,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex' |
     \ else |
         \ let g:vimtex_view_method = 'skim' |
-        \ endif
+    \ endif
     autocmd FileType tex nnoremap <silent> <buffer> <leader>lb <Plug>(vimtex-compile-ss)
 
     Plug 'makerj/vim-pdf'
@@ -215,7 +215,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         \ nnoremap <silent> <buffer> <leader>lD :set makeprg=zig\ build\ test\ -Ddump<CR>|
         \ nnoremap <silent> <buffer> <leader>lb :compiler zig_build<CR>
 
-    if has("python3")
+    if has('python3')
         Plug 'jceb/vim-orgmode'
         Plug 'SirVer/ultisnips'
         let g:UltiSnipsExpandTrigger = '<tab>'
@@ -228,7 +228,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
         endif
     endif
 
-    if executable("npm")
+    if executable('npm')
         Plug 'rhysd/vim-fixjson', {
             \ 'do': { -> fixjson#npm#local_command() },
             \ 'for': ['json', 'vim-plug'] }
@@ -355,7 +355,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_custom_ignore = {
-        \ 'dir': '\v(obj|bin|dist|Deploy|Compilation|node_modules|\.zig-cache|\.git)$',
+        \ 'dir': '\v(obj|bin|build|dist|Deploy|Compilation|node_modules|\.zig-cache|zig-pkg|\.git)$',
         \ 'file': '\v(\.DS_Store|\.swp)$' }
     let g:ctrlp_match_window = 'bottom,order:btt,min:15,max:15,results:15'
     let g:ctrlp_by_filename = 1

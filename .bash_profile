@@ -1,18 +1,6 @@
 
-alias diff="diff -u --color=always" # <file> <file>
-alias ls="ls --color=always" # [directory]
-alias ll="ls -lAh --color=always" # [directory]
-alias lll="ls -lh --color=always" # [directory]
-alias lt="ll -t" # [directory]
-alias usage="du -hd 1" # [directory]
-alias tohex="hexdump -ve '1/1 \"%02x\"'"
-range() { sed "$1!d" $2; } # <range> [file]
-lineratelimit() { awk "{ print; system(\"sleep ${1:-"0.1"}\") }"; } # [time]
-
-if [ $(uname) == "Darwin" ]; then
-    # copy < file, range x,y file | copy
-    alias copy="pbcopy"
-fi
+PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+printf '\033[3 q' # underline
 
 # Homebrew
 if [ $(which brew 2> /dev/null) ]; then
@@ -27,6 +15,42 @@ if [ $(which brew 2> /dev/null) ]; then
     alias casks="brew list --casks | tee"
     alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
 fi
+
+# Fuzzy finder
+if [ $(which fzf 2> /dev/null) ]; then
+    eval "$(fzf --bash)"
+fi
+
+# GPG
+if [ $(which gpgconf 2> /dev/null) ]; then
+    export GPG_TTY=$(tty)
+    gpgconf --launch gpg-agent
+fi
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
+export VISUAL=vim
+export EDITOR=vim
+
+if [ $(which foot 2> /dev/null) ]; then
+    export TERMINAL=foot
+fi
+
+if [ $(which ghostty 2> /dev/null) ]; then
+    export TERMINAL=ghostty
+fi
+
+# Aliases
+
+alias diff="diff -u --color=always" # <file> <file>
+alias ls="ls --color=always" # [directory]
+alias ll="ls -lAh --color=always" # [directory]
+alias lll="ls -lh --color=always" # [directory]
+alias lt="ll -t" # [directory]
+alias usage="du -hd 1" # [directory]
+alias tohex="hexdump -ve '1/1 \"%02x\"'"
+range() { sed "$1!d" $2; } # <range> [file]
+lineratelimit() { awk "{ print; system(\"sleep ${1:-"0.1"}\") }"; } # [time]
 
 # Sl train
 if [ $(which sl 2> /dev/null) ]; then
@@ -45,29 +69,13 @@ if [ $(which tar 2> /dev/null) ]; then
     alias extract="tar -xvf" # <directory>
 fi
 
-# GPG
-if [ $(which gpg 2> /dev/null) ]; then
-    alias gpgs="gpg --list-keys"
-    alias gpgsprivate="gpg --list-secret-keys"
-fi
-
-# Fuzzy finder
-if [ $(which fzf 2> /dev/null) ]; then
-    eval "$(fzf --bash)"
-fi
-
-# LaTeX
-if [ $(which pdflatex 2> /dev/null) ]; then
-    alias pdf="[ -d Compilation/ ] || mkdir Compilation; pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode" # <files>
-fi
-
 if [ $(which gs 2> /dev/null) ]; then
-    alias smallify="gs -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=Document.small.pdf" # <file>
+    alias compresspdf="gs -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=Document.small.pdf" # <file>
 fi
 
 # Pandoc
 if [ $(which pandoc 2> /dev/null) ]; then
-    alias conv="pandoc -V geometry:margin=0.75in -o Document.pdf" # <files>
+    alias topdf="pandoc -V geometry:margin=0.75in -o Document.pdf" # <files>
 fi
 
 # Docker
@@ -77,15 +85,9 @@ if [ $(which docker 2> /dev/null) ]; then
     dkrrmv() { docker volume rm -f $(docker volume ls -q); }
 fi
 
-# GPG
-if [ $(which gpgconf 2> /dev/null) ]; then
-    export GPG_TTY=$(tty)
-    gpgconf --launch gpg-agent
-fi
-
 # Rsync
 if [ $(which rsync 2> /dev/null) ]; then
-    alias djisync="rsync -vrt --exclude \"*.LRF\""
+    alias dsync="rsync -vrt --exclude \"*.LRF\""
 fi
 
 # Sigrok
@@ -93,28 +95,5 @@ if [ $(which sigrok-cli 2> /dev/null) ]; then
     alias sigrok="sigrok-cli --config samplerate=16m --channels D0,D1,D2,D3,D4,D5,D6,D7 -O vcd -o timings.vcd --time" # <milliseconds>
 fi
 
-# Shell
-export BASH_SILENCE_DEPRECATION_WARNING=1
-export PATH="/usr/local/sbin:~/.bin:~/.local/bin:$PATH"
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-if [ $(which foot 2> /dev/null) ]; then
-    export TERMINAL=foot
-fi
-
-if [ $(which ghostty 2> /dev/null) ]; then
-    export TERMINAL=ghostty
-fi
-
-if [ -e ~/.bash_local ]; then
-    . ~/.bash_local
-fi
-
-# Prefix for OSX
-if [ $(uname) == "Darwin" ]; then
-    PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-fi
-
-# Cursor underline
-printf '\033[3 q'
+# System-local script
+[ -x ~/.bash_local ] && . ~/.bash_local

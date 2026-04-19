@@ -2,7 +2,9 @@
 # ack already disregards common junkyards
 --ignore-dir=obj
 --ignore-dir=bin
+--ignore-dir=build
 --ignore-dir=dist
 --ignore-dir=Deploy
 --ignore-dir=Compilation
 --ignore-dir=.zig-cache
+--ignore-dir=zig-pkg

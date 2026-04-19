@@ -2,16 +2,16 @@
 snippet newdocument "\documentclass ..." b
 \documentclass[a4paper,10pt]{report}
 
-% ...
+\usepackage{$1}
 
 \begin{document}
 
 \tableofcontents
-% \listoffigures
-% \listoftables
+\listoffigures
+\listoftables
 
-% \chapter{Introduction}
-% \label{introduction}
+\chapter{Introduction}
+\label{introduction}
 
 \end{document}
 endsnippet
@@ -23,7 +23,7 @@ snippet document "\documentclass ..." b
 \chapter{$1}
 \label{$2}
 
-% ...
+${3:...}
 
 \end{document}
 endsnippet

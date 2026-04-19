@@ -6,7 +6,6 @@
 
 [init]
     defaultBranch = master
-    templatedir = ~/.gittemplate
 
 [core]
     excludesFile = ~/.gitignore
@@ -25,20 +24,11 @@
 
 [alias]
     conflicts = "diff --name-only --diff-filter=U"
-    ff = "merge --ff-only" # <branch>
     graph = "log --oneline --graph"
-    lg = "log --pretty=format:\"%h%x09%ad   %s (%an)\" --date=short"
-    mods = "submodule update --init --recursive"
-    mr = "merge --no-ff --no-commit" # <branch>
-    project = "!bash -c 'git status && \
-        git stash list && \
-        git branch -va && \
-        ls -lAh --color=always'"
     purge = "!bash -c 'git remote prune origin && \
         git branch -v | \
         grep \"\\[gone\\]\" | \
         awk \"{print \\$1}\" | \
         xargs git branch -D'"
     save = "stash save --include-untracked" # [message]
-    sq = "merge --squash" # <branch>
-    update = "!bash -c 'git pull && git mods && git purge'"
+    update = "!bash -c 'git pull && git submodule update --init --recursive && git purge'"

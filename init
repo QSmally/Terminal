@@ -1,10 +1,5 @@
 #!/bin/sh
 
-if [ ! $(which riverctl &> /dev/null) ]; then
-    alias riverctl="$HOME/.local/bin/riverctl"
-    alias rivertile="$HOME/.local/bin/rivertile"
-fi
-
 TERMINAL=${TERMINAL:-foot} # fallback
 
 if [ "$INIT_TERMINAL" -eq 1 ]; then
