@@ -43,6 +43,13 @@ const ${1:module} = b.addModule("$1", .{
 root_module.addImport("$1", $1);
 endsnippet
 
+snippet dep "const dep = b.dependency(...)" b
+const ${1:dependency} = b.dependency("$1", .{
+	.target = target,
+	.optimize = optimize });
+root_module.addImport("$1", $1.module("$1"));
+endsnippet
+
 snippet docs "const docs = b.addInstallDirectory(...)" b
 const docs = b.addInstallDirectory(.{
 	.source_dir = tests.getEmittedDocs(),
