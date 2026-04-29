@@ -51,6 +51,7 @@ alias usage="du -hd 1" # [directory]
 alias tohex="hexdump -ve '1/1 \"%02x\"'"
 range() { sed "$1!d" $2; } # <range> [file]
 lineratelimit() { awk "{ print; system(\"sleep ${1:-"0.1"}\") }"; } # [time]
+hist() { history 100000 | grep "$1"; } # <filter>
 
 # Sl train
 if [ $(which sl 2> /dev/null) ]; then
