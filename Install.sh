@@ -140,7 +140,7 @@ if [ ! $server ]; then
 fi
 
 if [ ! $server ]; then
-    download ~/.vim/thesaurus "https://files.qsmally.org/cdn/thesaurus.zip" "MyThes-1.0"
+    download ~/.vim/thesaurus "https://mirrors.qsmally.org/cdn/thesaurus.zip" "MyThes-1.0"
 fi
 
 if [ ! $uninstall ]; then

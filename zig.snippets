@@ -59,6 +59,10 @@ const docs_step = b.step("docs", "generate docs");
 docs_step.dependOn(&docs.step);
 endsnippet
 
+snippet std "const std = @import(std)" b
+const std = @import("std");
+endsnippet
+
 snippet main "pub fn main() !void" b
 const std = @import("std");
 
