@@ -2,3 +2,7 @@
 snippet dir "dir=basename script" b
 dir="$(cd -- "$(dirname "\$0")" > /dev/null 2>&1; pwd -P)"
 endsnippet
+
+snippet log "echo >&2"
+echo >&2 "${1:Hello world}"
+endsnippet
