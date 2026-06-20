@@ -16,6 +16,11 @@ snippet newdocument "\documentclass ..." b
 \end{document}
 endsnippet
 
+snippet empty "..." b
+\pagenumbering{gobble}
+\setlength\parindent{0pt}
+endsnippet
+
 snippet document "\documentclass ..." b
 \documentclass[00-Title.tex]{subfiles}
 \begin{document}
@@ -78,6 +83,20 @@ snippet tabularx "\begin{tabularx}{...}{...} ... \end{tabularx}" b
 \begin{tabularx}{${1:\linewidth}}{${2:lX}}
 	${3:\textbf{${4:something}}: & ${5:something}}
 \end{tabularx}
+endsnippet
+
+snippet minipage "\begin{minipage} ... \end{minipage} ..." b
+\begin{minipage}{0.495\linewidth}
+	${1:some content here}
+\end{minipage}%
+\hfill%
+\begin{minipage}{.495\linewidth}
+	${2:other content here}
+\end{minipage}
+endsnippet
+
+snippet graphics "\includegraphics{...}" b
+\includegraphics[width=\linewidth]{$1}
 endsnippet
 
 snippet eq "\begin{equation} ... \end{equation}" b

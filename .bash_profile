@@ -74,6 +74,11 @@ if [ $(which gs 2> /dev/null) ]; then
     alias compresspdf="gs -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=Document.small.pdf" # <file>
 fi
 
+# LaTeX
+if [ $(which pdflatex 2> /dev/null) ]; then
+    alias pdf="mkdir -p Compilation && pdflatex -output-directory=Compilation -jobname=Document -interaction=nonstopmode" # <files>
+fi
+
 # Pandoc
 if [ $(which pandoc 2> /dev/null) ]; then
     alias topdf="pandoc -V geometry:margin=0.75in -o Document.pdf" # <files>

@@ -457,3 +457,15 @@ if isdirectory(expand('~/.vim/plugged/nextfile.vim'))
     nnoremap <silent> <leader>[ :exec argc() > 1 ? ':prev' : 'norm <leader>f['<CR>
     nnoremap <silent> <leader>] :exec argc() > 1 ? ':next' : 'norm <leader>f]'<CR>
 endif
+
+" Random ID
+function! GenerateUniqueID()
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    let id = ''
+    for i in range(8)
+        let id .= chars[rand() % len(chars)]
+    endfor
+    return id
+endfunction
+
+command! UniqueID execute "normal! a" . GenerateUniqueID()
