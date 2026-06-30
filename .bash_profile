@@ -13,7 +13,7 @@ if [ $(which brew 2> /dev/null) ]; then
     alias gimme="brew install" # <package>
     alias packages="brew leaves | tee"
     alias casks="brew list --casks | tee"
-    alias update="brew update && brew upgrade && brew autoremove && brew cleanup"
+    alias update="brew update && brew upgrade -yg && brew autoremove && brew cleanup"
 fi
 
 # Fuzzy finder
