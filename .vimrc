@@ -433,17 +433,21 @@ function! _fopen(fname)
     endif
 endfunction
 
+function! _fpwd()
+    return expand('%:p:h')
+endfunction
+
 if isdirectory(expand('~/.vim/plugged/DWM'))
-    command! E Vexplore | call dwm#layout()
+    command! E exec 'Vexplore ' . _fpwd() | call dwm#layout()
     command! EE vsplit . | call dwm#layout()
-    command! F Explore | call dwm#focus_window(0, 1)
+    command! F exec 'Explore ' . _fpwd() | call dwm#focus_window(0, 1)
     command! FF edit . | call dwm#focus_window(0, 1)
     cabbrev wr wq \| call dwm#layout()
     nnoremap <silent> <leader>fix :call dwm#layout()<CR>
 else
-    command! E Vexplore
+    command! E exec 'Vexplore ' . _fpwd()
     command! EE vsplit .
-    command! F Explore
+    command! F exec 'Explore ' . _fpwd()
     command! FF edit .
     cabbrev wr wq
 endif
