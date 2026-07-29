@@ -254,6 +254,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_terminal_reports_focus = 0
+    highlight GitGutterAdd guifg=#009900 ctermfg=2
+    highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+    highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
     Plug 'vim-scripts/ConflictMotions'
     nnoremap <silent> <leader>x/ :ConflictTake all<CR>
