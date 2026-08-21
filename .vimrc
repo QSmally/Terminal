@@ -246,6 +246,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     let g:gutentags_enabled = executable('ctags')
     let g:gutentags_ctags_tagfile = '.git/tags'
 
+    Plug 'airblade/vim-tag-closer', { 'for': ['html', 'vim-plug'] }
     Plug 'vim-scripts/a.vim'
 
     " Mark: Git integration
@@ -401,11 +402,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
+    Plug 'airblade/vim-accent'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
     Plug 'artnez/vim-wipeout'
     Plug 'tpope/vim-eunuch'
-    Plug 'reedes/vim-wordy', { 'for': ['org', 'tex', 'markdown', 'quarto'] }
+    Plug 'reedes/vim-wordy', { 'for': ['org', 'tex', 'markdown', 'quarto', 'vim-plug'] }
 
     call plug#end()
 endif
