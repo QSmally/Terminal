@@ -402,7 +402,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
-    Plug 'airblade/vim-accent'
     Plug 'gioele/vim-autoswap'
     Plug 'fcpg/vim-altscreen'
     Plug 'artnez/vim-wipeout'
