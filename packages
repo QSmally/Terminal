@@ -5,7 +5,6 @@ blender
 coreutils
 ctags
 dfu-util
-docker-desktop
 fzf
 gnupg
 hevi
@@ -17,6 +16,7 @@ lsusb
 minicom
 minipro
 nmap
+orbstack
 pandoc
 pv
 quarto
