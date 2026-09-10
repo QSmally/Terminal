@@ -104,6 +104,7 @@ if [ ! $server ]; then
     install ~/.vim/snippet/all.snippets
     install ~/.vim/snippet/quarto.snippets
     install ~/.vim/snippet/sh.snippets
+    install ~/.vim/snippet/systemverilog.snippets
     install ~/.vim/snippet/tex.snippets
     install ~/.vim/snippet/zig.snippets
 

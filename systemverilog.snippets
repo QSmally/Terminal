@@ -1,0 +1,21 @@
+
+snippet module "module ... endmodule" b
+module ${1:identifier} ($2);
+	$3
+endmodule
+endsnippet
+
+snippet clk "always #5 clk = ~clk;" b
+always #5 clk = ~clk;
+endsnippet
+
+snippet tb "initial begin ... end" b
+initial begin
+	$dumpfile("output.vcd");
+	$dumpvars();
+end
+
+initial begin
+	$1
+end
+endsnippet
