@@ -150,14 +150,15 @@ autocmd FileType cs,razor compiler dotnet
 autocmd FileType asm setl tabstop=6 shiftwidth=6
 autocmd FileType c,cpp nnoremap <buffer> <leader>lcf :!clang-format --Werror -i %<CR>
 autocmd FileType quarto setl makeprg=quarto\ render
+autocmd FileType systemverilog setl makeprg=make\ simulate\ TEST_BENCH_FILE=%
+autocmd FileType systemverilog nnoremap <silent> <buffer> <leader>lb :!make surfer TEST_BENCH_FILE=%<CR>
+autocmd FileType org,text nnoremap <silent> <buffer> <leader>ll :!pandoc -V geometry:margin=0.75in -o Document.pdf %<CR>
 
 " File shortcuts
 autocmd FileType tex
     \ nnoremap <silent> <buffer> <leader>lfr :call _fopen('References.bib')<CR>|
     \ nnoremap <silent> <buffer> <leader>lft :call _fopen('Terminology.tex')<CR>|
     \ nnoremap <silent> <buffer> <leader>lf0 :call _fopen('00-Title.tex')<CR>
-autocmd FileType org,text
-    \ nnoremap <silent> <buffer> <leader>ll :!pandoc -V geometry:margin=0.75in -o Document.pdf %<CR>
 nnoremap <silent> <buffer> <leader>lfm :call _fopen('Makefile')<CR>
 
 " LaTeX
