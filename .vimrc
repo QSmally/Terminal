@@ -8,6 +8,7 @@ set autoread
 set incsearch
 set noruler
 set secure
+set exrc
 set noshowcmd
 
 set belloff+=esc
