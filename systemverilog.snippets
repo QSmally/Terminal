@@ -5,7 +5,13 @@ module ${1:identifier} ($2);
 endmodule
 endsnippet
 
-snippet clk "always #5 clk = ~clk;" b
+snippet clk "always_ff @(posedge clk) begin ... end" b
+always_ff @(posedge clk) begin
+	$1
+end
+endsnippet
+
+snippet genclk "always #5 clk = ~clk;" b
 always #5 clk = ~clk;
 endsnippet
 

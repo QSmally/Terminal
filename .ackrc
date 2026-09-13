@@ -1,6 +1,7 @@
 
 # ack already disregards common junkyards
 --ignore-dir=obj
+--ignore-dir=obj_dir
 --ignore-dir=bin
 --ignore-dir=build
 --ignore-dir=dist
