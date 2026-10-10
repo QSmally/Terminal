@@ -264,8 +264,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'vim-scripts/ConflictMotions'
     nnoremap <silent> <leader>x/ :ConflictTake all<CR>
 
-    Plug 'jlcrochet/vim-razor'
-
     " Mark: window management
     Plug 'romainl/vim-qf'
     let g:qf_mapping_ack_style = 1
@@ -394,13 +392,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     vnoremap <silent> <leader>ad :LinediffAdd<CR>
     nnoremap <silent> <leader>rd :LinediffReset<CR>
     nnoremap <silent> <leader>sd :LinediffShow<CR>
-
-    Plug 'skanehira/docker-compose.vim'
-    nnoremap <leader>cu :DockerComposeUp<CR>
-    nnoremap <leader>cd :DockerComposeDown<CR>
-    nnoremap <leader>cb :DockerComposeBuild<CR>
-    nnoremap <leader>cl :DockerComposeLogs<CR>
-    nnoremap <leader>cL :DockerComposeList<CR>
 
     Plug 'kshenoy/vim-signature'
     Plug 'antoyo/vim-licenses'
