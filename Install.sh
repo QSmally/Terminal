@@ -10,6 +10,10 @@
 # Installation of dotfiles and recommendations of dependencies.
 #
 
+dir="$(cd -- "$(dirname "$0")" > /dev/null 2>&1; pwd -P)"
+
+cd "$dir"
+
 declare -i linked_file_count=0
 declare server="\"${1:-false}\" == \"--server\""
 declare uninstall="\"${1:-false}\" == \"--uninstall\""
@@ -136,7 +140,6 @@ dependency vim python3
 if [ ! $server ]; then
     dependency git gpg
     dependency vim ctags
-    dependency vim docker
     dependency vim latexmk
     dependency vim xpdf
 fi

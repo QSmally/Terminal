@@ -4,6 +4,6 @@
 Bash, Git, LaTeX and Vim dotfiles.
 
 ```bash
-$ ./Install
+$ ./Install.sh
 $ xargs brew install < packages
 ```
