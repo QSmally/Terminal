@@ -5,6 +5,7 @@ blender
 coreutils
 ctags
 dfu-util
+ffmpeg
 fzf
 gnupg
 hevi

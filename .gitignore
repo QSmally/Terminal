@@ -1,9 +1,5 @@
 
-.git
-
-# System
 .DS_Store
-
-# File editor
 Session.vim
 *.swp
+.vimrc
